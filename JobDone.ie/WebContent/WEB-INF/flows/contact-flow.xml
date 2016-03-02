@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    
+    <!-- deceribes a particular web-flow -->
+	<!-- states display a file-jsp or carries out an action from one stae to 
+		another -->
+    
+	<var name="message" class="ie.done.job.web.dao.Message" />
+
+	<view-state id="showContactForm" model="message">
+	    <on-entry>
+	        <!-- safe navigation operator >>? -->
+	        <set name="requestScope.fromUser" value="usersService.getUser(currentUser?.name)"></set>
+	        <set name="flowScope.fromName" value="fromUser?.name"></set>
+	        <set name="flowScope.fromEmail" value="fromUser?.email"></set>
+	        <!-- sets the username for message -->
+	        <set name="message.username" value="requestParameters.uid"></set>
+	    </on-entry>
+		<transition on="send" to="sendMessage"></transition>
+	</view-state>
+	
+	
+	<!-- model passed into the form & runs code that saves message to DB -->
+	  <!-- runs code and imidantly transitions to messageSent -->
+	
+	<action-state id="sendMessage">
+		<evaluate expression="usersService.sendMessage(message)"></evaluate>
+		<transition to="messageSent"></transition>
+	</action-state>
+
+	<view-state id="messageSent">
+	</view-state>
+
+</flow>
