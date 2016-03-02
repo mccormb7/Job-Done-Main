@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Message implements Serializable {
 
 	private static final long serialVersionUID = 8063111826064761657L;
-
+//testgits
 	@Id
 	@GeneratedValue
 	private int id;

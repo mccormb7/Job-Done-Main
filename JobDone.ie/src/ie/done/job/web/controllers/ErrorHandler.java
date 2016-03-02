@@ -1,4 +1,4 @@
-package ie.done.job.web.web.controllers;
+package ie.done.job.web.controllers;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;

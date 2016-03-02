@@ -1,4 +1,4 @@
-package ie.done.job.web.web.controllers;
+package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.FormValidationGroup;
 import ie.done.job.web.dao.Message;
