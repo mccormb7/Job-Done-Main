@@ -1,4 +1,4 @@
-package com.caveofprogramming.spring.web.test.tests;
+package ie.done.job.web.test.tests;
 
 import static org.junit.Assert.*;
 import ie.done.job.web.dao.Offer;
