@@ -1,6 +1,8 @@
 package ie.done.job.web.controllers;
 
+import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.Offer;
+import ie.done.job.web.web.service.JobPostsService;
 import ie.done.job.web.web.service.OffersService;
 
 import java.security.Principal;
@@ -20,22 +22,25 @@ public class HomeController {
 	
 	@Autowired
 	private OffersService offersService;
+	
+	@Autowired
+	private JobPostsService jobPostService;
 
 	//principal allows you to get the current username of user logged in
 	@RequestMapping("/")
 	public String showHome(Model model, Principal principal) {
 
-		List<Offer> offers = offersService.getCurrent();
-
-		model.addAttribute("offers", offers);
+		//List<Offer> offers = offersService.getCurrent();
+		List<JobPost> jobposts = jobPostService.getCurrent();
+		model.addAttribute("jobposts", jobposts);
 		//only allow one offer
-		boolean hasOffer = false;
+		boolean hasJobPost = false;
 		
 		if(principal != null) {
-			hasOffer = offersService.hasOffer(principal.getName());
+			hasJobPost = offersService.hasOffer(principal.getName());
 		}
 		
-		model.addAttribute("hasOffer", hasOffer);
+		model.addAttribute("hasJobPost", hasJobPost);
 		//logger.debug("show home page");
 		return "home";
 	}

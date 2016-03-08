@@ -26,7 +26,7 @@ public class OffersController {
 		this.offersService = offersService;
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String showTest(Model model, @RequestParam("id") String id) {
 		System.out.println("Id is: " + id);
 		return "home";

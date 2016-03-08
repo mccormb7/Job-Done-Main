@@ -3,23 +3,29 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+	
+	
+
 <script type="text/javascript">
-<!--
 
-function onDeleteClick(event) {
 	
-	var doDelete = confirm("Are you sure you want to delete this offer?");
-	
-	if(doDelete == false) {
-		event.preventDefault();
+
+	google.maps.event.addDomListener(window, 'load', init);
+
+	function onDeleteClick(event) {
+
+		var doDelete = confirm("Are you sure you want to delete this offer?");
+
+		if (doDelete == false) {
+			event.preventDefault();
+		}
 	}
-}
 
-function onReady() {
-	$("#delete").click(onDeleteClick);
-}
+	function onReady() {
+		$("#delete").click(onDeleteClick);
+	}
 
-$(document).ready(onReady);
+	$(document).ready(onReady);
 //-->
 </script>
 
@@ -29,7 +35,32 @@ $(document).ready(onReady);
 	<sf:input type="hidden" name="id" path="id" />
 
 	<table class="formtable">
+
 		<tr>
+			<td>Title: <input type="text" name="firstname" value="Mickey">
+				<br> Last name: <input type="text" name="lastname"
+				value="Mouse">
+
+			</td>
+		</tr>
+		<tr>
+			<td><label for="locationTextField">Location</label> <input
+				id="locationTextField" type="text" size="50">
+			<td>
+			<input id="searchTextField" type="text" size="50">
+		</tr>
+		<tr>
+			<td>Domain of Job<select>
+					<option value="Tutor">Tutor</option>
+					<option value="Carpender">Carpender</option>
+					<option value="Builder">Builder</option>
+					<option value="Gardener">Gardener</option>
+			</select></td>
+		</tr>
+		<tr>
+
+
+			<input type="submit" value="Submit">
 			<td class="label">Your offer:</td>
 			<td><sf:textarea class="control" path="text" name="text"
 					rows="10" cols="10"></sf:textarea><br /> <sf:errors path="text"

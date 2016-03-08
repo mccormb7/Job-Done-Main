@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-	<definition name="offers.base" template="/WEB-INF/templates/default.jsp">
+	<definition name="jobdone.base" template="/WEB-INF/templates/default.jsp">
 		<put-attribute name="includes" value=""></put-attribute>
 		<!-- need to add the JS for every page for this to work -->
 		<put-attribute name="toolbar" value="/WEB-INF/tiles/toolbar.jsp"></put-attribute>
@@ -14,80 +14,85 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
 	</definition>
 
-	<definition name="home" extends="offers.base">
+	<definition name="home" extends="jobdone.base">
 		<put-attribute name="title" value="Offers Homepage"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
 	</definition>
 
-	<definition name="offers" extends="offers.base">
+	<definition name="offers" extends="jobdone.base">
 		<put-attribute name="title" value="Current Offers"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/offers.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/jobdone.jsp"></put-attribute>
 	</definition>
 
-	<definition name="login" extends="offers.base">
+	<definition name="login" extends="jobdone.base">
 		<put-attribute name="title" value="Login"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/login.jsp"></put-attribute>
 	</definition>
 
-	<definition name="newaccount" extends="offers.base">
+	<definition name="newaccount" extends="jobdone.base">
 		<put-attribute name="includes"
 			value="/WEB-INF/tiles/newaccountscript.jsp"></put-attribute>
 		<put-attribute name="title" value="Create Account"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/newaccount.jsp"></put-attribute>
 	</definition>
 
-	<definition name="accountcreated" extends="offers.base">
+	<definition name="accountcreated" extends="jobdone.base">
 		<put-attribute name="title" value="Account Created"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/accountcreated.jsp"></put-attribute>
 	</definition>
 
-	<definition name="admin" extends="offers.base">
+	<definition name="admin" extends="jobdone.base">
 		<put-attribute name="title" value="Authorised Users Only!"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/admin.jsp"></put-attribute>
 	</definition>
 
-	<definition name="createoffer" extends="offers.base">
+	<definition name="createoffer" extends="jobdone.base">
 		<put-attribute name="title" value="Create Offer"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/createoffer.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="createjobpost" extends="jobdone.base">
+		<put-attribute name="title" value="Create Job Post"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/createjobpost.jsp"></put-attribute>
+	</definition>
 
-	<definition name="denied" extends="offers.base">
+	<definition name="denied" extends="jobdone.base">
 		<put-attribute name="title" value="Access Denied"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/denied.jsp"></put-attribute>
 	</definition>
 
-	<definition name="error" extends="offers.base">
+	<definition name="error" extends="jobdone.base">
 		<put-attribute name="title" value="Error"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp"></put-attribute>
 	</definition>
 
 
-	<definition name="loggedout" extends="offers.base">
+	<definition name="loggedout" extends="jobdone.base">
 		<put-attribute name="title" value="Logged Out"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/loggedout.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="offercreated" extends="offers.base">
+	<definition name="offercreated" extends="jobdone.base">
 		<put-attribute name="title" value="Offer Created"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/offercreated.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="offerdeleted" extends="offers.base">
+	<definition name="offerdeleted" extends="jobdone.base">
 		<put-attribute name="title" value="Offer Deleted"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/offerdeleted.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="showContactForm" extends="offers.base">
+	<definition name="showContactForm" extends="jobdone.base">
 		<put-attribute name="title" value="Send Message"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/contact.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="messageSent" extends="offers.base">
+	<definition name="messageSent" extends="jobdone.base">
 		<put-attribute name="title" value="Message Sent"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/messagesent.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="messages" extends="offers.base">
+	<definition name="messages" extends="jobdone.base">
 		<put-attribute name="title" value="Messages"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/messages.jsp"></put-attribute>
 	</definition>

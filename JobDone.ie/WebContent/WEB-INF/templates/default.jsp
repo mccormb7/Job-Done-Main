@@ -11,6 +11,10 @@
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/script/jquery.js"></script>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 
 <tiles:insertAttribute name="includes"></tiles:insertAttribute>
 

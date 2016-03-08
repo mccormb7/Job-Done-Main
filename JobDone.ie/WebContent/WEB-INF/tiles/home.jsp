@@ -12,14 +12,14 @@
 		<td>Offer</td>
 	</tr>
 
-	<c:forEach var="offer" items="${offers}">
+	<c:forEach var="jobpost" items="${jobposts}">
 		<tr>
 
-			<td><c:out value="${offer.user.name}"></c:out></td>
+			<td><c:out value="${jobpost.user.name}"></c:out></td>
 
-			<td><a href = "<c:url value='/message?uid=${offer.user.username}'/>">contact</a></td>
+			<td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
 
-			<td><c:out value="${offer.text}"></c:out></td>
+			<td><c:out value="${jobpost.description}"></c:out></td>
 
 		</tr>
 	</c:forEach>
