@@ -6,11 +6,11 @@
 
 <c:choose>
 	<c:when test="${hasOffer}">
-		<a href="${pageContext.request.contextPath}/createoffer">Edit or delete your current offer.</a>
+		<a href="${pageContext.request.contextPath}/createjobpost">Edit or delete your current offer.</a>
 	</c:when>
 	<c:otherwise>
 		<p>
-			<a href="${pageContext.request.contextPath}/createoffer">Add a
+			<a href="${pageContext.request.contextPath}/createjobpost">Add a
 				new offer.</a>
 		</p>
 </c:otherwise>
