@@ -45,6 +45,12 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreatejob"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/search"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/dosearch"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/foundjobs"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/messages"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/offercreated"

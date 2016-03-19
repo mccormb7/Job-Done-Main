@@ -13,9 +13,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Store;
 
 
 @Entity
+@Indexed
 @Table(name="jobPosts")
 public class JobPost {
 
@@ -26,8 +32,9 @@ public class JobPost {
 	@ManyToOne//mapping from the object your in to this object
 	@JoinColumn(name="username")
 	private User user;
-	
+	//Analize ->chunking a sentence into individual words, lowercase them and potentially excluding common words like 'a' or 'the'.
 	@Column(name="title")//must match name in DB
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private String title;
 	
 	//@Column(name="domain")//must match name in DB
@@ -35,6 +42,7 @@ public class JobPost {
 	//title, domain, description, photo, location. price
 	@Size(min=5, max=255, groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Column(name="description")//must match name in DB
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private String description;
 	
 	@Lob
@@ -50,6 +58,7 @@ public class JobPost {
 	
 	
 	@Column(name="domain")
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private String domain;
 	
 	

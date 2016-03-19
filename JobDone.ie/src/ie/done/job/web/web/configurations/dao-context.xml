@@ -30,6 +30,9 @@
 			<property name="hibernateProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+					<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+					<prop key="hibernate.search.default.directory_provider">org.hibernate.search.store.impl.FSDirectoryProvider</prop>
+					<prop key="hibernate.search.default.indexBase"> ie/done/job/web/search</prop>
 					<prop key="javax.persistence.validation.group.pre-persist">ie.done.job.web.dao.PersistenceValidationGroup
 					</prop>
 					<prop key="javax.persistence.validation.group.pre-update">ie.done.job.web.dao.PersistenceValidationGroup

@@ -2,6 +2,7 @@ package ie.done.job.web.web.service;
 
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
+import ie.done.job.web.dao.User;
 
 import java.util.List;
 
@@ -68,5 +69,12 @@ public class JobPostsService {
 	public void delete(int id) {
 		//deletes from DB
 		JobPostsDao.delete(id);
+	}
+	
+	public List<JobPost> search(String text) throws Exception{
+		//JobPostsDao.search(text);
+		
+		List<JobPost> jobPosts = JobPostsDao.search(text);
+		return jobPosts;
 	}
 }
