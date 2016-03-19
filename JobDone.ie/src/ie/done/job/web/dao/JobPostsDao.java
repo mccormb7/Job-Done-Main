@@ -89,12 +89,14 @@ public class JobPostsDao {
 	      }
 	   }
 
+	
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<JobPost> search(String searchText) throws Exception {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-
+			//error here 
 			FullTextSession fullTextSession = Search
 					.getFullTextSession(session);
 
