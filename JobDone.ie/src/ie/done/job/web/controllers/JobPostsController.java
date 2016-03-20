@@ -3,9 +3,7 @@ package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.FormValidationGroup;
 import ie.done.job.web.dao.JobPost;
-import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.User;
-import ie.done.job.web.models.JobPostModel;
 import ie.done.job.web.web.service.JobPostsService;
 
 import java.security.Principal;
@@ -15,7 +13,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jboss.logging.Logger;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,18 +34,17 @@ public class JobPostsController {
 
 	
 	private JobPostsService jobPostsService;
+	 private ArrayList<String> domains;  
+	 private HashMap<String, ArrayList<String>> model;  
 	
-	private static Logger _logger = Logger.getLogger(JobPostsController.class);
-	 
-	@Autowired
-	private JobPostsDao repo;
+	
 	
 	@Autowired
 	public void setJobPostsService(JobPostsService jobPostsService) {
 		this.jobPostsService = jobPostsService;
 	}
 
-	/*ModelAndView mav = null;
+	ModelAndView mav = null;
 	@ModelAttribute("countryList")
 	public List getDomain()
 	{
@@ -55,21 +53,22 @@ public class JobPostsController {
 		countryList.add("Australia");
 		countryList.add("England");
 		return countryList;
-	}*/
+	}
 	
 	@RequestMapping("/jobposts")
-	public String showJobPosts(Model model) throws Exception {
+	public String showJobPosts(Model model) {
 
 		// jobPostsService.throwTestException();
 
 		List<JobPost> jobPosts = jobPostsService.getCurrent();
-		repo.indexJobPosts();
+
 		model.addAttribute("jobPosts", jobPosts);
-		
 
 		return "jobPosts";
 	}
 	
+	
+
 	@RequestMapping("/createjobpost")
 	public String createJobPost(Model model, Principal principal) {
 
@@ -126,89 +125,47 @@ public class JobPostsController {
 		
 	}
 	
-	/*@RequestMapping(value = "/addJobToDB", method = RequestMethod.POST)
-	   public ModelAndView addJobToDB(
-	      @ModelAttribute("JobPostModel")
-	      JobPostModel jobInfo
-	   ) throws Exception
-	   {
-	      _logger.info(jobInfo.getJobPostDescription());
-	      _logger.info(jobInfo.getJobPostDomain());
-	      _logger.info(jobInfo.getJobPostTitle());
-	      
-	      repo.addJobToDB(
-    		  jobInfo.getJobPostDescription(),
-    		  jobInfo.getJobPostDomain(),
-    		  jobInfo.getJobPostTitle()
-	      );
-	      
-	      ModelAndView mav = new ModelAndView("done");
-	      mav.addObject("message", "Add book to DB successfully");
-	      return mav;
-	   }
-	
-	@RequestMapping(value = "/addJobPost", method = RequestMethod.GET)
-	public ModelAndView addBookPage()
-	{
-	   ModelAndView mav = new ModelAndView("addJobPost", "command", new JobPostModel());
-	   return mav;
+	@RequestMapping("/search")
+	public String showLSearch() {
+		return "search";
 	}
 	
-	*/
-	
-	
-	
-	  @RequestMapping("/search")
-	  public String search(String q, Model model) {
-	    List<JobPost> searchResults = null;
-	    try {
-	      searchResults = jobPostsService.search(q);
-	    }
-	    catch (Exception ex) {
-	      // here you should handle unexpected errors
-	      // ...
-	      // throw ex;
-	    }
-	    model.addAttribute("searchResults", searchResults);
-	    return "search";
-	  }
-
-	
-	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
-	   public ModelAndView searchPage()
+	@RequestMapping(value = "/doSearch", method = RequestMethod.POST)
+	   public String search(@RequestParam("searchText")String searchText, Model model) throws Exception
 	   {
-	      ModelAndView mav = new ModelAndView("search");
-	      return mav;
-	   }
-	
-	
-	
-	
-	/*@RequestMapping(value = "/dosearch", method = RequestMethod.POST)
-	   public ModelAndView search(
-	      @RequestParam("searchText")
-	      String searchText
-	   ) throws Exception
-	   {
-	      List<JobPost> allFound = repo.searchForJobPost(searchText);
-	      List<JobPostModel> jobPostModels = new ArrayList<JobPostModel>();
+		System.out.print(searchText);
+		
+		List<JobPost> foundPosts = jobPostsService.searchForJob(searchText);
+		String temp="empty";
+		int i=0;
+		
+			temp = foundPosts.get(i).getDescription();
+			System.out.println(temp);
+			i++;
+		
+		
+		
+		
+		model.addAttribute("search", foundPosts);
+		//jobPostsService.searchForJob(searchText);
+		return "search";
+	     /* List<Book> allFound = _repo.searchForBook(searchText);
+	      List<BookModel> bookModels = new ArrayList<BookModel>();
 	      
-	      for (JobPost b : allFound)
+	      for (Book b : allFound)
 	      {
-	    	 JobPostModel jp = new JobPostModel();
-	    	 jp.setJobPostDescription(b.getDescription());
-	    	 jp.setJobPostDomain(b.getDomain());
-	    	 jp.setJobPostTitle(b.getTitle());
+	         BookModel bm = new BookModel();
+	         bm.setBookAuthor(b.getAuthor());
+	         bm.setBookDescription(b.getDescription());
+	         bm.setBookTitle(b.getTitle());
 	         
-	         
-	    	 jobPostModels.add(jp);
+	         bookModels.add(bm);
 	      }
 	      
-	      ModelAndView mav = new ModelAndView("foundJobs");
-	      mav.addObject("foundJobs", jobPostModels);
-	      return mav;
-	   }*/
-	
-	
-	
+	      ModelAndView mav = new ModelAndView("foundBooks");
+	      mav.addObject("foundBooks", bookModels);
+	      return mav;*/
+	   }
+
+
 }

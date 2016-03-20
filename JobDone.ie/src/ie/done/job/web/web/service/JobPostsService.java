@@ -2,7 +2,6 @@ package ie.done.job.web.web.service;
 
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
-import ie.done.job.web.dao.User;
 
 import java.util.List;
 
@@ -60,6 +59,22 @@ public class JobPostsService {
 
 		return jobPosts.get(0);
 	}
+	
+	public List<JobPost> searchForJob(String text) {
+
+		if (text == null) {
+			return null;
+		}
+
+		List<JobPost> jobPosts = JobPostsDao.getJobPosts(text);
+		
+		//stops trying to return first item of an empty list
+		if (jobPosts.size() == 0) {
+			return null;
+		}
+
+		return jobPosts;
+	}
 
 	public void saveOrUpdate(JobPost offer) {
 		//hibernate looks at primary key and checks is it in db or not
@@ -69,12 +84,5 @@ public class JobPostsService {
 	public void delete(int id) {
 		//deletes from DB
 		JobPostsDao.delete(id);
-	}
-	
-	public List<JobPost> search(String text) throws Exception{
-		//JobPostsDao.search(text);
-		
-		List<JobPost> jobPosts = JobPostsDao.search(text);
-		return jobPosts;
 	}
 }

@@ -2,18 +2,16 @@ package ie.done.job.web.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
-import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.query.dsl.QueryBuilder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -26,13 +24,46 @@ public class JobPostsDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	  // Spring will inject here the entity manager object
-	  //@PersistenceContext
-	  private EntityManager entityManager;
 
 	public Session session() {
 		return sessionFactory.getCurrentSession();
+	}
+
+	@Transactional
+	public void indexBooks() throws Exception {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+
+			FullTextSession fullTextSession = Search
+					.getFullTextSession(session);
+			fullTextSession.createIndexer().startAndWait();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@Transactional
+	public List<JobPost> searchForJob(String searchText) throws Exception {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+
+			FullTextSession fullTextSession = Search
+					.getFullTextSession(session);
+
+			QueryBuilder qb = fullTextSession.getSearchFactory()
+					.buildQueryBuilder().forEntity(JobPost.class).get();
+			org.apache.lucene.search.Query query = qb.keyword()
+					.onFields("description", "title", "domain")
+					.matching(searchText).createQuery();
+
+			org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
+					query, JobPost.class);
+
+			List<JobPost> results = hibQuery.list();
+			return results;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -51,6 +82,43 @@ public class JobPostsDao {
 
 		return crit.list();
 	}
+
+	// ////////////////////////////Fucntiomn to perform search///////////////
+	@SuppressWarnings("unchecked")
+	public List<JobPost> searchForJobtemp(String text) {
+
+		Criteria crit = session().createCriteria(JobPost.class);
+		crit.add(Restrictions.eq("username", "%" + text + "%"));
+		/*
+		 * QueryBuilder queryBuilder =
+		 * fullTextSession.getSearchFactory().buildQueryBuilder
+		 * ().forEntity(JobPost.class).get(); Query luceneQuery =
+		 * queryBuilder.keyword
+		 * ().onFields("productTitle").matching(text).createQuery();
+		 * 
+		 * org.hibernate.search.FullTextQuery fullTextQuery =
+		 * fullTextSession.createFullTextQuery(luceneQuery, JobPost.class);
+		 * 
+		 * 
+		 * Criteria crit = session().createCriteria(JobPost.class);
+		 * crit.add(Restrictions.eq("username", text));
+		 * 
+		 * /*crit.createAlias("user", "u"); Criteria criteria =
+		 * session.createCriteria(StockDailyRecord.class)
+		 * .add(Restrictions.eq("volume", 10000));
+		 * 
+		 * crit.add(Restrictions.eq("u.enabled", true));
+		 * crit.add(Restrictions.eq("u.username", text));
+		 */
+
+		return crit.list();
+	}
+
+	/*
+	 * Criteria cri = session().createCriteria(User.class);
+	 * cri.add(Restrictions.eq("email", email)); User user = (User)
+	 * cri.uniqueResult();
+	 */
 
 	public void saveOrUpdate(JobPost JobPost) {
 		session().saveOrUpdate(JobPost);
@@ -72,85 +140,5 @@ public class JobPostsDao {
 
 		return (JobPost) crit.uniqueResult();
 	}
-	
-	@Transactional
-	   public void indexJobPosts() throws Exception
-	   {
-	      try
-	      {
-	         Session session = sessionFactory.getCurrentSession();
-	      
-	         FullTextSession fullTextSession = Search.getFullTextSession(session);
-	         fullTextSession.createIndexer().startAndWait();
-	      }
-	      catch(Exception e)
-	      {
-	         throw e;
-	      }
-	   }
-
-	
-	
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<JobPost> search(String searchText) throws Exception {
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			//error here 
-			FullTextSession fullTextSession = Search
-					.getFullTextSession(session);
-
-			QueryBuilder qb = fullTextSession.getSearchFactory()
-					.buildQueryBuilder().forEntity(JobPost.class).get();
-			org.apache.lucene.search.Query query = qb.keyword()
-					.onFields("description", "title", "domain")
-					.matching(searchText).createQuery();
-
-			org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
-					query, JobPost.class);
-
-			List<JobPost> results = hibQuery.list();
-			return results;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-	
-	/*@Transactional
-	 public List<JobPost> search(String text) {
-		    
-		
-			// get the full text entity manager
-		    FullTextEntityManager fullTextEntityManager =
-		        org.hibernate.search.jpa.Search.
-		        getFullTextEntityManager(entityManager);
-		    
-		    // create the query using Hibernate Search query DSL
-		    QueryBuilder queryBuilder = 
-		        fullTextEntityManager.getSearchFactory()
-		        .buildQueryBuilder().forEntity(JobPost.class).get();
-		    
-		    // a very basic query by keywords
-		    org.apache.lucene.search.Query query =
-		        queryBuilder
-		          .keyword()
-		          .onFields("title", "description", "domain")
-		          .matching(text)
-		          .createQuery();
-
-		    // wrap Lucene query in an Hibernate Query object
-		    org.hibernate.search.jpa.FullTextQuery jpaQuery =
-		        fullTextEntityManager.createFullTextQuery(query, JobPost.class);
-		  
-		    // execute search and return results (sorted by relevance as default)
-		    @SuppressWarnings("unchecked")
-		    List<JobPost> results = jpaQuery.getResultList();
-		    
-		    return results;
-		  } // method search
-
-	*/
-
-	
 
 }

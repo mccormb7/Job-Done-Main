@@ -5,15 +5,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
-
-<h1>Search for Jobs</h1>
-    <form action="dosearch" method="post">
-      Search: <input type="text" name="searchText" /><br/>
-      <input type="reset"/>
-      <input type="submit"/>
-    </form>
-
-
 <table class="offers">
 	<tr>
 		<td>Name</td>

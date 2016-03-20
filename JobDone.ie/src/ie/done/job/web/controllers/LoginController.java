@@ -73,6 +73,8 @@ public class LoginController {
 		return "loggedout";
 	}
 	
+	
+	
 	@RequestMapping("/newaccount")
 	public String showNewAccount(Model model) {
 		

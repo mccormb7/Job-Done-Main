@@ -20,8 +20,8 @@ import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Store;
 
 
+
 @Entity
-@Indexed
 @Table(name="jobPosts")
 public class JobPost {
 
@@ -32,9 +32,9 @@ public class JobPost {
 	@ManyToOne//mapping from the object your in to this object
 	@JoinColumn(name="username")
 	private User user;
-	//Analize ->chunking a sentence into individual words, lowercase them and potentially excluding common words like 'a' or 'the'.
-	@Column(name="title")//must match name in DB
+	
 	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
+	@Column(name="title")//must match name in DB
 	private String title;
 	
 	//@Column(name="domain")//must match name in DB
@@ -56,9 +56,8 @@ public class JobPost {
 	@Column(name="price")
 	private double price;
 	
-	
-	@Column(name="domain")
 	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
+	@Column(name="domain")
 	private String domain;
 	
 	

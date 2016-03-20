@@ -56,6 +56,7 @@ public class UsersDao {
 		Criteria cri = session().createCriteria(User.class);
 		cri.add(Restrictions.eq("email", email));
 		User user = (User) cri.uniqueResult();
+		
 		return user != null;
 	}
 
