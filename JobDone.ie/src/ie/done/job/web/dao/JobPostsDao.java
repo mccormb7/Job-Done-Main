@@ -7,11 +7,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -28,9 +26,21 @@ public class JobPostsDao {
 	public Session session() {
 		return sessionFactory.getCurrentSession();
 	}
+	
+	/*@Transactional
+	   public void addBookToDB(String title, String description, String domain)
+	   {
+	      Session session = sessionFactory.getCurrentSession();
+	      JobPost jobPost = new JobPost();
+	      jobPost.setDescription(description);
+	      jobPost.setTitle(title);
+	      jobPost.setDomain(domain);
+	      
+	      
+	   }*/
 
 	@Transactional
-	public void indexBooks() throws Exception {
+	public void indexJobs() throws Exception {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 
@@ -41,17 +51,41 @@ public class JobPostsDao {
 			throw e;
 		}
 	}
+	
+	@Transactional
+	public String[] splitString(String searchText) {
+		String[] splitArray = searchText.split("\\s+");
+		
+		return splitArray;
+		
+
+	}
+	
 
 	@Transactional
 	public List<JobPost> searchForJob(String searchText) throws Exception {
-		try {
-			Session session = sessionFactory.getCurrentSession();
+			
+		
+			String [] splitWords = splitString(searchText);
+			/*for(int i = 0; i<splitWords.length;i++){
+				System.out.println(splitWords[i] + "word " + i);
+			}*/
 
+			
+			
+			Session session = sessionFactory.getCurrentSession();
+			
+			
+
+			
+			//System.out.println(searchText + "in the search here1");
 			FullTextSession fullTextSession = Search
 					.getFullTextSession(session);
-
+			
+			//System.out.println(searchText + "in the search here");
 			QueryBuilder qb = fullTextSession.getSearchFactory()
 					.buildQueryBuilder().forEntity(JobPost.class).get();
+			
 			org.apache.lucene.search.Query query = qb.keyword()
 					.onFields("description", "title", "domain")
 					.matching(searchText).createQuery();
@@ -61,9 +95,7 @@ public class JobPostsDao {
 
 			List<JobPost> results = hibQuery.list();
 			return results;
-		} catch (Exception e) {
-			throw e;
-		}
+		
 	}
 
 	@SuppressWarnings("unchecked")

@@ -1,6 +1,7 @@
 package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.JobPost;
+import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.Offer;
 import ie.done.job.web.web.service.JobPostsService;
 import ie.done.job.web.web.service.OffersService;
@@ -25,16 +26,22 @@ public class HomeController {
 	
 	@Autowired
 	private JobPostsService jobPostService;
+	
+	@Autowired
+	private JobPostsDao jobDao;
 
 	//principal allows you to get the current username of user logged in
 	@RequestMapping("/")
-	public String showHome(Model model, Principal principal) {
+	public String showHome(Model model, Principal principal) throws Exception {
 
 		//List<Offer> offers = offersService.getCurrent();
 		List<JobPost> jobposts = jobPostService.getCurrent();
-		model.addAttribute("jobposts", jobposts);
+		model.addAttribute("jobposts1", jobposts);
 		//only allow one offer
 		boolean hasJobPost = false;
+		jobDao.indexJobs();
+		
+		
 		
 		if(principal != null) {
 			hasJobPost = offersService.hasOffer(principal.getName());

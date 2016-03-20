@@ -12,7 +12,7 @@
 		<td>Offer</td>
 	</tr>
 
-	<c:forEach var="jobpost" items="${jobposts}">
+	<c:forEach var="jobpost" items="${jobposts1}">
 		<tr>
 
 			<td><c:out value="${jobpost.user.name}"></c:out></td>

@@ -3,15 +3,23 @@ package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.FormValidationGroup;
 import ie.done.job.web.dao.JobPost;
+import ie.done.job.web.dao.JobPostModel;
+import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.User;
+import ie.done.job.web.test.tests.JobPostDaoTests;
 import ie.done.job.web.web.service.JobPostsService;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
+
+
 
 
 
@@ -34,26 +42,30 @@ public class JobPostsController {
 
 	
 	private JobPostsService jobPostsService;
-	 private ArrayList<String> domains;  
-	 private HashMap<String, ArrayList<String>> model;  
-	
-	
+
+	private JobPostsDao jobPostsDao;
+
+	@Autowired
+	public void setJobPostsDao(JobPostsDao JobPostsDao) {
+		this.jobPostsDao = JobPostsDao;
+	}
+//	private JobPostModel  _repo;
 	
 	@Autowired
 	public void setJobPostsService(JobPostsService jobPostsService) {
 		this.jobPostsService = jobPostsService;
 	}
 
-	ModelAndView mav = null;
-	@ModelAttribute("countryList")
-	public List getDomain()
-	{
-		List countryList = new ArrayList();
-		countryList.add("India");
-		countryList.add("Australia");
-		countryList.add("England");
-		return countryList;
-	}
+//	ModelAndView mav = null;
+//	@ModelAttribute("countryList")
+//	public List getDomain()
+//	{
+//		List countryList = new ArrayList();
+//		countryList.add("India");
+//		countryList.add("Australia");
+//		countryList.add("England");
+//		return countryList;
+//	}
 	
 	@RequestMapping("/jobposts")
 	public String showJobPosts(Model model) {
@@ -102,7 +114,7 @@ public class JobPostsController {
 	
 	@RequestMapping(value = "/docreatejob", method = RequestMethod.POST)
 	public String doCreate(Model model, @Validated(value=FormValidationGroup.class) JobPost jobPost,
-			BindingResult result, Principal principal,
+			BindingResult result, Principal principal, @ModelAttribute("JobPostModel") JobPostModel jobInfo,
 			@RequestParam(value = "delete", required = false) String delete) {
 
 		System.out.println(jobPost);
@@ -116,6 +128,9 @@ public class JobPostsController {
 			// used to create jobPost in DB
 			jobPost.getUser().setUsername(username);
 			jobPostsService.saveOrUpdate(jobPost);
+			//model.addAttribute("docreatejob", new JobPostModel());
+			//jobPostsDao.addBookToDB(jobInfo.getJobDescription(), jobInfo.getJobDomain(), jobInfo.getJobTitle());
+			
 			return "offercreated";
 		}
 		else {
@@ -129,8 +144,65 @@ public class JobPostsController {
 	public String showLSearch() {
 		return "search";
 	}
+	@RequestMapping("/search1")
+	public String showLSearch1() {
+		return "search1";
+	}
+
+	@RequestMapping("/searchnull")
+	public String showSearchNull() {
+		return "search1";
+	}
+	
+	@RequestMapping("/foundjobs")
+	public String showResult() {
+		return "foundjobs";
+	}
 	
 	@RequestMapping(value = "/doSearch", method = RequestMethod.POST)
+	public String search(Model model,
+	   @RequestParam("searchText")
+	   String searchText
+	) throws Exception
+	{
+	   List<JobPost> allFound = jobPostsDao.searchForJob(searchText);
+	   List<JobPostModel> jobPostModels = new ArrayList<JobPostModel>();
+
+
+	  // System.out.println(allFound.get(0).getDescription());
+	   System.out.print(allFound.size() + " size of the array being passed");
+	   
+	   if(allFound.isEmpty()){
+		  allFound = Collections.emptyList();
+		  return "searchnull";
+		  
+	   }
+	 // JobPost b = new JobPost();
+	 //  System.out.println("test");
+	  for(JobPost b : allFound){
+
+		   JobPostModel jm = new JobPostModel();
+		   System.out.println(searchText);
+
+		  jm.setJobDescription(b.getDescription());
+		  jm.setJobDomain(b.getDomain());
+		  jm.setJobTitle(b.getTitle());
+		  
+	      
+
+	      jobPostModels.add(jm);
+	  }
+	  
+	  System.out.println(jobPostModels + "jbmodel");
+
+	  model.addAttribute("search1",jobPostModels);
+	   return "search1";
+	}
+	
+	
+	
+	
+	/*@RequestMapping(value = "/doSearch", method = RequestMethod.POST)
 	   public String search(@RequestParam("searchText")String searchText, Model model) throws Exception
 	   {
 		System.out.print(searchText);
@@ -143,29 +215,10 @@ public class JobPostsController {
 			System.out.println(temp);
 			i++;
 		
-		
-		
-		
 		model.addAttribute("search", foundPosts);
-		//jobPostsService.searchForJob(searchText);
 		return "search";
-	     /* List<Book> allFound = _repo.searchForBook(searchText);
-	      List<BookModel> bookModels = new ArrayList<BookModel>();
-	      
-	      for (Book b : allFound)
-	      {
-	         BookModel bm = new BookModel();
-	         bm.setBookAuthor(b.getAuthor());
-	         bm.setBookDescription(b.getDescription());
-	         bm.setBookTitle(b.getTitle());
-	         
-	         bookModels.add(bm);
-	      }
-	      
-	      ModelAndView mav = new ModelAndView("foundBooks");
-	      mav.addObject("foundBooks", bookModels);
-	      return mav;*/
-	   }
+
+	   }*/
 
 
 }

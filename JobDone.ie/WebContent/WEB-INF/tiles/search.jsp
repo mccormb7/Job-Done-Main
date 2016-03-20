@@ -8,10 +8,3 @@
     </form>
     
     
-    <c:forEach var="jobpost" items="${foundPosts}">
-        <ul>
-          <li>${jobpost.getDescription()}</li>
-          
-        </ul>
-        <hr>
-    </c:forEach>

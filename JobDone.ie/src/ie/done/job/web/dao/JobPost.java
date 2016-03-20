@@ -20,7 +20,7 @@ import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Store;
 
 
-
+@Indexed
 @Entity
 @Table(name="jobPosts")
 public class JobPost {
@@ -79,6 +79,14 @@ public class JobPost {
 	}
 	
 	
+
+	public JobPost(String title, String description, String domain) {
+		this.title = title;
+		this.description = description;
+		this.domain = domain;
+	}
+
+
 
 	public JobPost(int id, User user, String title, String domain,
 			String description, byte[] photo, String location, double price) {

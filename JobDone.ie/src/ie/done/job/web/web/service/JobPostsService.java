@@ -67,6 +67,7 @@ public class JobPostsService {
 		}
 
 		List<JobPost> jobPosts = JobPostsDao.getJobPosts(text);
+		System.out.println(jobPosts + "jobpost value");
 		
 		//stops trying to return first item of an empty list
 		if (jobPosts.size() == 0) {
@@ -84,5 +85,10 @@ public class JobPostsService {
 	public void delete(int id) {
 		//deletes from DB
 		JobPostsDao.delete(id);
+	}
+
+	public void indexJobs() throws Exception {
+		JobPostsDao.indexJobs();
+		
 	}
 }

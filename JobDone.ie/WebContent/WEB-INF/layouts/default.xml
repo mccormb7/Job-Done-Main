@@ -101,6 +101,23 @@
 		<put-attribute name="title" value="Search"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/search.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="search1" extends="jobdone.base">
+		<put-attribute name="title" value="Search1"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/search1.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="searchnull" extends="jobdone.base">
+		<put-attribute name="title" value="Search1"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/searchnull.jsp"></put-attribute>
+	</definition>
+	
+	
+	
+	<definition name="foundjobs" extends="jobdone.base">
+		<put-attribute name="title" value="foundjobs"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/foundjobs.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
 
 
