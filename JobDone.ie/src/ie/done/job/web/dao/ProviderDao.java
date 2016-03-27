@@ -18,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-@Component("jobPostsDao")
-public class JobPostsDao {
+@Component("providerDao")
+public class ProviderDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -28,18 +28,8 @@ public class JobPostsDao {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	/*@Transactional
-	   public void addBookToDB(String title, String description, String domain)
-	   {
-	      Session session = sessionFactory.getCurrentSession();
-	      JobPost jobPost = new JobPost();
-	      jobPost.setDescription(description);
-	      jobPost.setTitle(title);
-	      jobPost.setDomain(domain);
-	      
-	      
-	   }*/
 
+/*
 	@Transactional
 	public void indexJobs() throws Exception {
 		try {
@@ -69,9 +59,7 @@ public class JobPostsDao {
 		
 			
 			String [] splitWords = splitString(searchText);
-			/*for(int i = 0; i<splitWords.length;i++){
-				System.out.println(splitWords[i] + "word " + i);
-			}*/
+			
 			
 			List<JobPost> results = null;
 			List<JobPost> resultsFinal = new ArrayList<JobPost>();
@@ -103,17 +91,19 @@ public class JobPostsDao {
 			return resultsFinal;
 		
 	}
+	
+	*/
 
 	@SuppressWarnings("unchecked")
-	public List<JobPost> getJobPosts() {
-		Criteria crit = session().createCriteria(JobPost.class);
+	public List<Provider> getProviders() {
+		Criteria crit = session().createCriteria(Provider.class);
 		crit.createAlias("user", "u").add(Restrictions.eq("u.enabled", true));
 		return crit.list();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<JobPost> getJobPosts(String username) {
-		Criteria crit = session().createCriteria(JobPost.class);
+	public List<Provider> getProviders(String username) {
+		Criteria crit = session().createCriteria(Provider.class);
 		crit.createAlias("user", "u");
 		crit.add(Restrictions.eq("u.enabled", true));
 		crit.add(Restrictions.eq("u.username", username));
@@ -122,40 +112,38 @@ public class JobPostsDao {
 	}
 
 	// ////////////////////////////Fucntiomn to perform search///////////////
-	@SuppressWarnings("unchecked")
-	public List<JobPost> searchForJobtemp(String text) {
 
-		Criteria crit = session().createCriteria(JobPost.class);
-		crit.add(Restrictions.eq("username", "%" + text + "%"));
-	
-		return crit.list();
-	}
 
-	/*
-	 * Criteria cri = session().createCriteria(User.class);
-	 * cri.add(Restrictions.eq("email", email)); User user = (User)
-	 * cri.uniqueResult();
-	 */
-
-	public void saveOrUpdate(JobPost JobPost) {
-		session().saveOrUpdate(JobPost);
+	public void saveOrUpdate(Provider provider) {
+		session().saveOrUpdate(provider);
 	}
 
 	public boolean delete(int id) {
-		Query query = session().createQuery("delete from JobPost where id=:id");
+		Query query = session().createQuery("delete from provider where id=:id");
 		query.setLong("id", id);
 		return query.executeUpdate() == 1;
 	}
 
-	public JobPost getJobPost(int id) {
-		Criteria crit = session().createCriteria(JobPost.class);
+	public Provider getProvider(int id) {
+		Criteria crit = session().createCriteria(Provider.class);
 
 		crit.createAlias("user", "u");
 
 		crit.add(Restrictions.eq("u.enabled", true));
 		crit.add(Restrictions.idEq(id));
 
-		return (JobPost) crit.uniqueResult();
+		return (Provider) crit.uniqueResult();
+	}
+	
+	public Provider getProvider(String username) {
+		Criteria crit = session().createCriteria(Provider.class);
+
+		crit.createAlias("user", "u");
+
+		crit.add(Restrictions.eq("u.enabled", true));
+		crit.add(Restrictions.idEq(username));
+
+		return (Provider) crit.uniqueResult();
 	}
 
 }

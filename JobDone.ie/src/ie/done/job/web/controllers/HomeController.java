@@ -3,7 +3,7 @@ package ie.done.job.web.controllers;
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.Offer;
-import ie.done.job.web.web.service.JobPostsService;
+import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.OffersService;
 
 import java.security.Principal;
@@ -25,7 +25,7 @@ public class HomeController {
 	private OffersService offersService;
 	
 	@Autowired
-	private JobPostsService jobPostService;
+	private JobPostService jobPostService;
 	
 	@Autowired
 	private JobPostsDao jobDao;

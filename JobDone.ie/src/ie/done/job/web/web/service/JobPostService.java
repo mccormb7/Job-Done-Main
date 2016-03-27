@@ -10,7 +10,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 @Service("jobPostsService")
-public class JobPostsService {
+public class JobPostService {
 
 	private JobPostsDao JobPostsDao;
 
@@ -24,7 +24,7 @@ public class JobPostsService {
 	}
 
 	//add role client
-	@Secured({ "ROLE_USER", "ROLE_ADMIN" })
+	@Secured({ "ROLE_USER", "ROLE_ADMIN" , "ROLE_TRADE"})
 	public void create(JobPost offer) {
 		JobPostsDao.saveOrUpdate(offer);
 	}

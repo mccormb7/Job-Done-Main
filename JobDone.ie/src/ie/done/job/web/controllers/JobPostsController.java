@@ -6,8 +6,8 @@ import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostModel;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.User;
-import ie.done.job.web.test.tests.JobPostDaoTests;
-import ie.done.job.web.web.service.JobPostsService;
+import ie.done.job.web.test.tests.ProviderDaoTest;
+import ie.done.job.web.web.service.JobPostService;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 
@@ -41,7 +42,7 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 public class JobPostsController {
 
 	
-	private JobPostsService jobPostsService;
+	private JobPostService jobPostsService;
 
 	private JobPostsDao jobPostsDao;
 
@@ -52,7 +53,7 @@ public class JobPostsController {
 //	private JobPostModel  _repo;
 	
 	@Autowired
-	public void setJobPostsService(JobPostsService jobPostsService) {
+	public void setJobPostsService(JobPostService jobPostsService) {
 		this.jobPostsService = jobPostsService;
 	}
 
@@ -127,6 +128,7 @@ public class JobPostsController {
 			String username = principal.getName();
 			// used to create jobPost in DB
 			jobPost.getUser().setUsername(username);
+			System.out.println(jobPost.getUser() + "-----------------");
 			jobPostsService.saveOrUpdate(jobPost);
 			//model.addAttribute("docreatejob", new JobPostModel());
 			//jobPostsDao.addBookToDB(jobInfo.getJobDescription(), jobInfo.getJobDomain(), jobInfo.getJobTitle());
@@ -144,6 +146,12 @@ public class JobPostsController {
 	public String showLSearch() {
 		return "search";
 	}
+	@RequestMapping("/searchpro")
+	public String showLSearchPro() {
+		return "searchpro";
+	}
+	
+	
 	@RequestMapping("/search1")
 	public String showLSearch1() {
 		return "search1";
@@ -159,12 +167,21 @@ public class JobPostsController {
 		return "foundjobs";
 	}
 	
+	@RequestMapping("/profile")
+	public String showProfile() {
+		return "profile";
+	}
+	
 	@RequestMapping(value = "/doSearch", method = RequestMethod.POST)
 	public String search(Model model,
 	   @RequestParam("searchText")
 	   String searchText
 	) throws Exception
 	{
+		//check if entered text is null
+	   if(searchText.equals("")){
+		   return "searchnull";
+	   }
 	   List<JobPost> allFound = jobPostsDao.searchForJob(searchText);
 	   List<JobPostModel> jobPostModels = new ArrayList<JobPostModel>();
 

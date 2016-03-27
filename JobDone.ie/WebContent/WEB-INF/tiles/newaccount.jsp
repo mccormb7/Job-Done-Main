@@ -26,6 +26,33 @@
 					<sf:errors path="name"></sf:errors>
 				</div></td>
 		</tr>
+		
+	<!--  	<tr>
+			<td class="label">Authority:</td>
+			<td><sf:input class="control" path="authority" name="authority"
+					type="text" /><br />
+				<div class="error">
+					<sf:errors path="authority"></sf:errors>
+				</div></td>
+		</tr>
+		-->
+		
+		<tr>
+			<td class="label">Authority:</td>
+			<td><sf:select path="authority" name="authority">
+					<sf:option value="ROLE_TRADE">Tradesman</sf:option>
+					<sf:option selected="selected" value="ROLE_USER">Client</sf:option>
+				 </sf:select>
+				 
+					 <br />
+					<div class="error">
+						<sf:errors path="authority"></sf:errors>
+					</div></td>
+
+			
+
+		</tr>
+		
 		<tr>
 			<td class="label">Email:</td>
 			<td><sf:input class="control" path="email" name="email"

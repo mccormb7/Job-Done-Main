@@ -47,6 +47,8 @@ public class LoginController {
 		return "login";
 	}
 	
+
+	
 	@RequestMapping("/messages")
 	public String showMessages() {
 		return "messages";
@@ -114,7 +116,8 @@ public class LoginController {
 			return "newaccount";
 		}
 		
-		user.setAuthority("ROLE_USER");
+		
+		//user.setAuthority("ROLE_USER");
 		user.setEnabled(true);
 		
 		if(usersService.exists(user.getUsername())||usersService.existsEmail(user.getEmail())) {

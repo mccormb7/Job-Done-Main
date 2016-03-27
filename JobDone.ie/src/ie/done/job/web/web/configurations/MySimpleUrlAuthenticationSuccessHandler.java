@@ -49,12 +49,18 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     protected String determineTargetUrl(final Authentication authentication) {
         boolean isUser = false;
         boolean isAdmin = false;
+        boolean isTradesman = false;
         final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (final GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
                 isUser = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+            } 
+            else if (grantedAuthority.getAuthority().equals("ROLE_TRADE")) {
+                    isTradesman = true;
+                    break;
+            }
+            else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 isAdmin = true;
                 break;
             }
@@ -62,7 +68,10 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 
         if (isUser) {
             return "/";
-        } else if (isAdmin) {
+        }else if(isTradesman) {
+                return "/";	
+        }
+        else if (isAdmin) {
             return "/admin";
         } else {
             throw new IllegalStateException();

@@ -45,6 +45,12 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreatejob"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/docreateprofile"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/createprofile"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/providers"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/messages"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/offercreated"
@@ -56,9 +62,11 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/search"
 			access="permitAll" />
+		<security:intercept-url pattern="/searchpro"
+			access="permitAll" />
 		<security:intercept-url pattern="/search1"
 			access="permitAll" />
-		<security:intercept-url pattern="/searchnull"
+		<security:intercept-url pattern="/createprofile"
 			access="permitAll" />
 		<security:intercept-url pattern="/loggedout"
 			access="permitAll" />
@@ -72,7 +80,10 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/accountcreated"
 			access="permitAll" />
+		
 		<security:intercept-url pattern="/static/**"
+			access="permitAll" />
+		<security:intercept-url pattern="profile"
 			access="permitAll" />
 		<security:intercept-url pattern="/login"
 			access="permitAll" />

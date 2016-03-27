@@ -25,11 +25,21 @@
 		</bean>
 
 		<bean id="sessionFactory"
-			class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+			class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 			<property name="dataSource" ref="dataSource"></property>
 			<property name="hibernateProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+
+					<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+					<prop key="hibernate.search.default.directory_provider">
+						org.hibernate.search.store.impl.FSDirectoryProvider
+					</prop>
+					<prop key="hibernate.search.default.indexBase">
+						C:/Users/user/Pictures/indexes
+					</prop>
+
+
 					<prop key="javax.persistence.validation.group.pre-persist">ie.done.job.web.dao.PersistenceValidationGroup
 					</prop>
 					<prop key="javax.persistence.validation.group.pre-update">ie.done.job.web.dao.PersistenceValidationGroup
@@ -46,14 +56,10 @@
 		</bean>
 
 		<bean id="transactionManager"
-			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-			<property name="dataSource" ref="dataSource"></property>
+			class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+			<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
-		<tx:annotation-driven />
-
-		<bean id="exceptionTranslator"
-			class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor">
-		</bean>
+		<tx:annotation-driven transaction-manager="transactionManager" />
 	</beans>
 
 </beans>

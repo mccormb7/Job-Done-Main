@@ -10,6 +10,7 @@
 
 <h3>Login with Username and Password</h3>
 
+
 <c:if test="${param.error != null}">
 
 	<p class="error">Login failed. Check that your username and
@@ -36,7 +37,7 @@
 				checked="checked" /></td>
 		</tr>
 		<tr>
-			<td colspan='2'><input name="submit" type="submit" value="Login" /></td>
+			<td colspan='2'><input name="submit" type="submit" value="login" /></td>
 		</tr>
 	</table>
 </form>
