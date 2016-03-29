@@ -167,10 +167,7 @@ public class JobPostsController {
 		return "foundjobs";
 	}
 	
-	@RequestMapping("/profile")
-	public String showProfile() {
-		return "profile";
-	}
+	
 	
 	@RequestMapping(value = "/doSearch", method = RequestMethod.POST)
 	public String search(Model model,
@@ -204,6 +201,7 @@ public class JobPostsController {
 		  jm.setJobDescription(b.getDescription());
 		  jm.setJobDomain(b.getDomain());
 		  jm.setJobTitle(b.getTitle());
+		  jm.setJobLocation(b.getLocation());
 		  
 	      
 

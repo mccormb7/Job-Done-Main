@@ -3,6 +3,7 @@ package ie.done.job.web.controllers;
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.Offer;
+import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.OffersService;
 
@@ -29,6 +30,9 @@ public class HomeController {
 	
 	@Autowired
 	private JobPostsDao jobDao;
+	
+	@Autowired
+	private ProviderDao providerDao;
 
 	//principal allows you to get the current username of user logged in
 	@RequestMapping("/")
@@ -38,13 +42,14 @@ public class HomeController {
 		List<JobPost> jobposts = jobPostService.getCurrent();
 		model.addAttribute("jobposts1", jobposts);
 		//only allow one offer
+		
+		//jobDao.indexJobs();
+		providerDao.indexProviders();
+		
 		boolean hasJobPost = false;
-		jobDao.indexJobs();
-		
-		
-		
 		if(principal != null) {
-			hasJobPost = offersService.hasOffer(principal.getName());
+			//hasJobPost = offersService.hasOffer(principal.getName());
+			hasJobPost = jobPostService.hasJobPost(principal.getName());
 		}
 		
 		model.addAttribute("hasJobPost", hasJobPost);

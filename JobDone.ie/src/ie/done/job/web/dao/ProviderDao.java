@@ -1,6 +1,8 @@
 package ie.done.job.web.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -29,9 +31,9 @@ public class ProviderDao {
 	}
 	
 
-/*
+
 	@Transactional
-	public void indexJobs() throws Exception {
+	public void indexProviders() throws Exception {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 
@@ -53,38 +55,37 @@ public class ProviderDao {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<JobPost> searchForJob(String searchText) throws Exception {
-			
-		
-			
-			String [] splitWords = splitString(searchText);
-			
-			
-			List<JobPost> results = null;
-			List<JobPost> resultsFinal = new ArrayList<JobPost>();
+	public List<Provider> searchForProvider(String searchTextPro) throws Exception {
+			//allows a client search for specific tradesmen
+
+			String [] splitWords = splitString(searchTextPro);
+					
+			List<Provider> results = null;
+			List<Provider> resultsFinal = new ArrayList<Provider>();
 			Session session = sessionFactory.getCurrentSession();
-			System.out.println(searchText + " in the search here1");
+			System.out.println(searchTextPro + " in the search here1");
 			FullTextSession fullTextSession = Search
 					.getFullTextSession(session);
 			
 			//System.out.println(searchText + "in the search here");
 			QueryBuilder qb = fullTextSession.getSearchFactory()
-					.buildQueryBuilder().forEntity(JobPost.class).get();
-			
+					.buildQueryBuilder().forEntity(Provider.class).get();
+			//title, experience,
 			for(int i = 0; i<splitWords.length;i++){
 				org.apache.lucene.search.Query query = qb.keyword()
-						.onFields("description", "title", "domain")
+						.onFields("experience", "title", "domain","qualifications", "location")
 						.matching(splitWords[i]).createQuery();
 	
 				org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
-						query, JobPost.class);
+						query, Provider.class);
 			
 				results = hibQuery.list();
 				if(!results.isEmpty()){
 					resultsFinal.addAll(results);
 				}
-				
+				//"experience", "title", "domain","qualifications", "location"
 				
 			}
 			
@@ -92,7 +93,41 @@ public class ProviderDao {
 		
 	}
 	
-	*/
+	/*@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Provider> searchForBook(String searchText) throws Exception
+	{
+	   try
+	   {
+	      Session session = sessionFactory.getCurrentSession();
+	      System.out.println(searchText + " in the search here1");
+
+	      FullTextSession fullTextSession = Search.getFullTextSession(session);
+
+	      System.out.println(searchText + "in the search here");
+	      QueryBuilder qb = fullTextSession.getSearchFactory()
+	        .buildQueryBuilder().forEntity(Provider.class).get();
+	      org.apache.lucene.search.Query query = qb
+	        .keyword().onFields("experience", "title", "domain","qualifications", "location")
+	        .matching(searchText)
+	        .createQuery();
+
+	      org.hibernate.Query hibQuery =
+	         fullTextSession.createFullTextQuery(query, Provider.class);
+	      if(hibQuery.list() == null){
+	    	  return Collections.emptyList();
+	      }
+	      
+	      List<Provider> results = hibQuery.list();
+	      return results;
+	   }
+	   catch(Exception e)
+	   {
+	      throw e;
+	   }
+	}*/
+	
+
 
 	@SuppressWarnings("unchecked")
 	public List<Provider> getProviders() {
@@ -115,6 +150,8 @@ public class ProviderDao {
 
 
 	public void saveOrUpdate(Provider provider) {
+		Date currentDate = new Date();
+		provider.setDate(currentDate);
 		session().saveOrUpdate(provider);
 	}
 

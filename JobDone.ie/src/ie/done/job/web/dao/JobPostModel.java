@@ -5,6 +5,17 @@ public class JobPostModel {
 	private String jobTitle;
 	private String jobDomain;
 	private String jobDescription;
+	private String jobLocation;
+	
+	
+	
+	
+	public String getJobLocation() {
+		return jobLocation;
+	}
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
+	}
 	public String getJobTitle() {
 		return jobTitle;
 	}

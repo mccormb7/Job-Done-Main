@@ -5,6 +5,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
+
 <table class="offers">
 	<tr>
 		<td>Name</td>

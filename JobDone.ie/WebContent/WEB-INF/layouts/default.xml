@@ -50,7 +50,7 @@
 		<put-attribute name="title" value="Create Offer"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/createoffer.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="createjobpost" extends="jobdone.base">
 		<put-attribute name="title" value="Create Job Post"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/createjobpost.jsp"></put-attribute>
@@ -71,64 +71,73 @@
 		<put-attribute name="title" value="Logged Out"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/loggedout.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="offercreated" extends="jobdone.base">
 		<put-attribute name="title" value="Offer Created"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/offercreated.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="offerdeleted" extends="jobdone.base">
 		<put-attribute name="title" value="Offer Deleted"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/offerdeleted.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="showContactForm" extends="jobdone.base">
 		<put-attribute name="title" value="Send Message"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/contact.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="messageSent" extends="jobdone.base">
 		<put-attribute name="title" value="Message Sent"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/messagesent.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="messages" extends="jobdone.base">
 		<put-attribute name="title" value="Messages"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/messages.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="search" extends="jobdone.base">
 		<put-attribute name="title" value="Search"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/search.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="searchpro" extends="jobdone.base">
 		<put-attribute name="title" value="Searchpro"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/searchpro.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="search1" extends="jobdone.base">
 		<put-attribute name="title" value="Search1"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/search1.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="searchprovider" extends="jobdone.base">
+		<put-attribute name="title" value="SearchProvider"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/searchprovider.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="searchnull" extends="jobdone.base">
+		<put-attribute name="title" value="SearchNull"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/searchnull.jsp"></put-attribute>
+	</definition>
+
 	<definition name="createprofile" extends="jobdone.base">
 		<put-attribute name="title" value="CreateProfile"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/createprofile.jsp"></put-attribute>
 	</definition>
-	
+
 	<definition name="profile" extends="jobdone.base">
 		<put-attribute name="title" value="Profile"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/profile.jsp"></put-attribute>
 	</definition>
-	
-	
-	
+
+
 	<definition name="foundjobs" extends="jobdone.base">
 		<put-attribute name="title" value="foundjobs"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/foundjobs.jsp"></put-attribute>
 	</definition>
-	
+
 
 </tiles-definitions>
 

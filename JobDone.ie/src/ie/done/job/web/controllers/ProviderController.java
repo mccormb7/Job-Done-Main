@@ -2,9 +2,12 @@ package ie.done.job.web.controllers;
 
 
 import ie.done.job.web.dao.FormValidationGroup;
+import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.JobPostModel;
 import ie.done.job.web.dao.JobPostsDao;
+import ie.done.job.web.dao.ProviderDao;
+import ie.done.job.web.dao.ProviderModel;
 import ie.done.job.web.dao.User;
 import ie.done.job.web.test.tests.ProviderDaoTest;
 import ie.done.job.web.web.service.JobPostService;
@@ -17,6 +20,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
+
+
+
+
 
 
 
@@ -46,14 +55,18 @@ public class ProviderController {
 	
 	private ProviderService providerService;
 	
+	private ProviderDao providerDao;
 	
-
-	private JobPostsDao jobPostsDao;
-
+	
+	
+	
 	@Autowired
-	public void setJobPostsDao(JobPostsDao JobPostsDao) {
-		this.jobPostsDao = JobPostsDao;
+	public void setProviderDao(ProviderDao providerDao) {
+		this.providerDao = providerDao;
 	}
+
+
+
 
 	@Autowired
 	public void setProviderService(ProviderService providerService) {
@@ -74,6 +87,24 @@ public class ProviderController {
 		return "providers";
 	}
 	
+	@RequestMapping("/profile")
+	public String showProfile(Model model, Principal principal) {
+		Provider provider = null;
+		boolean hasProfile = false;
+		
+		if (principal != null) {
+			String username = principal.getName();
+			provider = providerService.getProvider(username);
+			//check if they have a profile
+			hasProfile = providerService.hasProvider(username);
+		}
+
+		model.addAttribute("provider", provider);
+		model.addAttribute("hasProfile", hasProfile);
+		
+		return "profile";
+	
+	}
 	
 
 	@RequestMapping("/createprofile")
@@ -96,6 +127,11 @@ public class ProviderController {
 
 		return "createprofile";
 	}
+	
+	@RequestMapping("/searchprovider")
+	public String showLSearchprovider() {
+		return "searchprovider";
+	}
 
 	
 	@RequestMapping(value = "/docreateprofile", method = RequestMethod.POST)
@@ -117,13 +153,58 @@ public class ProviderController {
 			//model.addAttribute("docreatejob", new JobPostModel());
 			//jobPostsDao.addBookToDB(jobInfo.getJobDescription(), jobInfo.getJobDomain(), jobInfo.getJobTitle());
 			
-			return "offercreated";
+			return "profile";
 		}
 		else {
 			providerService.delete(provider.getId());
 			return "offerdeleted";
 		}
 		
+	}
+	
+	@RequestMapping(value = "/doSearchProvider", method = RequestMethod.POST)
+	public String search(Model model,
+	   @RequestParam("searchTextPro")
+	   String searchTextPro
+	) throws Exception
+	{
+		//check if entered text is null
+	   if(searchTextPro.equals("")){
+		   return "searchnull";
+	   }
+	  
+	   List<Provider> allFound = providerDao.searchForProvider(searchTextPro);
+	   List<ProviderModel> providerModels = new ArrayList<ProviderModel>();
+	   
+
+	  // System.out.println(allFound.get(0).getDescription());
+	   System.out.print(allFound.size() + " size of the array being passed");
+	   
+	   if(allFound.isEmpty()){
+		  allFound = Collections.emptyList();
+		  return "searchnull";
+		  
+	   }
+	 // JobPost b = new JobPost();
+	 //  System.out.println("test");
+	  for(Provider b : allFound){
+
+		  ProviderModel pro = new ProviderModel();
+		   System.out.println(searchTextPro);
+
+		  pro.setProviderDomain(b.getDomain());
+		  pro.setProviderExperience(b.getExperience());
+		  pro.setProviderQualifications(b.getQualifications());
+		  pro.setProviderTitle(b.getLocation());
+		  pro.setProviderLocation(b.getLocation());
+
+	      providerModels.add(pro);
+	  }
+	  
+	  System.out.println(providerModels + "promodel");
+
+	  model.addAttribute("searchprovider",providerModels);
+	   return "searchprovider";
 	}
 	
 	

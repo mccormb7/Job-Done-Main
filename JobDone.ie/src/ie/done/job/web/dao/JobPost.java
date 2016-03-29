@@ -1,6 +1,7 @@
 package ie.done.job.web.dao;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +50,7 @@ public class JobPost {
     @Column(name="photo", nullable=false, columnDefinition="mediumblob")
     private byte[] photo;
 	
-	
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	@Column(name="location")
 	private String location;
 	
@@ -60,7 +61,9 @@ public class JobPost {
 	@Column(name="domain")
 	private String domain;
 	
-	
+	@Column(name = "date")
+	private Date date;
+
 	
 //	public DepartmentVO getDepartment() {
 ////		return domain;
@@ -290,6 +293,18 @@ public class JobPost {
 		} else if (!user.equals(other.user))
 			return false;
 		return true;
+	}
+
+
+
+	public Date getDate() {
+		return date;
+	}
+
+
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 

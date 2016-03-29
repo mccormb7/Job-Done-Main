@@ -1,6 +1,7 @@
 package ie.done.job.web.dao;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class Provider {
 	@JoinColumn(name="username")
 	private User user;
 	
-	//@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	@Column(name="title")//must match name in DB
 	private String title;
 	
@@ -42,14 +43,15 @@ public class Provider {
 	
 	@Size(min=5, max=255, groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Column(name="experience")//must match name in DB
-	//@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private String experience;
 	
-	//@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	@Column(name="domain")
 	private String domain;
 	
 	@Column(name="qualifications")
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private String qualifications;
 	
 	@Lob
@@ -61,6 +63,7 @@ public class Provider {
 	
 //title , experience, domain, qualifications,gender,price
 	@Column(name="location")
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private String location;
 	
 	@Column(name="price")
@@ -69,8 +72,9 @@ public class Provider {
 	@Column(name="rating")
 	private double rating;
 	
+	@Column(name = "date")
+	private Date date;
 	
-
 
 
 	public Provider() {
@@ -345,6 +349,14 @@ public class Provider {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override

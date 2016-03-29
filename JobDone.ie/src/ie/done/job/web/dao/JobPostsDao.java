@@ -1,6 +1,7 @@
 package ie.done.job.web.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -65,13 +66,7 @@ public class JobPostsDao {
 
 	@Transactional
 	public List<JobPost> searchForJob(String searchText) throws Exception {
-			
-		
-			
 			String [] splitWords = splitString(searchText);
-			/*for(int i = 0; i<splitWords.length;i++){
-				System.out.println(splitWords[i] + "word " + i);
-			}*/
 			
 			List<JobPost> results = null;
 			List<JobPost> resultsFinal = new ArrayList<JobPost>();
@@ -86,7 +81,7 @@ public class JobPostsDao {
 			
 			for(int i = 0; i<splitWords.length;i++){
 				org.apache.lucene.search.Query query = qb.keyword()
-						.onFields("description", "title", "domain")
+						.onFields("description", "title", "domain", "location")
 						.matching(splitWords[i]).createQuery();
 	
 				org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
@@ -103,6 +98,51 @@ public class JobPostsDao {
 			return resultsFinal;
 		
 	}
+	
+	@Transactional
+	public List<JobPost> recommendJob(Provider provider) throws Exception {
+			//String [] splitWords = splitString(searchText);
+			
+			List<JobPost> results = null;
+			List<JobPost> resultsFinal = new ArrayList<JobPost>();
+			List<String> profileDetails = new ArrayList<String>();
+			profileDetails.add(provider.getTitle());
+			profileDetails.add(provider.getExperience());
+			profileDetails.add(provider.getDomain());
+			profileDetails.add(provider.getQualifications());
+			profileDetails.add(provider.getDescription());
+			
+			
+			
+			
+			
+			Session session = sessionFactory.getCurrentSession();
+			//System.out.println(searchText + " in the search here1");
+			FullTextSession fullTextSession = Search
+					.getFullTextSession(session);
+			
+			//System.out.println(searchText + "in the search here");
+			QueryBuilder qb = fullTextSession.getSearchFactory()
+					.buildQueryBuilder().forEntity(JobPost.class).get();
+			
+			for(int i = 0; i<profileDetails.size();i++){
+				org.apache.lucene.search.Query query = qb.keyword()
+						.onFields("description", "title", "domain", "location")
+						.matching(profileDetails.get(i)).createQuery();
+	
+				org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
+						query, JobPost.class);
+			
+				results = hibQuery.list();
+				if(!results.isEmpty()){
+					resultsFinal.addAll(results);
+				}
+			}
+
+			return resultsFinal;
+		
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	public List<JobPost> getJobPosts() {
@@ -138,6 +178,8 @@ public class JobPostsDao {
 	 */
 
 	public void saveOrUpdate(JobPost JobPost) {
+		Date currentDate = new Date();
+		JobPost.setDate(currentDate);
 		session().saveOrUpdate(JobPost);
 	}
 

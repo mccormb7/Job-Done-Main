@@ -64,7 +64,13 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/searchpro"
 			access="permitAll" />
+		<security:intercept-url pattern="/searchnull"
+			access="permitAll" />
 		<security:intercept-url pattern="/search1"
+			access="permitAll" />
+		<security:intercept-url pattern="/searchprovider"
+			access="permitAll" />
+		<security:intercept-url pattern="/profile"
 			access="permitAll" />
 		<security:intercept-url pattern="/createprofile"
 			access="permitAll" />
@@ -76,14 +82,14 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/doSearch"
 			access="permitAll" />
+		<security:intercept-url pattern="/doSearchProvider"
+			access="permitAll" />
 		<security:intercept-url pattern="/foundjobs"
 			access="permitAll" />
 		<security:intercept-url pattern="/accountcreated"
 			access="permitAll" />
 		
 		<security:intercept-url pattern="/static/**"
-			access="permitAll" />
-		<security:intercept-url pattern="profile"
 			access="permitAll" />
 		<security:intercept-url pattern="/login"
 			access="permitAll" />
