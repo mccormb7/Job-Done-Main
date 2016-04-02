@@ -59,6 +59,7 @@ public class JobPostService {
 
 		return jobPosts.get(0);
 	}
+
 	
 	public List<JobPost> searchForJob(String text) {
 
@@ -81,6 +82,17 @@ public class JobPostService {
 		//hibernate looks at primary key and checks is it in db or not
 		JobPostsDao.saveOrUpdate(offer);
 	}
+	
+	public void updateJobPost(JobPost jobPost){
+		JobPostsDao.updateJobPost(jobPost);
+	}
+	
+	public void getJobPostById(int id){
+		JobPostsDao.getJobPost(id);
+	}
+	public JobPost getJobPostByIdEdit(int id){
+		return JobPostsDao.getJobPost(id);
+	}
 
 	public void delete(int id) {
 		//deletes from DB
@@ -89,6 +101,12 @@ public class JobPostService {
 
 	public void indexJobs() throws Exception {
 		JobPostsDao.indexJobs();
+		
+	}
+
+	public void delete(String username) {
+		JobPostsDao.delete(username);
+		// TODO Auto-generated method stub
 		
 	}
 }

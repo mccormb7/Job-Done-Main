@@ -9,6 +9,7 @@ public class ProviderModel {
 	private String providerLocation;
 	
 	
+	
 	public String getProviderTitle() {
 		return providerTitle;
 	}

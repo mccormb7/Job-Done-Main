@@ -9,8 +9,7 @@
 <sec:authorize access="hasRole('ROLE_USER')">
 <c:choose>
 	<c:when test="${hasJobPost}">
-		<a href="${pageContext.request.contextPath}/createjobpost">Edit or
-			delete your current offer.  ${user.username}</a>
+		<a href="${pageContext.request.contextPath}/createjobpost">Create a Job Post</a>
 	</c:when>
 	<c:otherwise>
 		<p>
@@ -20,6 +19,17 @@
 	</c:otherwise>
 
 </c:choose>
+</sec:authorize>
+
+
+<sec:authorize access="hasRole('ROLE_USER')">
+<p> Username of client</p>
+<c:out value="${jobpost.user.username}"></c:out>
+</sec:authorize>
+
+<sec:authorize access="hasRole('ROLE_TRADE')">
+<p> Username of provider</p>
+<c:out value="${jobpost.user.username}"></c:out>
 </sec:authorize>
 
 &nbsp;
@@ -41,6 +51,12 @@
 	<a href="<c:url value='/profile'/>">View your profile  ${user.username}</a>
 </sec:authorize>
 &nbsp;
+&nbsp;
+<sec:authorize access="hasRole('ROLE_USER')">
+
+	<a href="<c:url value='/jobposts'/>">View your current Job Posts</a>
+
+</sec:authorize>
 
 
 <!-- allows Provides to search for specific jobs---done -->

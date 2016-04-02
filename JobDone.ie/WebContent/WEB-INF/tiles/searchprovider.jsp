@@ -11,16 +11,18 @@
 <td>List of Users that match your search</td></tr>
 	<tr>
 		<td>Title</td>
+		<td>Profile</td>
 		<td>Domain</td>
-		<td>Experience</td>
+		
 		<td>Location</td>
 	</tr>	
 		<c:forEach var="provider" items="${searchprovider}">
 				<tr>
 					
 					<td><c:out value="${provider.getProviderTitle()}"></c:out></td>
+					
 					<td><c:out value="${provider.getProviderDomain()}"></c:out></td>
-					<td><c:out value="${provider.getProviderExperience()}"></c:out></td>
+					
 					<td><c:out value="${provider.getProviderLocation()}"></c:out></td>
 					
 		

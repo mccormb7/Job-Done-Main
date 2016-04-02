@@ -35,6 +35,7 @@ import java.util.Map;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +44,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -104,6 +106,18 @@ public class ProviderController {
 		
 		return "profile";
 	
+	}
+	
+	//view profile- allows clients view the providers profile
+	@RequestMapping("/viewprofile/{id}")
+	public String viewProfile(Model model, Principal principal, @PathVariable("id") int id) {
+
+
+		Provider provider = providerDao.getProvider(id);
+
+		model.addAttribute("provider", provider);
+
+		return "profile";
 	}
 	
 

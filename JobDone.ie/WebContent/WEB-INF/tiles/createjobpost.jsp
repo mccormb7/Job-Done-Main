@@ -26,15 +26,27 @@ function initialize() {
 	$(document).ready(onReady);
 	
 	
+	
 	var geocoder = new google.maps.Geocoder();
-	var address = "new york";
+	//var a = document.getElementById('searchTextField');
+	var address = document.getElementById('searchTextField');
 
 	geocoder.geocode( { 'address': address}, function(results, status) {
 
 	  if (status == google.maps.GeocoderStatus.OK) {
 	    var latitude = results[0].geometry.location.lat();
 	    var longitude = results[0].geometry.location.lng();
-	   
+	   	alert(latitude +' ' + ' ' + longitude);
+	   	
+	   	function onCheckClick(event) {
+	   		alert(latitude + '   ' +  longitude);
+		}
+
+		function onReadytwo() {
+			$("#submit").click(onCheckClick);
+		}
+		$(document).ready(onReadytwo);
+
 	  } 
 	}); 
 </script>
@@ -107,7 +119,7 @@ function initialize() {
 
 		<tr>
 			<td class="label"></td>
-			<td><input class="control" value="Save advert" type="submit" /></td>
+			<td><input class="control" value="Save advert" type="submit"  id = "submit" name ="submit"/></td>
 		</tr>
 
 		<c:if test="${jobpost.id != 0}">

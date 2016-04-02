@@ -24,6 +24,9 @@ import java.util.Map;
 
 
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +35,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,25 +72,62 @@ public class JobPostsController {
 //		return countryList;
 //	}
 	
+	
+	//adds only the jobs that the current logged in user made
 	@RequestMapping("/jobposts")
+	public String showHome(Model model, Principal principal) throws Exception {
+
+		
+		List<JobPost> jobposts = jobPostsService.getCurrent();
+		String username = principal.getName();
+		
+		for(int i = 0;i < jobposts.size();i++){
+			if(jobposts.get(i).getUser().getUsername() != username){
+				jobposts.remove(i);
+			}
+			else{
+				i++;
+			}
+		
+		}
+		model.addAttribute("jobposts2", jobposts);
+		return "jobposts";
+	}
+		//only allow one offer
+		
+	/*
+		boolean hasJobPost = false;
+		if(principal != null) {
+			//hasJobPost = offersService.hasOffer(principal.getName());
+			hasJobPost = jobPostsService.hasJobPost(principal.getName());
+		}
+		
+		model.addAttribute("hasJobPost", hasJobPost);
+		//logger.debug("show home page");
+		return "home";
+	}
+	*/
+	
+/*	@RequestMapping("/jobposts")
 	public String showJobPosts(Model model) {
 
 		// jobPostsService.throwTestException();
 
 		List<JobPost> jobPosts = jobPostsService.getCurrent();
 
-		model.addAttribute("jobPosts", jobPosts);
+		model.addAttribute("jobposts", jobPosts);
 
-		return "jobPosts";
+		return "jobposts";
 	}
+	*/
 	
 	
 
 	@RequestMapping("/createjobpost")
 	public String createJobPost(Model model, Principal principal) {
 
-		JobPost jobPost = null;
-
+		JobPost jobPost = new JobPost();
+		/*
 		if (principal != null) {
 			String username = principal.getName();
 			// check if user has an jobPost already and use to check if user has
@@ -96,7 +137,7 @@ public class JobPostsController {
 
 		if (jobPost == null) {
 			jobPost = new JobPost();
-		}
+		}*/
 
 		model.addAttribute("jobpost", jobPost);
 
@@ -167,7 +208,31 @@ public class JobPostsController {
 		return "foundjobs";
 	}
 	
+	@RequestMapping("/remove/{id}")
+    public String removeJobPost(@PathVariable("id") int id){
+		
+        jobPostsService.delete(id);
+        return "redirect:/";
+    }
 	
+
+	@RequestMapping("/editjobpost/{id}")
+	public String editJobPost(Model model, Principal principal, @PathVariable("id") int id) {
+
+		JobPost jobPost = null;
+
+		if (principal != null) {
+			String username = principal.getName();
+			// check if user has an jobPost already and use to check if user has
+			// any jobPosts
+			//jobPost = jobPostsService.getJobPost(username);
+			jobPost = jobPostsService.getJobPostByIdEdit(id);
+		}
+
+		model.addAttribute("jobpost", jobPost);
+
+		return "createjobpost";
+	}
 	
 	@RequestMapping(value = "/doSearch", method = RequestMethod.POST)
 	public String search(Model model,
@@ -215,25 +280,5 @@ public class JobPostsController {
 	}
 	
 	
-	
-	
-	/*@RequestMapping(value = "/doSearch", method = RequestMethod.POST)
-	   public String search(@RequestParam("searchText")String searchText, Model model) throws Exception
-	   {
-		System.out.print(searchText);
-		
-		List<JobPost> foundPosts = jobPostsService.searchForJob(searchText);
-		String temp="empty";
-		int i=0;
-		
-			temp = foundPosts.get(i).getDescription();
-			System.out.println(temp);
-			i++;
-		
-		model.addAttribute("search", foundPosts);
-		return "search";
-
-	   }*/
-
 
 }

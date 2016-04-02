@@ -19,9 +19,9 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
 	</definition>
 
-	<definition name="offers" extends="jobdone.base">
-		<put-attribute name="title" value="Current Offers"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/jobdone.jsp"></put-attribute>
+	<definition name="jobposts" extends="jobdone.base">
+		<put-attribute name="title" value="Job Posts"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/jobposts.jsp"></put-attribute>
 	</definition>
 
 	<definition name="login" extends="jobdone.base">

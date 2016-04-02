@@ -43,6 +43,10 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreate"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/editjobpost/{id}"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/editjobpost"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreatejob"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreateprofile"
@@ -50,6 +54,8 @@
 		<security:intercept-url pattern="/createprofile"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/providers"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/remove/{id}"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/messages"
 			access="isAuthenticated()" />
@@ -63,6 +69,8 @@
 		<security:intercept-url pattern="/search"
 			access="permitAll" />
 		<security:intercept-url pattern="/searchpro"
+			access="permitAll" />
+		<security:intercept-url pattern="/viewprofile/{id}"
 			access="permitAll" />
 		<security:intercept-url pattern="/searchnull"
 			access="permitAll" />
@@ -93,7 +101,7 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/login"
 			access="permitAll" />
-		<security:intercept-url pattern="/offers"
+		<security:intercept-url pattern="/jobposts"
 			access="permitAll" />
 		<security:intercept-url pattern="/**" access="denyAll" />
 
@@ -103,7 +111,7 @@
 			login-page="/login" default-target-url="/"
 			authentication-failure-url="/login?error=true" />-->
 
-		  <security:form-login login-page='/login.html' authentication-success-handler-ref="myAuthenticationSuccessHandler" authentication-failure-url="/login.html?error=true" />
+		  <security:form-login login-page='/login' authentication-success-handler-ref="myAuthenticationSuccessHandler" authentication-failure-url="/login.html?error=true" />
 		
 		<security:logout logout-success-url="/loggedout" />
 		<security:access-denied-handler
