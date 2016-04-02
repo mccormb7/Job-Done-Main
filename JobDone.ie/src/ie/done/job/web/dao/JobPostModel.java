@@ -6,10 +6,16 @@ public class JobPostModel {
 	private String jobDomain;
 	private String jobDescription;
 	private String jobLocation;
+	private int jobId;
 	
 	
 	
-	
+	public int getJobId() {
+		return jobId;
+	}
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
+	}
 	public String getJobLocation() {
 		return jobLocation;
 	}

@@ -5,18 +5,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
-<sec:authorize access="hasRole('ROLE_TRADE')">
-<c:choose>
-	<c:when test="${hasProfile}">
-		<a href="${pageContext.request.contextPath}/createprofile">Edit or delete your Profile</a>
-	</c:when>
-	<c:otherwise>
-		<p>
-			<a href="${pageContext.request.contextPath}/createprofile">Create a profile to better match to jobs</a>
-		</p>
-</c:otherwise>
-</c:choose>
-</sec:authorize>
+
 
 <div class="container">
       <div class="row">
@@ -30,52 +19,37 @@
    
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">${provider.user.username}</h3>
+              <h3 class="panel-title"> Username : ${jobpost.user.username}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://cdn3.iconfinder.com/data/icons/simplius-pack/512/user-512.png"> </div>
                 
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
+                
                 <div class=" col-md-9 col-lg-9 "> 
+                
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
                         <td>Title:</td>
-                        <td>${provider.title}</td>
+                        <td>${jobpost.title}</td>
                       </tr>
                       <tr>
-                        <td>Experience</td>
-                        <td>${provider.experience}</td>
+                        <td>Description</td>
+                        <td>${jobpost.description}</td>
                       </tr>
                       <tr>
-                        <td>Qualifications</td>
-                        <td>${provider.qualifications}</td>
+                        <td>Domain</td>
+                        <td>${jobpost.domain}</td>
                       </tr>
                    
-                         <tr>
-                             <tr>
-                        <td>Gender</td>
-                        <td>${provider.gender}</td>
-                      </tr>
                         <tr>
                         <td>Address</td>
-                        <td>${provider.location}</td>
+                        <td>${jobpost.location}</td>
                       </tr>
                       <tr>
                         <td>Email</td>
-                        <td><a href = "<c:url value='/message?uid=${provider.user.username}'/>">contact</a></td>
+                        <td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
                       </tr>
                      
                       
@@ -83,9 +57,7 @@
                      
                     </tbody>
                   </table>
-                  
-                  <a href="#" class="btn btn-primary">My Sales Performance</a>
-                  <a href="#" class="btn btn-primary">Team Sales Performance</a>
+                
                 </div>
               </div>
             </div>

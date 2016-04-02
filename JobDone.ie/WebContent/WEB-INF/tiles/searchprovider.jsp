@@ -20,6 +20,7 @@
 				<tr>
 					
 					<td><c:out value="${provider.getProviderTitle()}"></c:out></td>
+					<td><a href="<c:url value='/viewprofile/${provider.getProviderId()}' />" >View</a></td>
 					
 					<td><c:out value="${provider.getProviderDomain()}"></c:out></td>
 					

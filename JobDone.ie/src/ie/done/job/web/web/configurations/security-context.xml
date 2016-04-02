@@ -72,6 +72,8 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/viewprofile/{id}"
 			access="permitAll" />
+		<security:intercept-url pattern="/viewjobpost/{id}"
+			access="permitAll" />
 		<security:intercept-url pattern="/searchnull"
 			access="permitAll" />
 		<security:intercept-url pattern="/search1"
@@ -96,6 +98,11 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/accountcreated"
 			access="permitAll" />
+		<security:intercept-url pattern="/jobpostdetails"
+			access="permitAll" />
+		
+		
+		
 		
 		<security:intercept-url pattern="/static/**"
 			access="permitAll" />

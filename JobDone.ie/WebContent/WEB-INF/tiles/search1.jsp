@@ -19,6 +19,7 @@
 				<tr>
 					
 					<td><c:out value="${jobpost.getJobTitle()}"></c:out></td>
+					
 					<td><c:out value="${jobpost.getJobDomain()}"></c:out></td>
 					<td><c:out value="${jobpost.getJobDescription()}"></c:out></td>
 					<td><c:out value="${jobpost.getJobLocation()}"></c:out></td>

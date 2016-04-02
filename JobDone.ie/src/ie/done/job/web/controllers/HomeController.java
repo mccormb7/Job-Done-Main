@@ -3,9 +3,11 @@ package ie.done.job.web.controllers;
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.Offer;
+import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.OffersService;
+import ie.done.job.web.web.service.ProviderService;
 
 import java.security.Principal;
 import java.util.List;
@@ -23,7 +25,7 @@ public class HomeController {
 	private static Logger logger = Logger.getLogger(HomeController.class);
 	
 	@Autowired
-	private OffersService offersService;
+	private ProviderService providerService;
 	
 	@Autowired
 	private JobPostService jobPostService;
@@ -42,6 +44,9 @@ public class HomeController {
 		List<JobPost> jobposts = jobPostService.getCurrent();
 		model.addAttribute("jobposts1", jobposts);
 		//only allow one offer
+		
+		List<Provider> providers = providerService.getCurrent();
+		model.addAttribute("providers1", providers);
 		
 		//jobDao.indexJobs();
 		providerDao.indexProviders();

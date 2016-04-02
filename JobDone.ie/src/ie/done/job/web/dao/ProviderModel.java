@@ -7,9 +7,16 @@ public class ProviderModel {
 	private String providerExperience;
 	private String providerQualifications;
 	private String providerLocation;
+	private int providerId;
 	
 	
 	
+	public int getProviderId() {
+		return providerId;
+	}
+	public void setProviderId(int providerId) {
+		this.providerId = providerId;
+	}
 	public String getProviderTitle() {
 		return providerTitle;
 	}

@@ -5,6 +5,7 @@ import ie.done.job.web.dao.FormValidationGroup;
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostModel;
 import ie.done.job.web.dao.JobPostsDao;
+import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.User;
 import ie.done.job.web.test.tests.ProviderDaoTest;
 import ie.done.job.web.web.service.JobPostService;
@@ -16,6 +17,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 
 
@@ -120,6 +123,41 @@ public class JobPostsController {
 		return "jobposts";
 	}
 	*/
+	
+	
+	@RequestMapping("/jobpostdetails")
+	public String showJobPostDetails(Model model, Principal principal) {
+		//boolean hasProfile = false;
+		
+		JobPost jobpost = null;
+		
+		if (principal != null) {
+			String username = principal.getName();
+			jobpost = jobPostsService.getJobPost(username);
+			
+			//check if they have a profile
+			//hasProfile = providerService.hasProvider(username);
+		}
+
+		model.addAttribute("jobpost", jobpost);
+		//model.addAttribute("hasProfile", hasProfile);
+		
+		return "jobpostdetails";
+	
+	}
+	
+	@RequestMapping("/viewjobpost/{id}")
+	public String viewProfile(Model model, Principal principal, @PathVariable("id") int id) {
+
+		JobPost jobpost = jobPostsDao.getJobPost(id);
+		
+
+		model.addAttribute("jobpost", jobpost);
+
+		return "jobpostdetails";
+	}
+	
+	
 	
 	
 
@@ -267,6 +305,7 @@ public class JobPostsController {
 		  jm.setJobDomain(b.getDomain());
 		  jm.setJobTitle(b.getTitle());
 		  jm.setJobLocation(b.getLocation());
+		  jm.setJobId(b.getId());
 		  
 	      
 

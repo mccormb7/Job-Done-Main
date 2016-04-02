@@ -28,6 +28,7 @@ public class JobPost {
 
 	@Id
 	@GeneratedValue//auto generated from the db
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private int id;
 	
 	@ManyToOne//mapping from the object your in to this object

@@ -155,20 +155,20 @@ container.dropdown-user {
     height: 100%;
 }
 
-container.dropdown-user:hover {
+table.dropdown-user:hover {
     cursor: pointer;
 }
 
-container.table-user-information > tbody > tr {
+table.table-user-information > tbody > tr {
     border-top: 1px solid rgb(221, 221, 221);
 }
 
-container.table-user-information > tbody > tr:first-child {
+table.table-user-information > tbody > tr:first-child {
     border-top: 0;
 }
 
 
-container.table-user-information > tbody > tr > td {
+table.table-user-information > tbody > tr > td {
     border-top: 0;
 
 

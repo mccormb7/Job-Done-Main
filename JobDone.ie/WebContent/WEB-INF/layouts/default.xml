@@ -131,6 +131,11 @@
 		<put-attribute name="title" value="Profile"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/profile.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="jobpostdetails" extends="jobdone.base">
+		<put-attribute name="title" value="Job Post Details"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/jobpostdetails.jsp"></put-attribute>
+	</definition>
 
 
 	<definition name="foundjobs" extends="jobdone.base">

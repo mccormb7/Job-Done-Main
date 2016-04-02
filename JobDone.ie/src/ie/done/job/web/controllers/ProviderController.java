@@ -209,8 +209,9 @@ public class ProviderController {
 		  pro.setProviderDomain(b.getDomain());
 		  pro.setProviderExperience(b.getExperience());
 		  pro.setProviderQualifications(b.getQualifications());
-		  pro.setProviderTitle(b.getLocation());
+		  pro.setProviderTitle(b.getTitle());
 		  pro.setProviderLocation(b.getLocation());
+		  pro.setProviderId(b.getId());
 
 	      providerModels.add(pro);
 	  }
