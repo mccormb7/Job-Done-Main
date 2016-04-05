@@ -78,22 +78,30 @@ public class JobPostsController {
 	
 	//adds only the jobs that the current logged in user made
 	@RequestMapping("/jobposts")
-	public String showHome(Model model, Principal principal) throws Exception {
+	public String showUsersJobPosts(Model model, Principal principal) throws Exception {
 
 		
 		List<JobPost> jobposts = jobPostsService.getCurrent();
+		List<JobPost> currentPosts = new ArrayList<JobPost>();
 		String username = principal.getName();
-		
+
 		for(int i = 0;i < jobposts.size();i++){
-			if(jobposts.get(i).getUser().getUsername() != username){
-				jobposts.remove(i);
-			}
-			else{
-				i++;
+			if(jobposts.get(i).getUser().getUsername().equals(username)){
+				
+				currentPosts.add(jobposts.get(i));
+				
 			}
 		
 		}
-		model.addAttribute("jobposts2", jobposts);
+		
+		boolean hasPostedJob = false;
+		if(currentPosts.size()>0) {
+			//hasJobPost = offersService.hasOffer(principal.getName());
+			hasPostedJob = true;
+		}
+		
+		model.addAttribute("hasPostedJob", hasPostedJob);
+		model.addAttribute("jobposts2", currentPosts);
 		return "jobposts";
 	}
 		//only allow one offer
@@ -250,7 +258,7 @@ public class JobPostsController {
     public String removeJobPost(@PathVariable("id") int id){
 		
         jobPostsService.delete(id);
-        return "redirect:/";
+        return "redirect:/jobposts";
     }
 	
 

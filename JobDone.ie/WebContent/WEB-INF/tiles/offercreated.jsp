@@ -1,2 +1,2 @@
 
-Offer created: <a href="${pageContext.request.contextPath}/">click here to view current offers.</a>
+Job Post created: <a href="${pageContext.request.contextPath}/jobposts">click here to view current job posts.</a>

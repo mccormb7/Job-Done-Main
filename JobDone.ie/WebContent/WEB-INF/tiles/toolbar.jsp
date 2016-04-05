@@ -58,6 +58,23 @@
 
 </sec:authorize>
 
+<sec:authorize access="hasRole('ROLE_TRADE')">
+
+	<!-- user cant be recommended jobs unless the profile is filled out -->
+	<c:choose>
+	<c:when test="${hasProfile}">
+		<a href="<c:url value='/recommendationpro'/>">View your Recommended Jobs</a>
+
+	</c:when>
+	<c:otherwise>
+		<p>
+			<a href="${pageContext.request.contextPath}/profile">Update Profile to get Job Recommendations</a>
+		</p>
+	</c:otherwise>
+
+</c:choose>
+</sec:authorize>
+
 
 <!-- allows Provides to search for specific jobs---done -->
 <sec:authorize access="hasRole('ROLE_TRADE')">
@@ -67,6 +84,8 @@
 		type="reset" /> <input type="submit" />
 </form>
 </sec:authorize>
+
+
 
 <!-- allows users search for specfic Providers -->
 <sec:authorize access="hasRole('ROLE_USER')">

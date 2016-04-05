@@ -35,17 +35,6 @@ public class JobPostsDao {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	/*@Transactional
-	   public void addBookToDB(String title, String description, String domain)
-	   {
-	      Session session = sessionFactory.getCurrentSession();
-	      JobPost jobPost = new JobPost();
-	      jobPost.setDescription(description);
-	      jobPost.setTitle(title);
-	      jobPost.setDomain(domain);
-	      
-	      
-	   }*/
 
 	@Transactional
 	public void indexJobs() throws Exception {
@@ -64,14 +53,7 @@ public class JobPostsDao {
 	//change find job to take list instead
 	
 	
-	@Transactional
-	public List <String> splitStringasList(String searchText) {
-		List<String> items = Arrays.asList(searchText.split("\\s+"));
-		//List<String> splitList = searchText.split("\\s+");
-		
-		return items;
 
-	}
 	@Transactional
 	public String[] splitString(String searchText) {
 		String[] splitArray = searchText.split("\\s+");
@@ -100,11 +82,36 @@ public class JobPostsDao {
 
 	}
 	
+	
+	@Transactional
+	public List <String> splitStringasList(String searchText) {
+		List<String> items = Arrays.asList(searchText.split("\\s+"));
+		//List<String> splitList = searchText.split("\\s+");
+		String [] stopWords = { "an", "and","a", "are", "as", "at", "be", "but", "by",
+                "for", "if", "in", "into", "is", "it",
+                "no", "not", "of", "on", "or", "such",
+                "that", "the", "their", "then", "there", "these",
+                "they", "this", "to", "was", "will", "with"};
+		
+		//remove stop words from the search list
+		for(int i = 0; i< items.size(); i++){
+
+			for(int j = 0; j< items.size(); j++){
+				if(items.get(i).equals(stopWords[i])){
+					items.remove(i);
+				}
+			}
+		}
+		
+		
+		return items;
+
+	}
 
 	@Transactional
 	public List<JobPost> searchForJob(String searchText) throws Exception {
 			
-			String [] splitWords = splitString(searchText);
+			List<String>  splitWords = splitStringasList(searchText);
 			
 			List<JobPost> results = null;
 			List<JobPost> resultsFinal = new ArrayList<JobPost>();
@@ -117,10 +124,10 @@ public class JobPostsDao {
 			QueryBuilder qb = fullTextSession.getSearchFactory()
 					.buildQueryBuilder().forEntity(JobPost.class).get();
 			
-			for(int i = 0; i<splitWords.length;i++){
+			for(int i = 0; i<splitWords.size();i++){
 				org.apache.lucene.search.Query query = qb.keyword()
 						.onFields("description", "title", "domain", "location")
-						.matching(splitWords[i]).createQuery();
+						.matching(splitWords.get(i)).createQuery();
 	
 				org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
 						query, JobPost.class);
@@ -137,82 +144,7 @@ public class JobPostsDao {
 		
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<JobPost> recommendJob(Provider provider) throws Exception {
-			//String [] splitWords = splitString(searchText);
-			
-			//String [] splitWords = null;
-			String [] stopWords = {"a", "an", "and", "are", "as", "at", "be", "but", "by",
-			                       "for", "if", "in", "into", "is", "it",
-			                       "no", "not", "of", "on", "or", "such",
-			                       "that", "the", "their", "then", "there", "these",
-			                       "they", "this", "to", "was", "will", "with"};
-			List<JobPost> results = null;
-			List<JobPost> resultsFinal = new ArrayList<JobPost>();
-			List<String> profileDetails = new ArrayList<String>();
-			List<String> splitDetails = new ArrayList<String>();
-			List<String> holder = new ArrayList<String>();
-			//takes in full sentances and must be split in order to process
-			profileDetails.add(provider.getTitle());
-			profileDetails.add(provider.getExperience());
-			profileDetails.add(provider.getDomain());
-			profileDetails.add(provider.getQualifications());
-			profileDetails.add(provider.getDescription());
-			//String [] splitWords = null;
-			for(int i = 0; i<profileDetails.size();i++){
-				//if(stopWords[i])
-					holder = splitStringasList(profileDetails.get(i));
-					splitDetails.addAll(holder);
-					//+++++++++++++++++++++++++++++++++++++++++++++++++++
-					System.out.println(splitDetails.size() + "############### ");
-					
-			}
-			for(int j = 0; j<splitDetails.size();j++){
-				System.out.println(splitDetails.get(j)+ "=====================");
-				//remove all the stop words from the search
-				for(int s = 0; s<stopWords.length;s++){
-					if((splitDetails.get(j).equals(stopWords[s]))){
-						System.out.println(stopWords[s]+ " %%%%%%%%%%%%%%%%%%%");
-						splitDetails.remove(j);
-					}
-				}
-				
-				
-			}
-			
-			
-			
-			
-			
-			Session session = sessionFactory.getCurrentSession();
-			//System.out.println(searchText + " in the search here1");
-			FullTextSession fullTextSession = Search
-					.getFullTextSession(session);
-			
-			//System.out.println(searchText + "in the search here");
-			QueryBuilder qb = fullTextSession.getSearchFactory()
-					.buildQueryBuilder().forEntity(JobPost.class).get();
-			
-			for(int i = 0; i<splitDetails.size()-1;i++){
-				org.apache.lucene.search.Query query = qb.keyword()
-						.onFields("description", "title", "domain", "location")
-						.matching(splitDetails.get(i)).createQuery();
-	
-				org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
-						query, JobPost.class);
-			
-				results = hibQuery.list();
-				if(!results.isEmpty()){
-					resultsFinal.addAll(results);
-				}
-				
-				
-			}
-			
-			return resultsFinal;
-		
-	}
+
 	
 
 	@SuppressWarnings("unchecked")

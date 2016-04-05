@@ -12,6 +12,11 @@
  
 <a class="title" href="<c:url value='/'/>">TaskTackler.ie</a>
 
+
+<sec:authorize access="isAuthenticated()">
+<a href="${pageContext.request.contextPath}/settings">Settings</a>
+</sec:authorize>
+
 <sec:authorize access="!isAuthenticated()">
 <a class="login" href="<c:url value='/login'/>">Log in</a>
 </sec:authorize>

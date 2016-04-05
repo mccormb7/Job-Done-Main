@@ -45,6 +45,8 @@ public class HomeController {
 		model.addAttribute("jobposts1", jobposts);
 		//only allow one offer
 		
+		
+		
 		List<Provider> providers = providerService.getCurrent();
 		model.addAttribute("providers1", providers);
 		
@@ -52,12 +54,15 @@ public class HomeController {
 		providerDao.indexProviders();
 		
 		boolean hasJobPost = false;
+		boolean hasProfile = false;
 		if(principal != null) {
 			//hasJobPost = offersService.hasOffer(principal.getName());
 			hasJobPost = jobPostService.hasJobPost(principal.getName());
+			hasProfile = providerService.hasProvider(principal.getName());
 		}
 		
 		model.addAttribute("hasJobPost", hasJobPost);
+		model.addAttribute("hasProfile", hasProfile);
 		//logger.debug("show home page");
 		return "home";
 	}

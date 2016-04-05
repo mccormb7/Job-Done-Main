@@ -132,11 +132,28 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/profile.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="searchnullrecommend" extends="jobdone.base">
+		<put-attribute name="title" value="Search Null on Recommend"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/searchnullrecommend.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="jobpostdetails" extends="jobdone.base">
 		<put-attribute name="title" value="Job Post Details"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/jobpostdetails.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="settings" extends="jobdone.base">
+		<put-attribute name="title" value="Settings"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/settings.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="recommendationpro" extends="jobdone.base">
+		<put-attribute name="title" value="Job Post Recommendations for provider"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/recommendationpro.jsp"></put-attribute>
+	</definition>
 
+	
+	
 
 	<definition name="foundjobs" extends="jobdone.base">
 		<put-attribute name="title" value="foundjobs"></put-attribute>

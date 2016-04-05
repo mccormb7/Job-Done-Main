@@ -47,6 +47,14 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping("/settings")
+	public String showSetiings() {
+		return "settings";
+	}
+	
+	
+	
+	
 
 	
 	@RequestMapping("/messages")
@@ -84,31 +92,6 @@ public class LoginController {
 		return "newaccount";
 	}
 	
-
-	/*@RequestMapping(value="/createaccount", method=RequestMethod.POST)
-	public String createAccount(@Validated(FormValidationGroup.class) User user, BindingResult result) {
-		
-		if(result.hasErrors()) {
-			return "newaccount";
-		}
-		
-		user.setAuthority("ROLE_USER");
-		user.setEnabled(true);
-		
-		if(usersService.exists(user.getUsername())) {
-			result.rejectValue("username", "DuplicateKey.user.username");
-			return "newaccount";
-		}
-		
-		try {
-			usersService.create(user);
-		} catch (DuplicateKeyException e) {
-			result.rejectValue("username", "DuplicateKey.user.username");
-			return "newaccount";
-		}
-
-		return "accountcreated";
-	}*/
 	@RequestMapping(value="/createaccount", method=RequestMethod.POST)
 	public String createAccount(@Validated(FormValidationGroup.class) User user, BindingResult result) {
 		

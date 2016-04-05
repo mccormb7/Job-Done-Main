@@ -43,6 +43,8 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreate"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/settings"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/editjobpost/{id}"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/editjobpost"
@@ -58,6 +60,8 @@
 		<security:intercept-url pattern="/remove/{id}"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/messages"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/recommendationpro"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/offercreated"
 			access="isAuthenticated()" />
@@ -100,6 +104,12 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/jobpostdetails"
 			access="permitAll" />
+		<security:intercept-url pattern="/journey"
+			access="permitAll" />
+		<security:intercept-url pattern="/searchnullrecommend"
+			access="hasRole('ROLE_TRADE')" />
+		
+		
 		
 		
 		

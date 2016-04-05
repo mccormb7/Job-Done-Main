@@ -93,40 +93,6 @@ public class ProviderDao {
 		
 	}
 	
-	/*@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Provider> searchForBook(String searchText) throws Exception
-	{
-	   try
-	   {
-	      Session session = sessionFactory.getCurrentSession();
-	      System.out.println(searchText + " in the search here1");
-
-	      FullTextSession fullTextSession = Search.getFullTextSession(session);
-
-	      System.out.println(searchText + "in the search here");
-	      QueryBuilder qb = fullTextSession.getSearchFactory()
-	        .buildQueryBuilder().forEntity(Provider.class).get();
-	      org.apache.lucene.search.Query query = qb
-	        .keyword().onFields("experience", "title", "domain","qualifications", "location")
-	        .matching(searchText)
-	        .createQuery();
-
-	      org.hibernate.Query hibQuery =
-	         fullTextSession.createFullTextQuery(query, Provider.class);
-	      if(hibQuery.list() == null){
-	    	  return Collections.emptyList();
-	      }
-	      
-	      List<Provider> results = hibQuery.list();
-	      return results;
-	   }
-	   catch(Exception e)
-	   {
-	      throw e;
-	   }
-	}*/
-	
 
 
 	@SuppressWarnings("unchecked")
@@ -182,5 +148,7 @@ public class ProviderDao {
 
 		return (Provider) crit.uniqueResult();
 	}
+	
+	
 
 }

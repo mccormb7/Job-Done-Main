@@ -5,6 +5,7 @@ import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
+import ie.done.job.web.dao.ProviderRecommendationDao;
 import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
 
@@ -54,6 +55,9 @@ public class SearchDaoTests {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private ProviderRecommendationDao recommend;
 
 	File file = new File(
 			"C:\\Users\\User\\Desktop\\college 4th\\dbimage\\test.jpg"); // windows
@@ -173,7 +177,7 @@ public class SearchDaoTests {
 		providerDao.saveOrUpdate(pro3);*/
 
 		System.out.println("...........................................................");
-		List<JobPost> resultsFinal = jobPostsDao.recommendJob(pro3);
+		List<JobPost> resultsFinal = recommend.recommendJob(pro3);
 		List<JobPost> uniqueList = new ArrayList<JobPost>();
 		
 		
@@ -304,7 +308,7 @@ public class SearchDaoTests {
 		jobPostsDao.saveOrUpdate(jobPost4);
 		jobPostsDao.saveOrUpdate(jobPost2);
 		System.out.println("...........................................................");
-		List<JobPost> resultsFinal = jobPostsDao.recommendJob(pro1);
+		List<JobPost> resultsFinal = recommend.recommendJob(pro1);
 		for(int i=0;i<resultsFinal.size();i++){
 			System.out.println("DESCRITPION -> " + resultsFinal.get(i).getDescription());
 			System.out.println("Title ->" + resultsFinal.get(i).getTitle());

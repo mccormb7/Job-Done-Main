@@ -98,6 +98,7 @@ public class ProviderController {
 			String username = principal.getName();
 			provider = providerService.getProvider(username);
 			//check if they have a profile
+			
 			hasProfile = providerService.hasProvider(username);
 		}
 

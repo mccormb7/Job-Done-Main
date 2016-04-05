@@ -8,12 +8,16 @@
 
 
 
+
+
+
+<c:choose>
+	<c:when test="${hasPostedJob}">
 <p><a>
-Edit or delete your current job posts
+	Edit or delete your current job posts
 </a>
 </p>
-
-
+		
 <table class="offers">
 	<tr>
 		<td>Name</td>
@@ -33,7 +37,22 @@ Edit or delete your current job posts
 
 		</tr>
 	</c:forEach>
-</table>
+</table>		
+		
+		
+		
+	</c:when>
+	<c:otherwise>
+		<p>
+			<a href="${pageContext.request.contextPath}/createjobpost">No Job Posts made, create one here</a>
+		</p>
+	</c:otherwise>
+
+</c:choose>
+
+
+
+
 
 
 <p/>

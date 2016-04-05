@@ -94,11 +94,16 @@
 			replyButton.setAttribute("class", "replybutton");
 			replyButton.setAttribute("type", "button");
 			replyButton.setAttribute("value", "Reply");
+			
 			replyButton.onclick = function(j, name, email) {
 				return function() {
 					sendMessage(j, name, email);
 				}
 			}(i, message.name, message.email);
+			
+			
+			
+			
 			
 			replyForm.appendChild(textarea);
 			replyForm.appendChild(replyButton);
@@ -114,6 +119,15 @@
 		}
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	function onLoad() {
 		updatePage();
 		startTimer();

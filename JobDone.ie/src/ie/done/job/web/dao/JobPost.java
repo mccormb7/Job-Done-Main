@@ -24,7 +24,7 @@ import org.hibernate.search.annotations.Store;
 @Indexed
 @Entity
 @Table(name="jobPosts")
-public class JobPost {
+public class JobPost implements Comparable<JobPost> {
 
 	@Id
 	@GeneratedValue//auto generated from the db
@@ -64,6 +64,10 @@ public class JobPost {
 	
 	@Column(name = "date")
 	private Date date;
+	
+	//holds distance between job location and provider
+	@Column(name = "distance")
+	private Double distance;
 
 	
 //	public DepartmentVO getDepartment() {
@@ -306,6 +310,26 @@ public class JobPost {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+
+
+	public Double getDistance() {
+		return distance;
+	}
+
+
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
+
+
+	@Override
+	public int compareTo(JobPost o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
