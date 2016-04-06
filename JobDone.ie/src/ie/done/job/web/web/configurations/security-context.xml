@@ -39,6 +39,9 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/sendmessage"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/messageinbox"
+			access="isAuthenticated()" />
+		
 		<security:intercept-url pattern="/offerdeleted"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreate"
@@ -46,6 +49,8 @@
 		<security:intercept-url pattern="/settings"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/editjobpost/{id}"
+			access="isAuthenticated()" />
+			<security:intercept-url pattern="/deletemessage/{id}"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/editjobpost"
 			access="isAuthenticated()" />

@@ -17,6 +17,7 @@
 	        <set name="requestScope.fromUser" value="usersService.getUser(currentUser?.name)"></set>
 	        <set name="flowScope.fromName" value="fromUser?.name"></set>
 	        <set name="flowScope.fromEmail" value="fromUser?.email"></set>
+	        
 	        <!-- sets the username for message -->
 	        <set name="message.username" value="requestParameters.uid"></set>
 	    </on-entry>
@@ -34,5 +35,7 @@
 
 	<view-state id="messageSent">
 	</view-state>
+	
+	
 
 </flow>

@@ -46,11 +46,21 @@ public class UsersService {
 	public User getUser(String username){
 		return usersDao.getUser(username);
 	}
+	
+	public User getUserEmailOwner(String email){
+		return usersDao.getUserEmailOwner(email);
+	}
 
 
 	public List<Message> getMessages(String username) {
 		
 		return messagesDao.getMessages(username);
+	}
+	
+	public void delete(int id) {
+		//deletes from DB
+		messagesDao.delete(id);
+	
 	}
 
 }

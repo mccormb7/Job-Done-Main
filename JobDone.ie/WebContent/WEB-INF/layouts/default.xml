@@ -152,6 +152,10 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/recommendationpro.jsp"></put-attribute>
 	</definition>
 
+	<definition name="messageinbox" extends="jobdone.base">
+		<put-attribute name="title" value="Message Inbox"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/messageinbox.jsp"></put-attribute>
+	</definition>
 	
 	
 

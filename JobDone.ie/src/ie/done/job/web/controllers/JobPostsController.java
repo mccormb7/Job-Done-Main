@@ -157,7 +157,8 @@ public class JobPostsController {
 	@RequestMapping("/viewjobpost/{id}")
 	public String viewProfile(Model model, Principal principal, @PathVariable("id") int id) {
 
-		JobPost jobpost = jobPostsDao.getJobPost(id);
+		JobPost jobpost = jobPostsService.getJobPostByIdEdit(id);
+				//jobPostsDao.getJobPost(id);
 		
 
 		model.addAttribute("jobpost", jobpost);

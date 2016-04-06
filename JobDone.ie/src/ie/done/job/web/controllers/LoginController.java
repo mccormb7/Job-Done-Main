@@ -1,8 +1,11 @@
 package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.FormValidationGroup;
+import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.Message;
+import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.User;
+import ie.done.job.web.web.service.MessageService;
 import ie.done.job.web.web.service.UsersService;
 
 import java.security.Principal;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +36,7 @@ public class LoginController {
 	
 	
 	private UsersService usersService;
+	private MessageService messageService;
 	
 	@Autowired
 	private MailSender mailSender;
@@ -42,10 +47,18 @@ public class LoginController {
 		this.usersService = usersService;
 	}
 
+	
+	public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
+
+
 	@RequestMapping("/login")
 	public String showLogin() {
 		return "login";
 	}
+	
+	
 	
 	@RequestMapping("/settings")
 	public String showSetiings() {
@@ -92,6 +105,8 @@ public class LoginController {
 		return "newaccount";
 	}
 	
+
+	
 	@RequestMapping(value="/createaccount", method=RequestMethod.POST)
 	public String createAccount(@Validated(FormValidationGroup.class) User user, BindingResult result) {
 		
@@ -127,6 +142,72 @@ public class LoginController {
 	}
 	
 	//gets amount of messsages current logged in user has
+	
+	
+	
+	
+	
+
+//	@RequestMapping("/messageinbox")
+//	public String showMessageInbox() {
+//		return "messageinbox";
+//	}
+	
+	
+	
+	
+	/************************************************************message related *******************************/
+	
+	
+	@RequestMapping("/deletemessage/{id}")
+    public String removeJobPost(@PathVariable("id") int id){
+		usersService.delete(id);
+        
+        return "redirect:/messageinbox";
+    }
+	
+	@RequestMapping("/messageinbox")
+	public String showMessageInbox(Model model, Principal principal) throws Exception {
+
+		//List<Offer> offers = offersService.getCurrent();
+		
+		List<Message> messages = null;
+				
+		
+		if(principal == null){
+			messages = new ArrayList<Message>();
+		}
+		else{
+			String username = principal.getName();
+			messages = usersService.getMessages(username);
+		}
+		
+		model.addAttribute("messages1", messages);
+		//only allow one offer
+		
+		
+		
+//		List<Provider> providers = providerService.getCurrent();
+//		model.addAttribute("providers1", providers);
+//		
+//		//jobDao.indexJobs();
+//		providerDao.indexProviders();
+		
+		/*boolean hasHasMessage = false;
+		boolean hasProfile = false;
+		if(principal != null) {
+			//hasJobPost = offersService.hasOffer(principal.getName());
+			hasHasMessage = jobPostService.hasJobPost(principal.getName());
+			hasProfile = providerService.hasProvider(principal.getName());
+		}
+		
+		model.addAttribute("hasJobPost", hasJobPost);
+		model.addAttribute("hasProfile", hasProfile);
+		//logger.debug("show home page");*/
+		return "messageinbox";
+	}
+	
+	
 	
 	@RequestMapping(value = "/getmessages", method=RequestMethod.GET, produces = "application/json")
 	@ResponseBody//causes spring to look at data return and try to return in approipate format from "produces"

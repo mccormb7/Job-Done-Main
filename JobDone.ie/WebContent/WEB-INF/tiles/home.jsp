@@ -23,6 +23,8 @@
 			<!--<td><a href="<c:url value='/remove/${jobpost.id}' />" >Delete</a></td>
 			<td><a href="<c:url value='/editjobpost/${jobpost.id}' />" >Edit</a></td>
 			  <td><a href="${pageContext.request.contextPath}/editjobpost">Edit</a></td>-->
+			  
+			  
 			<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />" >View Job Post</a></td>
 			<td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
 	

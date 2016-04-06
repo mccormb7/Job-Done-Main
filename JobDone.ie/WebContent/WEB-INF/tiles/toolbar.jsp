@@ -32,6 +32,11 @@
 <c:out value="${jobpost.user.username}"></c:out>
 </sec:authorize>
 
+
+
+<a href="<c:url value='/messageinbox'/>">Message Inbox</a>
+
+
 &nbsp;
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 

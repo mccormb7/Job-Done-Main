@@ -42,6 +42,8 @@ public class Message implements Serializable {
 	// Send message TO this user.
 	//name of user the email will go to.
 	private String username;
+	
+	private String usernameto;
 
 	public Message() {
 
@@ -102,6 +104,14 @@ public class Message implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getUsernameto() {
+		return usernameto;
+	}
+
+	public void setUsernameto(String usernameto) {
+		this.usernameto = usernameto;
 	}
 
 	@Override
