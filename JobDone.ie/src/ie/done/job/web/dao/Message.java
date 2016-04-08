@@ -1,6 +1,6 @@
 package ie.done.job.web.dao;
 
-import ie.done.job.web.validation.ValidEmail;
+//import ie.done.job.web.validation.Validfromuser;
 
 import java.io.Serializable;
 
@@ -35,12 +35,12 @@ public class Message implements Serializable {
 	@Size(min=8, max=60)
 	private String name;
 
-	// Sender's email address
-	@ValidEmail
-	private String email;
+	// Sender's fromuser address
+	//@Validfromuser
+	private String fromuser;
 
 	// Send message TO this user.
-	//name of user the email will go to.
+	//name of user the fromuser will go to.
 	private String username;
 	
 	private String usernameto;
@@ -49,12 +49,12 @@ public class Message implements Serializable {
 
 	}
 
-	public Message(String subject, String content, String name, String email,
+	public Message(String subject, String content, String name, String fromuser,
 			String username) {
 		this.subject = subject;
 		this.content = content;
 		this.name = name;
-		this.email = email;
+		this.fromuser = fromuser;
 		this.username = username;
 	}
 
@@ -90,12 +90,13 @@ public class Message implements Serializable {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+
+	public String getFromuser() {
+		return fromuser;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setFromuser(String fromuser) {
+		this.fromuser = fromuser;
 	}
 
 	public String getUsername() {
@@ -119,7 +120,7 @@ public class Message implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fromuser == null) ? 0 : fromuser.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
 		result = prime * result
@@ -141,10 +142,10 @@ public class Message implements Serializable {
 				return false;
 		} else if (!content.equals(other.content))
 			return false;
-		if (email == null) {
-			if (other.email != null)
+		if (fromuser == null) {
+			if (other.fromuser != null)
 				return false;
-		} else if (!email.equals(other.email))
+		} else if (!fromuser.equals(other.fromuser))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -167,7 +168,7 @@ public class Message implements Serializable {
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", subject=" + subject + ", content="
-				+ content + ", name=" + name + ", email=" + email
+				+ content + ", name=" + name + ", fromuser=" + fromuser
 				+ ", username=" + username + "]";
 	}
 

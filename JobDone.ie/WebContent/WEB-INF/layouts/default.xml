@@ -157,6 +157,21 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/messageinbox.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="accountsent" extends="jobdone.base">
+		<put-attribute name="title" value="Account Sent For Registration"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/accountsent.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="confirmationfailed" extends="jobdone.base">
+		<put-attribute name="title" value="Email Confirmation Failed"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/confirmationfailed.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="confirmedregister" extends="jobdone.base">
+		<put-attribute name="title" value="Email Confirmation "></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/confirmedregister.jsp"></put-attribute>
+	</definition>
+	
 	
 
 	<definition name="foundjobs" extends="jobdone.base">

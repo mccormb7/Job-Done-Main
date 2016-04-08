@@ -60,6 +60,12 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/createprofile"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/confirmationfailed"
+			access="permitAll" />
+		<security:intercept-url pattern="/confirmedregister"
+			access="permitAll" />
+		<security:intercept-url pattern="/accountsent"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/providers"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/remove/{id}"
@@ -114,7 +120,7 @@
 		<security:intercept-url pattern="/searchnullrecommend"
 			access="hasRole('ROLE_TRADE')" />
 		
-		
+		<!--  registrationconfirm-->
 		
 		
 		

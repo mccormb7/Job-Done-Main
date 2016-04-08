@@ -1,5 +1,7 @@
 package ie.done.job.web.web.service;
 
+import ie.done.job.web.dao.EmailVerification;
+import ie.done.job.web.dao.EmailVerificationDao;
 import ie.done.job.web.dao.Message;
 import ie.done.job.web.dao.MessagesDao;
 import ie.done.job.web.dao.User;
@@ -18,7 +20,24 @@ public class UsersService {
 	private UsersDao usersDao;
 	
 	@Autowired
+	private EmailVerificationDao emailVerificationDao;
+	
+	@Autowired
 	private MessagesDao messagesDao;
+	
+	public void enabled(User user){
+		usersDao.enabled(user);
+	}
+	
+	public void createEmailVerificationToken(User user, String token) {
+		EmailVerification emailToken  = new EmailVerification(token, user);
+		emailVerificationDao.create(emailToken);
+		//System.out.println("Token created ********" + myToken);
+	}
+	
+	public EmailVerification getToken(String token) {
+		return emailVerificationDao.getToken(token);
+	}
 	
 	public void create(User user) {
 		usersDao.create(user);
@@ -42,6 +61,10 @@ public class UsersService {
 	public void sendMessage(Message message) {
 		messagesDao.saveOrUpdate(message);
 	}
+
+	public void sendMessageEmail(String email){
+		
+	}
 	
 	public User getUser(String username){
 		return usersDao.getUser(username);
@@ -62,5 +85,9 @@ public class UsersService {
 		messagesDao.delete(id);
 	
 	}
+
+	
+	
+
 
 }

@@ -14,21 +14,13 @@ User: ${fromUser}
 	
 
 	<table class="formtable">
-		<tr>
-			<td class="label">Your name:</td>
-			<!-- fromName create in flowScope -->
-			<td><sf:input class="control" path="name" type="text"  value = "${fromName }"/><br />
-				<div class="error">
-					<sf:errors path="name"></sf:errors>
-				</div></td>
-		</tr>
-		<tr>
-			<td class="label">Your email:</td>
-			<td><sf:input class="control" path="email" type="text" value = "${fromEmail}" /><br />
-				<div class="error">
-					<sf:errors path="email"></sf:errors>
-				</div></td>
-		</tr>
+			
+			<!-- fromName created in flowScope -->
+			<!-- Auto attaches details from user when message is being sent -->
+			<sf:input class="control" path="name" type="hidden"  value = "${fromName }"/>
+			<sf:input class="control" path="fromuser" type="hidden" value = "${fromUsername}" />
+				
+			
 		<tr>
 			<td class="label">Subject:</td>
 			<td><sf:input class="control" path="subject" type="text" /><br />

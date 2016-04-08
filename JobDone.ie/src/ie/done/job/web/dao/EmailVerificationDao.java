@@ -33,8 +33,8 @@ public class EmailVerificationDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<EmailVerification> getAllToken (String email) {
-		return session().createQuery("from VerificationToken").list();
+	public List<EmailVerification> getAllToken (String username) {
+		return session().createQuery("from EmailVerification").list();
 	}
 
 	public boolean exists(String token){

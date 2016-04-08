@@ -85,6 +85,12 @@ public class UsersDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void enabled(User user) {
+		user.setEnabled(true);
+		session().saveOrUpdate(user);
+		
+	}
 	
 
 }

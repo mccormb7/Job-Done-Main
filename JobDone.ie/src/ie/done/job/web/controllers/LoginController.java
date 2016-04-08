@@ -1,5 +1,6 @@
 package ie.done.job.web.controllers;
 
+import ie.done.job.web.dao.EmailVerification;
 import ie.done.job.web.dao.FormValidationGroup;
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.Message;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class LoginController {
@@ -96,7 +101,7 @@ public class LoginController {
 		return "loggedout";
 	}
 	
-	
+	/*****************************Registration verification***********************************/
 	
 	@RequestMapping("/newaccount")
 	public String showNewAccount(Model model) {
@@ -108,7 +113,7 @@ public class LoginController {
 
 	
 	@RequestMapping(value="/createaccount", method=RequestMethod.POST)
-	public String createAccount(@Validated(FormValidationGroup.class) User user, BindingResult result) {
+	public String createAccount(@Validated(FormValidationGroup.class) User user, BindingResult result, HttpServletRequest request) {
 		
 		if(result.hasErrors()) {
 			return "newaccount";
@@ -116,7 +121,7 @@ public class LoginController {
 		
 		
 		//user.setAuthority("ROLE_USER");
-		user.setEnabled(true);
+		user.setEnabled(false);
 		
 		if(usersService.exists(user.getUsername())||usersService.existsEmail(user.getEmail())) {
 			if(usersService.exists(user.getUsername())){
@@ -133,26 +138,80 @@ public class LoginController {
 		try {
 			usersService.create(user);
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("username", "DuplicateKey.user.username", "This username already exists!");
+			result.rejectValue("username", "DuplicateKey.user.username");
 			return "newaccount";
 		}
 		
 		
-		return "accountcreated";
+		/*Email Comfirmation*/
+		
+		// the users emaill address
+		String email = user.getUsername();
+		
+		//final User userRegistered = usersService.getUser(email);
+		
+		// ******************************************************************************
+				//                         send email from controller
+				
+		String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+		String randomToken = UUID.randomUUID().toString();
+		usersService.createEmailVerificationToken(user, randomToken);
+		
+		String userEmail = user.getEmail();
+		String subject = "Registration Confirmation";
+		String confirmationUrl = appUrl + "/confirmedregister?token=" + randomToken;
+		String message = "Account has been registed, To start using our website, confirm your email address";
+		SimpleMailMessage mailReceiver = new SimpleMailMessage();
+		
+		mailReceiver.setFrom("jobdoneire@gmail.com");
+		mailReceiver.setTo(userEmail);
+		mailReceiver.setSubject(subject);
+		mailReceiver.setText(message + " \r\n" + confirmationUrl);
+		mailSender.send(mailReceiver);
+		System.out.println(" test 1");
+		
+		//return "accountcreated";
+		
+		return "accountsent";
 	}
 	
-	//gets amount of messsages current logged in user has
+	@RequestMapping("/accountsent")
+	public String showAccountSent() {
+		return "accountsent";
+	}
+	
+	@RequestMapping("/confirmationfailed")
+	public String showConfirmationFailure() {
+		return "confirmationfailed";
+	}
 	
 	
-	
-	
-	
-
-//	@RequestMapping("/messageinbox")
-//	public String showMessageInbox() {
-//		return "messageinbox";
-//	}
-	
+	@RequestMapping(value="/confirmedregister", method=RequestMethod.GET)
+	public String confirmComplete(WebRequest request, Model model, @RequestParam("token") String token){
+		
+		EmailVerification emailVerification = usersService.getToken(token);
+		System.out.println(emailVerification.toString());
+		
+		if(emailVerification == null){
+			return "searchnull";
+		}
+		System.out.println(" test 2");
+		User user = emailVerification.getUser();
+		System.out.println(user.toString());
+		
+	/*	Calendar cal = Calendar.getInstance();
+		System.out.println(verificationToken.getExpiryDate().getTime()- cal.getTime().getTime());
+		if((verificationToken.getExpiryDate().getTime()- cal.getTime().getTime()) <= 0){
+			return "confirmfailed";
+		}
+		*/
+		usersService.enabled(user);
+		System.out.println("after " + user.toString());
+		
+		
+		
+		return "confirmedregister";
+	}
 	
 	
 	

@@ -16,7 +16,7 @@
 	        <!-- safe navigation operator >>? -->
 	        <set name="requestScope.fromUser" value="usersService.getUser(currentUser?.name)"></set>
 	        <set name="flowScope.fromName" value="fromUser?.name"></set>
-	        <set name="flowScope.fromEmail" value="fromUser?.email"></set>
+	        <set name="flowScope.fromUsername" value="fromUser?.username"></set>
 	        
 	        <!-- sets the username for message -->
 	        <set name="message.username" value="requestParameters.uid"></set>

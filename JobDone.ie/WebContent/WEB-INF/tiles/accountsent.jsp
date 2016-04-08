@@ -1,0 +1,1 @@
+Account sent for registration
