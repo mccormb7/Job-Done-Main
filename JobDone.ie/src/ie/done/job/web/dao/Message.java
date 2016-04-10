@@ -3,6 +3,7 @@ package ie.done.job.web.dao;
 //import ie.done.job.web.validation.Validfromuser;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,9 @@ public class Message implements Serializable {
 	//name of user the fromuser will go to.
 	private String username;
 	
-	private String usernameto;
+	//private String usernameto;
+	
+	private Date date;
 
 	public Message() {
 
@@ -89,7 +92,16 @@ public class Message implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public String getFromuser() {
 		return fromuser;
@@ -107,13 +119,7 @@ public class Message implements Serializable {
 		this.username = username;
 	}
 
-	public String getUsernameto() {
-		return usernameto;
-	}
 
-	public void setUsernameto(String usernameto) {
-		this.usernameto = usernameto;
-	}
 
 	@Override
 	public int hashCode() {

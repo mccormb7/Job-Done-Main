@@ -9,10 +9,11 @@
   message inbox
   
   
-  <h1> List of Job Posts </h1>
+  <h1> List of Messages </h1>
 <table class="offers">
 	<tr>
 		<td>Name</td>
+		<td>Date</td>
 		<td>	</td>
 		<td>	</td>
 		<td>  Subject </td>
@@ -25,6 +26,7 @@
 		<tr>
 
 			<td><c:out value="${messages.name}"></c:out></td>
+			
 			<td><a href="<c:url value='/deletemessage/${messages.id}' />" >Delete</a></td>
 			<td><a href = "<c:url value='/message?uid=${messages.fromuser}'/>">Reply</a></td>
 			<td><c:out value="${messages.subject}"></c:out></td>

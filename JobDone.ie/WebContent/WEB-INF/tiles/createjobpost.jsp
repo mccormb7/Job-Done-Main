@@ -58,6 +58,7 @@ function initialize() {
 <sf:form method="post"
 	action="${pageContext.request.contextPath}/docreatejob"
 	commandName="jobpost">
+	
 	<sf:input type="hidden" name="id" path="id" />
 
 	<table class="formtable">

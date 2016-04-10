@@ -70,9 +70,11 @@ public class UsersService {
 		return usersDao.getUser(username);
 	}
 	
-	public User getUserEmailOwner(String email){
-		return usersDao.getUserEmailOwner(email);
+	public User getUserByEmail(String email){
+		return usersDao.getUserByEmail(email);
 	}
+	
+	
 
 
 	public List<Message> getMessages(String username) {

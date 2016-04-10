@@ -1,5 +1,8 @@
 package ie.done.job.web.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -42,6 +45,9 @@ public class MessagesDao {
 
 	public void saveOrUpdate(Message message) {
 		System.out.println(message);
+		
+		Date currentDate = new Date();
+		message.setDate(currentDate);
 		session().saveOrUpdate(message);
 	}
 

@@ -54,6 +54,8 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/editjobpost"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/emailform"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreatejob"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreateprofile"
@@ -67,6 +69,10 @@
 		<security:intercept-url pattern="/accountsent"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/providers"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/sendmail"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/mail/{email}"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/remove/{id}"
 			access="isAuthenticated()" />

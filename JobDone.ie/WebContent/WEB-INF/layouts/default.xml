@@ -172,6 +172,11 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/confirmedregister.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="emailform" extends="jobdone.base">
+		<put-attribute name="title" value="Mail Form "></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/emailform.jsp"></put-attribute>
+	</definition>
+	
 	
 
 	<definition name="foundjobs" extends="jobdone.base">

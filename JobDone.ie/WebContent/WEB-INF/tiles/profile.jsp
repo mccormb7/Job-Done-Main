@@ -74,8 +74,12 @@
                         <td>${provider.location}</td>
                       </tr>
                       <tr>
-                        <td>Email</td>
+                        <td>Message</td>
                         <td><a href = "<c:url value='/message?uid=${provider.user.username}'/>">contact</a></td>
+                      </tr>
+                      <tr>
+                        <td>Email Directly</td>
+                        <td><a href = "<c:url value='/sendmail'/>">contact</a></td>
                       </tr>
                      
                       

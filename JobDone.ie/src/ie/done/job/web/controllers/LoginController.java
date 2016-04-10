@@ -62,6 +62,10 @@ public class LoginController {
 	public String showLogin() {
 		return "login";
 	}
+	@RequestMapping("/emailform")
+	public String showEmailForm() {
+		return "emailform";
+	}
 	
 	
 	
@@ -163,7 +167,7 @@ public class LoginController {
 		String message = "Account has been registed, To start using our website, confirm your email address";
 		SimpleMailMessage mailReceiver = new SimpleMailMessage();
 		
-		mailReceiver.setFrom("jobdoneire@gmail.com");
+		mailReceiver.setFrom("tasktacklerire@gmail.com");
 		mailReceiver.setTo(userEmail);
 		mailReceiver.setSubject(subject);
 		mailReceiver.setText(message + " \r\n" + confirmationUrl);
@@ -242,27 +246,7 @@ public class LoginController {
 		}
 		
 		model.addAttribute("messages1", messages);
-		//only allow one offer
-		
-		
-		
-//		List<Provider> providers = providerService.getCurrent();
-//		model.addAttribute("providers1", providers);
-//		
-//		//jobDao.indexJobs();
-//		providerDao.indexProviders();
-		
-		/*boolean hasHasMessage = false;
-		boolean hasProfile = false;
-		if(principal != null) {
-			//hasJobPost = offersService.hasOffer(principal.getName());
-			hasHasMessage = jobPostService.hasJobPost(principal.getName());
-			hasProfile = providerService.hasProvider(principal.getName());
-		}
-		
-		model.addAttribute("hasJobPost", hasJobPost);
-		model.addAttribute("hasProfile", hasProfile);
-		//logger.debug("show home page");*/
+
 		return "messageinbox";
 	}
 	
@@ -308,6 +292,42 @@ public class LoginController {
 		return data;
 		
 	}*/
+	
+	
+	
+	@RequestMapping(value="/sendmail",method = RequestMethod.POST)
+    public String doSendMail(HttpServletRequest request, Principal principal) {
+        // takes input from e-mail form
+		System.out.println(" in mails");
+		User user = null;
+		
+		if(principal!=null){
+			String username = principal.getName();
+			user = usersService.getUser(username);
+		}
+        String recipientAddress = request.getParameter("recipient");
+        String subject = request.getParameter("subject");
+        String message = request.getParameter("message");
+         System.out.println(user.toString());
+         
+        // prints debug info
+        System.out.println("To: " + recipientAddress);
+        System.out.println("Subject: " + subject);
+        System.out.println("Message: " + message);
+         
+        // creates a simple e-mail object
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setFrom("tasktacklerire@gmail.com");
+        email.setTo(recipientAddress);
+        email.setSubject("From user " + user.getEmail() + " "+ subject);
+        email.setText("This message has been sent on Task Tackler from " + user.getName() + "\n"  + message);
+         
+        // sends the e-mail
+        mailSender.send(email);
+         
+        // forwards to the view named "Result"
+        return "offercreated";
+    }
 	
 	@RequestMapping(value="/sendmessage", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
