@@ -34,7 +34,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.tartarus.snowball.ext.EnglishStemmer;
+import org.tartarus.snowball.ext.PorterStemmer;
 import org.w3c.dom.Document;
+
+import edu.smu.tspell.wordnet.Synset;
+import edu.smu.tspell.wordnet.WordNetDatabase;
+
 
 @ActiveProfiles("dev")
 @ContextConfiguration(locations = {
@@ -55,6 +60,7 @@ public class SearchDaoTests {
 
 	@Autowired
 	private DataSource dataSource;
+	
 	
 	@Autowired
 	private ProviderRecommendationDao recommend;
@@ -157,9 +163,70 @@ public class SearchDaoTests {
 		
 
 	}
-	
-
 	@Test
+	public void testSynsets(){
+		File f=new File("C://Program Files (x86)//WordNet//2.1//dict2");
+        System.setProperty("wordnet.database.dir", f.toString());
+	
+        WordNetDatabase database = WordNetDatabase.getFileInstance();
+        List<String> uniqueListOfSyn = new ArrayList<String>();
+        
+        String wordForm = "fence";
+        
+		//  Get the synsets containing the wrod form
+		String[] wordList = {"Handyman",  "general", "maintenance", "around"};
+		
+		for(int k =0;k< wordList.length;k++){
+			
+			
+			Synset[] synsets = database.getSynsets(wordList[k]);
+			
+			
+			if (synsets.length > 0)
+			{
+				System.out.println("The following synsets contain '" +
+						wordForm + "' or a possible base form " +
+						"of that text:");
+				
+				for (int i = 0; i < synsets.length; i++)
+				{
+					System.out.println("");
+					String[] wordForms = synsets[i].getWordForms();
+					
+					for (int j = 0; j < wordForms.length; j++)
+					{
+						if(!uniqueListOfSyn.contains(wordForms[j])){
+							uniqueListOfSyn.add(wordForms[j]);
+						}
+						
+						System.out.println(wordForms[j]);
+					}
+					//System.out.println(": " + synsets[i].getDefinition());
+					System.out.println("++++++++++++++++++++++++++++++++++++++");
+					
+					
+				}
+			}
+			else
+			{
+				System.err.println("No synsets exist that contain " +
+						"the word form '" + wordForm + "'");
+			}
+		}
+		System.out.println("++++++++++++++++++unique list++++++++++++++++");
+		for (int j = 0; j < uniqueListOfSyn.size(); j++)
+		{
+			System.out.println(uniqueListOfSyn.get(j));
+		}
+		System.out.println("++++++++++++++++++Stemming++++++++++++++++");
+		String term = "intresting";
+		EnglishStemmer eng = new EnglishStemmer();
+		eng.setCurrent(term);
+		eng.stem();
+		System.out.println(eng.getCurrent());
+	}
+	
+	@Ignore
 	public void testSearch() throws Exception {
 		usersDao.create(user1);
 		usersDao.create(user2);
@@ -187,7 +254,7 @@ public class SearchDaoTests {
 	            
 	    }
 		System.out.println("...........................................................");
-		System.out.println(pro2);
+		System.out.println(pro3);
 		System.out.println("...........................................................");
 		
 		String postcode=pro3.getLocation();
@@ -196,7 +263,7 @@ public class SearchDaoTests {
 		//recommendation list
 		for(int i=0;i<uniqueList.size();i++){
 
-		    String postcode2=uniqueList.get(i).getLocation();// job post user location
+		 /*   String postcode2=uniqueList.get(i).getLocation();// job post user location
 			 String latLongs[] = getLatLongPositions(postcode);
 		     String latLongs2[] = getLatLongPositions(postcode2);
 
@@ -205,22 +272,22 @@ public class SearchDaoTests {
 			  Double lat2 = Double.parseDouble(latLongs2[0]);
 			  Double long2 = Double.parseDouble(latLongs2[1]);
 			  
-			  
-			
+		*/	  
+			System.out.println("Id -> " + uniqueList.get(i).getId());
 			System.out.println("User -> " + uniqueList.get(i).getUser());
 			System.out.println("Title ->" + uniqueList.get(i).getTitle());
 			System.out.println("DESCRITPION -> " + uniqueList.get(i).getDescription());
 			System.out.println("Location -> " + uniqueList.get(i).getLocation());
 			
-			System.out.println("...........................distance to House................................");
+			//System.out.println("...........................distance to House................................");
 		      
-		      System.out.println(pro3.getLocation() + "  " + uniqueList.get(i).getLocation() + "  " + distance(lat1,long1, lat2,long2, "K") + " KM\n");
+		      //System.out.println(pro3.getLocation() + "  " + uniqueList.get(i).getLocation() + "  " + distance(lat1,long1, lat2,long2, "K") + " KM\n");
 		      
 		      System.out.println("...........................................................");
 	
 		}
-		
-		
+	
+		/*
 		for(int j=0;j<uniqueList.size();j++){
 
 		    String postcode2=uniqueList.get(j).getLocation();// job post user location

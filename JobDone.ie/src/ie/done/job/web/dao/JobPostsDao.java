@@ -86,6 +86,7 @@ public class JobPostsDao {
 	@Transactional
 	public List <String> splitStringasList(String searchText) {
 		List<String> items = Arrays.asList(searchText.split("\\s+"));
+		List<String> noStopWords = new ArrayList<String>();
 		//List<String> splitList = searchText.split("\\s+");
 		String [] stopWords = { "an", "and","a", "are", "as", "at", "be", "but", "by",
                 "for", "if", "in", "into", "is", "it",
@@ -95,13 +96,22 @@ public class JobPostsDao {
 		
 		//remove stop words from the search list
 		for(int i = 0; i< items.size(); i++){
-
-			for(int j = 0; j< items.size(); j++){
-				if(items.get(i).equals(stopWords[i])){
-					items.remove(i);
+			
+			for(int j = 0; j< stopWords.length; j++){
+				if(items.get(i).equals(stopWords[j])){
+					System.out.println("word removed "   + stopWords[j]);
+					String temp = stopWords[j];
+					items.remove(temp);		
+					i--;
 				}
+				break;
+				
+				
 			}
 		}
+		
+		System.out.println("==============iteams = " + items);
+		System.out.println(" ==============no Stop " + noStopWords);
 		
 		
 		return items;

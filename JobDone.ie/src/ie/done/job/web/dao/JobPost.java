@@ -24,7 +24,7 @@ import org.hibernate.search.annotations.Store;
 @Indexed
 @Entity
 @Table(name="jobPosts")
-public class JobPost implements Comparable<JobPost> {
+public class JobPost extends Post implements Comparable<JobPost>  {
 
 	@Id
 	@GeneratedValue//auto generated from the db

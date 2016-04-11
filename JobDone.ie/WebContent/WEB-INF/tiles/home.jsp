@@ -27,6 +27,7 @@
 			  
 			<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />" >View Job Post</a></td>
 			<td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+			<td><a href = "<c:url value='/emailform?uid=${jobpost.user.email}'/>">Email</a></td>
 	
 			<td><c:out value="${jobpost.description}"></c:out></td>
 

@@ -105,6 +105,11 @@ public class LoginController {
 		return "loggedout";
 	}
 	
+	@RequestMapping("/mailsent")
+	public String showMailSent() {
+		return "mailsent";
+	}
+	
 	/*****************************Registration verification***********************************/
 	
 	@RequestMapping("/newaccount")
@@ -326,7 +331,7 @@ public class LoginController {
         mailSender.send(email);
          
         // forwards to the view named "Result"
-        return "offercreated";
+        return "mailsent";
     }
 	
 	@RequestMapping(value="/sendmessage", method=RequestMethod.POST, produces="application/json")

@@ -24,7 +24,7 @@ import org.hibernate.search.annotations.Store;
 @Indexed
 @Entity
 @Table(name="provider")
-public class Provider {
+public class Provider extends Post {
 
 	@Id
 	@GeneratedValue//auto generated from the db

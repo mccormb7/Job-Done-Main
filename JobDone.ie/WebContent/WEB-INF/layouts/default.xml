@@ -177,6 +177,11 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/emailform.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="mailsent" extends="jobdone.base">
+		<put-attribute name="title" value="Mail Sent "></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/mailsent.jsp"></put-attribute>
+	</definition>
+	
 	
 
 	<definition name="foundjobs" extends="jobdone.base">

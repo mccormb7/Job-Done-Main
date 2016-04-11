@@ -291,7 +291,7 @@ public class JobPostsController {
 	   if(searchText.equals("")){
 		   return "searchnull";
 	   }
-	   List<JobPost> allFound = jobPostsDao.searchForJob(searchText);
+	   List<JobPost> allFound = jobPostsDao.searchForJob(searchText);//cast list to JobPost
 	   List<JobPostModel> jobPostModels = new ArrayList<JobPostModel>();
 
 

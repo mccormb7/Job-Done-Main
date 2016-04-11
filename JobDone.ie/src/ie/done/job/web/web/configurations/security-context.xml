@@ -68,11 +68,15 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/accountsent"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/mailsent"
+			access="permitAll" />
 		<security:intercept-url pattern="/providers"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/sendmail"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/mail/{email}"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/sendmail/{email}"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/remove/{id}"
 			access="isAuthenticated()" />

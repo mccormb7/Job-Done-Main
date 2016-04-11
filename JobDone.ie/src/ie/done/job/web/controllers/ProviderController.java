@@ -188,7 +188,7 @@ public class ProviderController {
 		   return "searchnull";
 	   }
 	  
-	   List<Provider> allFound = providerDao.searchForProvider(searchTextPro);
+	   List<Provider> allFound = providerDao.searchForProvider(searchTextPro);//cast as post
 	   List<ProviderModel> providerModels = new ArrayList<ProviderModel>();
 	   
 

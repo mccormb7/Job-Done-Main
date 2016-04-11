@@ -111,6 +111,8 @@ public class ProviderRecommendationDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<JobPost> recommendJob(Provider provider) throws Exception {
+		
+			
 			//String [] splitWords = splitString(searchText);
 			
 			//String [] splitWords = null;
@@ -129,6 +131,8 @@ public class ProviderRecommendationDao {
 				return Collections.EMPTY_LIST;
 			}
 			System.out.println(provider.toString() + "++++++++++++++++++++++++++++++++++++++++");
+			
+			//adds all the users details to an arraylist
 			profileDetails.add(provider.getTitle());
 			profileDetails.add(provider.getExperience());
 			profileDetails.add(provider.getDomain());
@@ -136,13 +140,23 @@ public class ProviderRecommendationDao {
 			profileDetails.add(provider.getDescription());
 			//String [] splitWords = null;
 			for(int i = 0; i<profileDetails.size();i++){
-				//if(stopWords[i])
+
+
+					//splits into a searchable string 
 					holder = splitStringasList(profileDetails.get(i));
 					splitDetails.addAll(holder);
+					
 					//+++++++++++++++++++++++++++++++++++++++++++++++++++
 					System.out.println(splitDetails.size() + "############### ");
 					
 			}
+			
+			
+			
+			
+			
+			
+			
 			for(int j = 0; j<splitDetails.size();j++){
 				System.out.println(splitDetails.get(j)+ "=====================");
 				//remove all the stop words from the search
@@ -157,8 +171,8 @@ public class ProviderRecommendationDao {
 				
 			}
 
+			//performs search here
 			Session session = sessionFactory.getCurrentSession();
-			//System.out.println(searchText + " in the search here1");
 			FullTextSession fullTextSession = Search
 					.getFullTextSession(session);
 			

@@ -53,7 +53,9 @@ public class ProviderDao {
 		
 
 	}
-	
+//	if(resultsFinal.get(0) instanceof JobPost){
+//		
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
