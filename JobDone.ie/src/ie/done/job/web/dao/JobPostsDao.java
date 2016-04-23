@@ -130,6 +130,7 @@ public class JobPostsDao {
 			FullTextSession fullTextSession = Search
 					.getFullTextSession(session);
 			
+			
 			//System.out.println(searchText + "in the search here");
 			QueryBuilder qb = fullTextSession.getSearchFactory()
 					.buildQueryBuilder().forEntity(JobPost.class).get();

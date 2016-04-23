@@ -5,6 +5,23 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <script type="text/javascript">
+	function messageCountLink(data) {
+		$("#messageNumber").text(data.number);
+
+	}
+	function pageLoad() {
+		pageUpdate();
+		window.setInterval(pageUpdate, 5000);
+
+	}
+	function pageUpdate() {
+
+		$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+	}
+
+	$(document).ready(pageLoad);
+
 	function initialize() {
 
 		var input = document.getElementById('searchTextField');
@@ -14,7 +31,7 @@
 	google.maps.event.addDomListener(window, 'load', initialize);
 
 	function onDeleteClick(event) {
-		var doDelete = confirm("Are you sure youwant to delete this offer?");
+		var doDelete = confirm("Are you sure you want to delete your profile?");
 		if (doDelete == false) {
 			event.preventDefault();
 		}
@@ -44,96 +61,170 @@
 
 <!-- title, domain, description, photo, location. price -->
 
-<sf:form method="post"
-	action="${pageContext.request.contextPath}/docreateprofile"
-	commandName="provider">
-	<sf:input type="hidden" name="id" path="id" />
 
-	<table class="formtable">
 
-		<tr>
-			<td class="label">Title:</td>
-			<td><sf:input class="control" path="title" name="title"
-					type="text" /><br />
-				<div class="error">
-					<sf:errors path="title"></sf:errors>
-				</div></td>
-		</tr>
+
+
+<!-- Top content -->
+<div class="top-content">
+
+	<div class="inner-bg">
 		
-		<tr>
-			<td class="label">Gender:</td>
-			<td><sf:select path="gender" name="gender">
-					<sf:option value="male">Male</sf:option>
-					<sf:option value="female">Female</sf:option>
-				</sf:select> <br />
-				<div class="error">
-					<sf:errors path="gender"></sf:errors>
-		</tr>
-		<tr>
-			<td class="label">Domain:</td>
-			<td><sf:select path="domain" name="domain">
-					<sf:option value="grinds">Grinds</sf:option>
-					<sf:option selected="selected" value="painter">Painter</sf:option>
-					<sf:option value="catering">Catering</sf:option>
-					<sf:option value="gardening">Gardening</sf:option>
-				</sf:select> <br />
-				<div class="error">
-					<sf:errors path="domain"></sf:errors>
-		</tr>
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3 form-box">
+					<div class="form-top">
+						<div class="form-top-left">
+							<h3>Edit your Profile</h3>
+							<p>Add as much info as possible to maximize possible
+								recommendations</p>
+						</div>
+						<div class="form-top-right">
+							<i class="fa fa-lock"></i>
+						</div>
+					</div>
 
 
 
-		<tr>
-			<td class="label">Experience:</td>
-			<td><sf:textarea class="control" path="experience" type="text"
-					rows="10" cols="10"></sf:textarea><br /> <sf:errors
-					path="experience" cssClass="error"></sf:errors></td>
-		</tr>
-
-		<tr>
-			<td class="label">Qualifications:</td>
-			<td><sf:textarea class="control" path="qualifications"
-					type="text" rows="5" cols="5"></sf:textarea><br /> <sf:errors
-					path="qualifications" cssClass="error"></sf:errors></td>
-		</tr>
+					<div class="form-bottom">
 
 
-		<tr>
-			<td class="label">Location:</td>
-			<td><sf:input class="control" path="location" name="location"
-					id="searchTextField" type="text" /><br />
-				<div class="error">
-					<sf:errors path="location"></sf:errors>
-				</div></td>
-		</tr>
-
-		<tr>
-			<td class="label">Price per hour</td>
-			<td><sf:input class="control" path="price" name="price"
-					type="text" /><br />
-				<div class="error">
-					<sf:errors path="price"></sf:errors>
-				</div></td>
-		</tr>
+						<!-- ===================================form edit profile input========================================== -->
+						<sf:form method="post"
+							action="${pageContext.request.contextPath}/docreateprofile"
+							commandName="provider">
+							<sf:input type="hidden" name="id" path="id" />
 
 
 
-		<tr>
-			<td class="label"></td>
-			<td><input class="control" value="Save Profile" type="submit" /></td>
-		</tr>
 
-		<c:if test="${tradesman.id != 0}">
-			<tr>
-				<td class="label"></td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td class="label"></td>
-				<td><input class="delete control" name="delete" id="delete"
-					value="Delete your profile" type="submit" /></td>
-			</tr>
-		</c:if>
-	</table>
+							<div class="form-group">
+							<b><font size="6">Title:</font></b>
+								<label class="sr-only" for="form-title">Title..</label>
+								<sf:input type="text" path="title" name="title"
+									placeholder="Title" class="form-title form-control"
+									id="form-title"></sf:input>
+							</div>
+							<div class="error">
+								<sf:errors path="title"></sf:errors>
+							</div>
 
-</sf:form>
+
+
+							
+
+
+							<div class="form-group">
+							<b><font size="6">Experience:</font></b>
+								<label class="sr-only" for="form-email">Experience:</label>
+								<sf:textarea path="experience" type="text"
+									name="experience" placeholder="Experience.."
+									class="form-name form-control" id="form-email" rows="10"
+									cols="10"></sf:textarea>
+							</div>
+							<div class="error">
+								<sf:errors path="experience"></sf:errors>
+							</div>
+
+
+							<div class="form-group">
+							<b><font size="6">Qualifications:</font></b>
+								<label class="sr-only" for="form-email">Qualifications:</label>
+								<sf:textarea path="qualifications" type="text"
+									name="qualifications" placeholder="Qualifications.."
+									class="form-name form-control" id="form-qualifications"
+									rows="5" cols="5"></sf:textarea>
+							</div>
+							<div class="error">
+								<sf:errors path="qualifications"></sf:errors>
+							</div>
+
+
+							<div class="form-group">
+							<b><font size="6">Domain:</font></b>
+								<label class="sr-only" for="form-role">Domain</label>
+								<sf:select type="text" path="domain" name="domain"
+									placeholder="Email.." class="form-role form-control"
+									id="form-role">
+									<sf:option value="grinds">Grinds</sf:option>
+									<sf:option selected="selected" value="painter">Painter</sf:option>
+									<sf:option value="catering">Catering</sf:option>
+									<sf:option value="gardening">Gardening</sf:option>
+
+								</sf:select>
+							</div>
+							<div class="error">
+								<sf:errors path="domain"></sf:errors>
+							</div>
+
+
+
+
+
+							<div class="form-group">
+							<b><font size="6">Gender:</font></b>
+								<label class="sr-only" for="form-role">Gender</label>
+								<sf:select type="text" path="gender" name="gender"
+									placeholder="Gender.." class="form-role form-control"
+									id="form-role">
+									<sf:option value="male">Male</sf:option>
+									<sf:option value="female">Female</sf:option>
+
+								</sf:select>
+							</div>
+							<div class="error">
+								<sf:errors path="gender"></sf:errors>
+							</div>
+
+
+							<div class="form-group">
+							<b><font size="6">Location:</font></b>
+								<label class="sr-only" for="form-location">Location..</label>
+								<sf:input type="text" path="location" name="location"
+									id="searchTextField" placeholder="Name.."
+									class="form-name form-control"></sf:input>
+							</div>
+							<div class="error">
+								<sf:errors path="location"></sf:errors>
+							</div>
+
+
+							<div class="form-group">
+							<b><font size="6">Price per Hour Est..</font><b/>
+								<label class="sr-only" for="form-price">Price</label>
+								<sf:input type="text" path="price" name="price"
+									placeholder="price.." class="form-name form-control"
+									id="form-name"></sf:input>
+							</div>
+							<div class="error">
+								<sf:errors path="price"></sf:errors>
+							</div>
+
+						
+							<div class="form-group">
+							<b><font size="6">Profile Picture URL</font></b>
+								<label class="sr-only" for="form-price">Enter Profile Picture URL</label>
+								<sf:input type="text" path="internetpic" name="internetpic"
+									placeholder="profile pic url.." class="form-name form-control"
+									id="form-name"></sf:input>
+							</div>
+							<div class="error">
+								<sf:errors path="internetpic"></sf:errors>
+							</div>
+							
+
+							<button type="submit" value="Save Profile" class="btn">Save Profile</button>
+							
+							<c:if test="${tradesman.id != 0}">
+							&nbsp;
+							<button type="submit" name="delete" id="delete" value="Delete your profile" class="btnx">Delete your profile</button>
+							
+							
+							</c:if>
+						</sf:form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+

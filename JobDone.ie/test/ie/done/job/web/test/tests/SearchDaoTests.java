@@ -174,7 +174,7 @@ public class SearchDaoTests {
         String wordForm = "fence";
         
 		//  Get the synsets containing the wrod form
-		String[] wordList = {"Handyman",  "general", "maintenance", "around"};
+		String[] wordList = {"fix", "paint" };
 		
 		for(int k =0;k< wordList.length;k++){
 			
@@ -207,23 +207,44 @@ public class SearchDaoTests {
 					
 				}
 			}
-			else
-			{
-				System.err.println("No synsets exist that contain " +
-						"the word form '" + wordForm + "'");
-			}
+//			else
+//			{
+//				System.err.println("No synsets exist that contain " +
+//						"the word form '" + wordForm + "'");
+//			}
 		}
 		System.out.println("++++++++++++++++++unique list++++++++++++++++");
 		for (int j = 0; j < uniqueListOfSyn.size(); j++)
 		{
 			System.out.println(uniqueListOfSyn.get(j));
 		}
+		
 		System.out.println("++++++++++++++++++Stemming++++++++++++++++");
-		String term = "intresting";
-		EnglishStemmer eng = new EnglishStemmer();
-		eng.setCurrent(term);
-		eng.stem();
-		System.out.println(eng.getCurrent());
+	/*	List<String> stemmedList = new ArrayList<String>();
+	//	String[] wordList = {"Handyman",  "general", "maintenance", "around","beside", "Dublin","cranmore"};
+		for(int j=0;j<wordList.length;j++){
+			
+			String term = wordList[j];
+			EnglishStemmer eng = new EnglishStemmer();
+			eng.setCurrent(term);
+			if(eng.stem()){
+				stemmedList.add(eng.getCurrent());
+			}
+			//System.out.println(eng.getCurrent());
+		}
+		System.out.println("++++++++++++++++++StemmedList++++++++++++++++");
+		for (int j = 0; j < stemmedList.size(); j++)
+		{
+			System.out.println(stemmedList.get(j));
+		}
+	*/
+		
+			//String term = "intresting";
+//			String term = wordForm[j];
+//			EnglishStemmer eng = new EnglishStemmer();
+//			eng.setCurrent(term);
+//			eng.stem();
+//			System.out.println(eng.getCurrent());
 	}
 	
 	@Ignore

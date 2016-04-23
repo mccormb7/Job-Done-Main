@@ -5,18 +5,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
-<sec:authorize access="hasRole('ROLE_TRADE')">
-<c:choose>
-	<c:when test="${hasProfile}">
-		<a href="${pageContext.request.contextPath}/createprofile">Edit or delete your Profile</a>
-	</c:when>
-	<c:otherwise>
-		<p>
-			<a href="${pageContext.request.contextPath}/createprofile">Create a profile to better match to jobs</a>
-		</p>
-</c:otherwise>
-</c:choose>
-</sec:authorize>
 
 <div class="container">
       <div class="row">
@@ -34,22 +22,10 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
-                
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src=${provider.internetpic} class="img-circle img-responsive"> </div>
+       
                 <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
+                  <table class="tableprofile table-user-information">
                     <tbody>
                       <tr>
                         <td>Title:</td>
@@ -88,24 +64,26 @@
                     </tbody>
                   </table>
                   
-                  <a href="#" class="btn btn-primary">My Sales Performance</a>
-                  <a href="#" class="btn btn-primary">Team Sales Performance</a>
                 </div>
               </div>
             </div>
                  <div class="panel-footer">
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                 		   
+                        <a data-original-title="Send Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                    
+                    
                         <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Edit Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Delete Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
+                        
+                        
                     </div>
             
           </div>
         </div>
       </div>
     </div>
-    
     
   <script type="text/javascript">  
   $(document).ready(function() {
@@ -145,4 +123,23 @@
     
 </script>
 
+<!-- goes to url and tries to download the data and pass it to the function -->
+<script type="text/javascript">
+ 
+function messageCountLink(data){
+	$("#messageNumber").text(data.number);
 	
+}
+function pageLoad(){
+	pageUpdate();
+	window.setInterval(pageUpdate, 5000);
+	
+}
+function pageUpdate(){
+	
+	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+}
+
+$(document).ready(pageLoad);
+</script>

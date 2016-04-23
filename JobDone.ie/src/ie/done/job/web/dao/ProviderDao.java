@@ -95,6 +95,50 @@ public class ProviderDao {
 		
 	}
 	
+	
+	/*@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Post> searchForProvider(String searchTextPro) throws Exception {
+			//allows a client search for specific tradesmen
+
+			String [] splitWords = splitString(searchTextPro);
+					
+			List<Post> results = null;
+			List<Post> resultsFinal = new ArrayList<Post>();
+			
+			Session session = sessionFactory.getCurrentSession();
+			System.out.println(searchTextPro + " in the search here1");
+			FullTextSession fullTextSession = Search
+					.getFullTextSession(session);
+			
+			if(resultsFinal.get(0) instanceof Provider){
+				
+				QueryBuilder qb = fullTextSession.getSearchFactory()
+						.buildQueryBuilder().forEntity(Provider.class).get();
+				//title, experience,
+				for(int i = 0; i<splitWords.length;i++){
+					org.apache.lucene.search.Query query = qb.keyword()
+							.onFields("experience", "title", "domain","qualifications", "location")
+							.matching(splitWords[i]).createQuery();
+		
+					org.hibernate.Query hibQuery = fullTextSession.createFullTextQuery(
+							query, Provider.class);
+				
+					results = hibQuery.list();
+					if(!results.isEmpty()){
+						resultsFinal.addAll(results);
+					}
+					//"experience", "title", "domain","qualifications", "location"
+					
+				}
+				
+			}
+			
+			return resultsFinal;
+		
+	}
+	*/
+	
 
 
 	@SuppressWarnings("unchecked")

@@ -7,30 +7,36 @@
 
 
 <h1> List of Job Posts </h1>
-<table class="offers">
-	<tr>
-		<td>Name</td>
-		<td>   </td>
-		<td>Details</td>
-		<td>Description</td>
+<table class="table table-hover" >
+	
+	<thead>
+		<tr class="danger">
 		
-	</tr>
+			<td>Name</td>
+			<td>   </td>
+			
+			<td>Details</td>
+			<td></td>
+			<td>   </td>
+			<td></td>
+			<td></td>
+			<td>Description</td>	
+		</tr>
+	</thead>
 
 	<c:forEach var="jobpost" items="${jobposts1}">
-		<tr>
-
+		<tr class="info">
 			<td><c:out value="${jobpost.user.name}"></c:out></td>
-			<!--<td><a href="<c:url value='/remove/${jobpost.id}' />" >Delete</a></td>
-			<td><a href="<c:url value='/editjobpost/${jobpost.id}' />" >Edit</a></td>
-			  <td><a href="${pageContext.request.contextPath}/editjobpost">Edit</a></td>-->
-			  
-			  
-			<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />" >View Job Post</a></td>
-			<td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
-			<td><a href = "<c:url value='/emailform?uid=${jobpost.user.email}'/>">Email</a></td>
-	
-			<td><c:out value="${jobpost.description}"></c:out></td>
 
+			<td></td>
+			<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />" >View </a></td>
+			<td></td>
+			<td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+			<td></td>
+			<td><a href = "<c:url value='/emailform?uid=${jobpost.user.email}'/>">Email</a></td>
+			
+			<td><c:out value="${jobpost.title}"></c:out></td>
+	
 		</tr>
 	</c:forEach>
 </table>
@@ -39,8 +45,9 @@
 
 <p>
 <h1> List of providers </h1>
-<table class="offers">
+<table class="table table-hover">
 	<tr>
+		<td></td>
 		<td>Name</td>
 		<td>   </td>
 		<td>Details</td>
@@ -50,11 +57,8 @@
 
 	<c:forEach var="provider" items="${providers1}">
 		<tr>
-
+			<td><img style= "display:block; " width="100%" height="100%" src="${provider.internetpic}" /></td>
 			<td><c:out value="${provider.user.name}"></c:out></td>
-			<!--<td><a href="<c:url value='/remove/${jobpost.id}' />" >Delete</a></td>
-			<td><a href="<c:url value='/editjobpost/${jobpost.id}' />" >Edit</a></td>
-			  <td><a href="${pageContext.request.contextPath}/editjobpost">Edit</a></td>-->
 			<td><a href="<c:url value='/viewprofile/${provider.id}' />" >View Profile</a></td>
 			<td><a href = "<c:url value='/message?uid=${provider.user.username}'/>">contact</a></td>
 	

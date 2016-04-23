@@ -17,14 +17,13 @@
 
 
 
-
 <c:choose>
 <c:when test="${hasRecommendation}">
-	<p><a>
+	<p>
 	<h1>Providers Recommendation Page</h1>
 	</p>
 	
-	<table class="offers">
+	<table class="table table-hover">
 		<tr>
 			<td>Name</td>
 			<td>   </td>
@@ -61,6 +60,32 @@
 	</c:otherwise>
 
 </c:choose>
+
+
+
+
+
+
+<!-- goes to url and tries to download the data and pass it to the function -->
+<script type="text/javascript">
+ 
+function messageCountLink(data){
+	$("#messageNumber").text(data.number);
+	
+}
+function pageLoad(){
+	pageUpdate();
+	window.setInterval(pageUpdate, 5000);
+	
+}
+function pageUpdate(){
+	
+	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+}
+
+$(document).ready(pageLoad);
+</script>
 
 <!-- goes to url and tries to download the data and pass it to the function -->
 <script type="text/javascript">

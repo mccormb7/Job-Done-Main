@@ -1,5 +1,6 @@
 package ie.done.job.web.dao;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.HttpURLConnection;
@@ -10,6 +11,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,6 +34,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
+
+import edu.smu.tspell.wordnet.Synset;
+import edu.smu.tspell.wordnet.WordNetDatabase;
+
+
 
 @Repository
 @Transactional
@@ -64,6 +72,87 @@ public class ProviderRecommendationDao {
 		//List<String> splitList = searchText.split("\\s+");
 		
 		return items;
+
+	}
+	
+	public boolean hasSpecialChar(String word){
+		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(word);
+		boolean specialCharContained = false;
+		boolean b = m.find();
+
+		if (b){
+			specialCharContained = true;
+		}else{
+			return specialCharContained;
+		}
+		return specialCharContained;
+	   
+	}
+	public boolean isStopWord(String word){
+		
+		String lowerWord = word.toLowerCase();
+		boolean stopWord= true;
+		String [] stopWords = { "an","looking", "my", "in", "and","a", "are", "as", "at", "be", "but", "by",
+	            "for", "if", "in", "into", "is", "it",
+	            "no", "not", "of", "on", "or", "such",
+	            "that", "the", "their", "then", "there", "these",
+	            "they", "this", "to", "was", "will", "with"};
+		
+		if(Arrays.asList(stopWords).contains(lowerWord)){
+			stopWord=true;
+		}
+		else{
+			return false;
+		}
+		
+		return stopWord;
+		
+	}
+	
+	
+	@Transactional
+	public List <String> addSynonymToSearch(List<String> splitDetails) {
+		
+		
+		File f=new File("C://Program Files (x86)//WordNet//2.1//dict2");
+        System.setProperty("wordnet.database.dir", f.toString());
+	
+        WordNetDatabase database = WordNetDatabase.getFileInstance();
+        List<String> uniqueListOfSyn = new ArrayList<String>();
+
+		//  Get the synsets containing the wrod form
+        for(int k =0;k< splitDetails.size();k++){
+	        Synset[] synsets = database.getSynsets(splitDetails.get(k));
+			
+			//finds all possible synonyms of each line of split details
+			if (synsets.length > 0){
+//				System.out.println("The following synsets contain '" +
+//						splitDetails.get(k) + "' or a possible base form " +
+//						"of that text:");
+				
+				for (int i = 0; i < synsets.length; i++){
+				//	System.out.println("");
+					String[] wordForms = synsets[i].getWordForms();
+					
+					for (int j = 0; j < wordForms.length; j++){
+						if(!uniqueListOfSyn.contains(wordForms[j])){
+							//removes multiStrings being passed and strings with special chars
+							if(!wordForms[j].contains(" ")&& (!isStopWord(wordForms[j])) &&(!hasSpecialChar(wordForms[j]))){
+								uniqueListOfSyn.add(wordForms[j]);
+							}
+						}
+						
+						//System.out.println(wordForms[j]);
+					}
+					//System.out.println(": " + synsets[i].getDefinition());
+					//System.out.println("++++++++++++++++++++++++++++++++++++++");
+
+				}
+			}
+			
+        }
+        return uniqueListOfSyn;	
 
 	}
 
@@ -113,9 +202,7 @@ public class ProviderRecommendationDao {
 	public List<JobPost> recommendJob(Provider provider) throws Exception {
 		
 			
-			//String [] splitWords = splitString(searchText);
-			
-			//String [] splitWords = null;
+			//stop words to be removed
 			String [] stopWords = { "an", "and","a", "are", "as", "at", "be", "but", "by",
 			                       "for", "if", "in", "into", "is", "it",
 			                       "no", "not", "of", "on", "or", "such",
@@ -126,7 +213,10 @@ public class ProviderRecommendationDao {
 			List<String> profileDetails = new ArrayList<String>();
 			List<String> splitDetails = new ArrayList<String>();
 			List<String> holder = new ArrayList<String>();
+			List<String> synonym = new ArrayList<String>();
+			
 			//takes in full sentances and must be split in order to process
+			//if either are empty it will return empty
 			if(provider.getTitle().isEmpty() || provider.getExperience().isEmpty()){
 				return Collections.EMPTY_LIST;
 			}
@@ -138,37 +228,44 @@ public class ProviderRecommendationDao {
 			profileDetails.add(provider.getDomain());
 			profileDetails.add(provider.getQualifications());
 			profileDetails.add(provider.getDescription());
-			//String [] splitWords = null;
+		
+			
+			//Split details now contains all the info from the profile details split into searchable Strings
+			
 			for(int i = 0; i<profileDetails.size();i++){
-
-
-					//splits into a searchable string 
-					holder = splitStringasList(profileDetails.get(i));
-					splitDetails.addAll(holder);
-					
-					//+++++++++++++++++++++++++++++++++++++++++++++++++++
-					System.out.println(splitDetails.size() + "############### ");
-					
+				//splits into a searchable string 
+				holder = splitStringasList(profileDetails.get(i));
+				splitDetails.addAll(holder);
+				
+				System.out.println(splitDetails.size() + "############### ");
+				
+		}
+			
+			System.out.println("==================synom List===================");
+			
+			synonym=addSynonymToSearch(splitDetails);
+			
+			for(int n = 0 ;n< synonym.size();n++){
+				System.out.println(synonym.get(n));
 			}
 			
+			System.out.println("==================synom List End===================");
 			
 			
-			
-			
-			
+			//adds all the synonyms to the search
+			splitDetails.addAll(synonym);
+			//Add all the synmomis to the search
 			
 			for(int j = 0; j<splitDetails.size();j++){
 				System.out.println(splitDetails.get(j)+ "=====================");
 				//remove all the stop words from the search
-				for(int s = 0; s<stopWords.length;s++){
-					
-					if((splitDetails.get(j).equals(stopWords[s]))|| splitDetails.get(j).equals("a")){
+				for(int s = 0; s<stopWords.length;s++){				
+					//if((splitDetails.get(j).equals(stopWords[s]))|| splitDetails.get(j).equals("a")){
+					if(isStopWord(splitDetails.get(j))){
 						System.out.println(stopWords[s]+ " %%%%%%%%%%%%%%%%%%%");
 						splitDetails.remove(j);
 					}
-				}
-				
-				
+				}			
 			}
 
 			//performs search here

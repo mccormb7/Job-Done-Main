@@ -5,8 +5,13 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
-
-
+    
+    
+    
+    
+    
+    
+    
 <div class="container">
       <div class="row">
       <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
@@ -19,37 +24,39 @@
    
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title"> Username : ${jobpost.user.username}</h3>
+              <h3 class="panel-title">Username : ${jobpost.user.username}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://cdn3.iconfinder.com/data/icons/simplius-pack/512/user-512.png"> </div>
-                
-                
+                <div class="col-md-6 col-lg-6" align="right"> <img alt="User Pic" src=${jobpost.internetpic} > </div>
+       
                 <div class=" col-md-9 col-lg-9 "> 
-                
-                  <table class="table table-user-information">
+                  <table class="tableprofile table-user-information">
                     <tbody>
                       <tr>
                         <td>Title:</td>
                         <td>${jobpost.title}</td>
                       </tr>
-                      <tr>
+                       <tr>
                         <td>Description</td>
                         <td>${jobpost.description}</td>
                       </tr>
-                      <tr>
+                   <tr>
                         <td>Domain</td>
                         <td>${jobpost.domain}</td>
                       </tr>
-                   
+           
                         <tr>
                         <td>Address</td>
                         <td>${jobpost.location}</td>
                       </tr>
                       <tr>
-                        <td>Email</td>
+                        <td>Message</td>
                         <td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+                      </tr>
+                      <tr>
+                        <td>Email Directly</td>
+                        <td><a href = "<c:url value='/sendmail'/>">contact</a></td>
                       </tr>
                      
                       
@@ -57,11 +64,27 @@
                      
                     </tbody>
                   </table>
-                
+                  
                 </div>
               </div>
             </div>
                  <div class="panel-footer">
+                 		   <sec:authorize access="hasRole('ROLE_TRADE')">
+							<c:choose>
+							<c:when test="${!hasProfile}">
+                        <a data-original-title="Send Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                        </c:when>
+						<c:otherwise>
+                        <span class="pull-right">
+                            <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Edit Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Delete Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+                        </c:otherwise>
+							</c:choose>
+						</sec:authorize>
+                        
+                    </div>
+                    <div class="panel-footer">
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
                         <span class="pull-right">
                             <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
@@ -73,6 +96,12 @@
         </div>
       </div>
     </div>
+    
+  <script type="text/javascript">  
+  $(document).ready(function() {
+    var panels = $('.user-infos');
+    var panelsButton = $('.dropdown-user');
+    panels.hide();
     
     
   <script type="text/javascript">  

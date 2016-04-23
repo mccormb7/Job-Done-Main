@@ -13,39 +13,57 @@
 
 <c:choose>
 	<c:when test="${hasPostedJob}">
-<p><a>
-	Edit or delete your current job posts
-</a>
-</p>
-		
-<table class="offers">
-	<tr>
-		<td>Name</td>
-		<td>Remove</td>
-		<td>Edit</td>
-		<td>Offer</td>
-	</tr>
+		<p>
+			<a> Edit or delete your current job posts </a>
+		</p>
 
-	<c:forEach var="jobpost" items="${jobposts2}">
-		<tr>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td></td>
+					<td></td>
+					<td>Task</td>
+				</tr>
+			</thead>
+			<c:forEach var="jobpost" items="${jobposts2}">
+				<tr class="info">
 
-			<td><c:out value="${jobpost.user.name}"></c:out></td>
-			<td><a href="<c:url value='/remove/${jobpost.id}' />" >Delete</a></td>
-			<td><a href="<c:url value='/editjobpost/${jobpost.id}' />" >Edit</a></td>
+					<td><c:out value="${jobpost.user.name}"></c:out></td>
+					<td><a href="<c:url value='/remove/${jobpost.id}' />">Delete</a></td>
+					<td><a href="<c:url value='/editjobpost/${jobpost.id}' />">Edit</a></td>
 
-			<td><c:out value="${jobpost.description}"></c:out></td>
+					<td><c:out value="${jobpost.description}"></c:out></td>
 
-		</tr>
-	</c:forEach>
-</table>		
-		
-		
-		
+				</tr>
+			</c:forEach>
+		</table>
+
+
+
 	</c:when>
 	<c:otherwise>
 		<p>
-			<a href="${pageContext.request.contextPath}/createjobpost">No Job Posts made, create one here</a>
-		</p>
+
+
+			<div class="inner-bg">
+
+			<div class="row">
+			<div class="col-sm-6 col-sm-offset-3 form-box">
+				<div class="form-top">
+				<font size="6" color="white">No Task Posts Made</font>
+					<div class="form-top-center">
+					<a class="btn btn-primary btn-lg" role="button"
+								href="${pageContext.request.contextPath}/createjobpost">Create Task Here</a>	
+					</div>
+					
+				</div>
+		</div>
+		</div>
+	</div>
+		
+		
+		
 	</c:otherwise>
 
 </c:choose>
@@ -56,24 +74,25 @@
 
 
 <p/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
 <!-- goes to url and tries to download the data and pass it to the function -->
 <script type="text/javascript">
- 
-function messageCountLink(data){
-	$("#messageNumber").text(data.number);
-	
-}
-function pageLoad(){
-	pageUpdate();
-	window.setInterval(pageUpdate, 5000);
-	
-}
-function pageUpdate(){
-	
-	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+	function messageCountLink(data) {
+		$("#messageNumber").text(data.number);
 
-}
+	}
+	function pageLoad() {
+		pageUpdate();
+		window.setInterval(pageUpdate, 5000);
 
-$(document).ready(pageLoad);
+	}
+	function pageUpdate() {
+
+		$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+	}
+
+	$(document).ready(pageLoad);
 </script>

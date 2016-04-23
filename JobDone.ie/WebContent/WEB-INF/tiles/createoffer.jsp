@@ -7,7 +7,23 @@
 	
 
 <script type="text/javascript">
+	
+function messageCountLink(data){
+	$("#messageNumber").text(data.number);
+	
+}
+function pageLoad(){
+	pageUpdate();
+	window.setInterval(pageUpdate, 5000);
+	
+}
+function pageUpdate(){
+	
+	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
 
+}
+
+$(document).ready(pageLoad);
 	
 
 	google.maps.event.addDomListener(window, 'load', init);

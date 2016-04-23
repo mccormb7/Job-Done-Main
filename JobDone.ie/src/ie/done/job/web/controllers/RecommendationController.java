@@ -132,6 +132,25 @@ public class RecommendationController {
 		}
 			
 	}
+	
+	//removes matchs that might not be relivant
+	public static void removeBadMatches(Map<JobPost, Integer> map){
+
+		for(Iterator<Map.Entry<JobPost, Integer>> it = map.entrySet().iterator(); it.hasNext(); ) {
+		      Map.Entry<JobPost, Integer> entry = it.next();
+		      if( entry.getValue() <= 2) {
+		        it.remove();
+		      }
+		 }
+		//System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+		/*for (Map.Entry<JobPost, Integer> entry : map.entrySet()) {
+			if( entry.getValue() < 2){
+				map.remove(entry.getKey(), entry.getValue());
+			}
+		}
+		*/
+			
+	}
 	/*
 	private static Map<JobPost, Integer> sortByComparator(Map<JobPost, Integer> unsortMap) {
 
@@ -191,12 +210,16 @@ public class RecommendationController {
 		//System.out.println("\nExample 3 - Count all with Map===========================");
 		//MyLinkedMap<JobPost, Integer> map1 = new MyLinkedMap<JobPost, Integer>();
 		Map<JobPost, Integer> map = new HashMap<JobPost, Integer>();
-
+		//counts the amount of matches for each job post
 		for (JobPost temp : recommendedList) {
 			Integer count = map.get(temp);
 			map.put(temp, (count == null) ? 1 : count + 1);
 		}
 		
+		
+		printMap(map);
+		removeBadMatches(map);
+		System.out.println(" --------------after removal----------");
 		printMap(map);
 		
 		System.out.println("\nSorted Linked list to be passed----------------------------");
@@ -204,7 +227,7 @@ public class RecommendationController {
 		Set<JobPost> keySet = map.keySet();
 		List<JobPost> uniqueList = new ArrayList<JobPost>(keySet); 
 		
-		Collections.reverse(uniqueList);
+		//Collections.reverse(uniqueList);
 		for(int i = 0; i < uniqueList.size();i++){
 			System.out.println(uniqueList.get(i).toString());
 		}

@@ -6,6 +6,8 @@
 
 
 
+
+
 <sec:authorize access="hasRole('ROLE_USER')">
 <c:choose>
 	<c:when test="${hasJobPost}">
@@ -82,7 +84,9 @@
 
 
 <!-- allows Provides to search for specific jobs---done -->
-<sec:authorize access="hasRole('ROLE_TRADE')">
+
+
+<!--<sec:authorize access="hasRole('ROLE_TRADE')">
 <h1>Search for Jobs</h1>
 <form action="doSearch" method="post">
 	Search: <input type="text" name="searchText" /><br /> <input
@@ -93,10 +97,10 @@
 
 
 <!-- allows users search for specfic Providers -->
-<sec:authorize access="hasRole('ROLE_USER')">
+<!--<sec:authorize access="hasRole('ROLE_USER')">
 <h1>Search for the right people for your job</h1>
 <form action="doSearchProvider" method="post">
 	Search: <input type="text" name="searchTextPro" /><br /> <input
 		type="reset" /> <input type="submit" />
 </form>
-</sec:authorize>
+</sec:authorize>-->

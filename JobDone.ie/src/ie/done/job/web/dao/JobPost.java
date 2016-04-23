@@ -69,16 +69,8 @@ public class JobPost extends Post implements Comparable<JobPost>  {
 	@Column(name = "distance")
 	private Double distance;
 
-	
-//	public DepartmentVO getDepartment() {
-////		return domain;
-//	}
-
-
-
-//	public void setDepartment(DepartmentVO department) {
-//		this.domain = department;
-//	}
+	@Column(name="internetpic")
+	private String internetpic;
 
 
 
@@ -231,6 +223,18 @@ public class JobPost extends Post implements Comparable<JobPost>  {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+
+
+	public String getInternetpic() {
+		return internetpic;
+	}
+
+
+
+	public void setInternetpic(String internetpic) {
+		this.internetpic = internetpic;
 	}
 
 

@@ -6,16 +6,18 @@
 	
 	
 
-<table class="offers" >
-<tr>
-<td>List of Users that match your search</td></tr>
-	<tr>
+<table class="table table-hover" >
+
+	<thead>
+	<tr class ="danger">
 		<td>Title</td>
 		<td>Profile</td>
 		<td>Domain</td>
 		
 		<td>Location</td>
 	</tr>	
+	</thead>
+	<tbody>
 		<c:forEach var="provider" items="${searchprovider}">
 				<tr>
 					
@@ -29,7 +31,7 @@
 		
 				</tr>
 			</c:forEach>
-
+	</tbody>
 </table>
 
     

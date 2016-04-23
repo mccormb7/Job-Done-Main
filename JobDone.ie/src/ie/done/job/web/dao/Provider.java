@@ -75,6 +75,9 @@ public class Provider extends Post {
 	@Column(name = "date")
 	private Date date;
 	
+	@Column(name = "internetpic")
+	private String internetpic;
+	
 
 
 	public Provider() {
@@ -357,6 +360,15 @@ public class Provider extends Post {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	
+	public String getInternetpic() {
+		return internetpic;
+	}
+
+	public void setInternetpic(String internetpic) {
+		this.internetpic = internetpic;
 	}
 
 	@Override
