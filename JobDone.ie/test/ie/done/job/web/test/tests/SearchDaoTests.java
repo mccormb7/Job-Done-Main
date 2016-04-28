@@ -247,7 +247,7 @@ public class SearchDaoTests {
 //			System.out.println(eng.getCurrent());
 	}
 	
-	@Ignore
+	@Test
 	public void testSearch() throws Exception {
 		usersDao.create(user1);
 		usersDao.create(user2);

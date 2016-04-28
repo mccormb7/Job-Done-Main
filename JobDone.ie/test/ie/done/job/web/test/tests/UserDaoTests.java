@@ -19,10 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @ActiveProfiles("dev")
 @ContextConfiguration(locations = {
-		"classpath:com/caveofprogramming/spring/web/config/dao-context.xml",
-		"classpath:com/caveofprogramming/spring/web/config/security-context.xml",
-		"classpath:com/caveofprogramming/spring/web/test/config/datasource.xml" })
+		"classpath:ie/done/job/web/web/configurations/dao-context.xml",
+		"classpath:ie/done/job/web/web/configurations/security-context.xml",
+		"classpath:ie/done/job/web/test/config/datasource.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
+
 public class UserDaoTests {
 
 	@Autowired

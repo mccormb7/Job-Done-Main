@@ -8,54 +8,69 @@
 
 
 <sec:authorize access="hasRole('ROLE_TRADE')">
-<h1>Search for recommended Jobs within a desired distance</h1>
-<form action="journey" method="post">
-	Search: <input type="text" name="journeyString" /><br /> 
-	<input type="reset" /> <input type="submit" />
-</form>
+	<h1>Search for recommended Jobs within a desired distance</h1>
+	<form action="journey" method="post">
+		Search: <input type="text" name="journeyString" /><br /> <input
+			type="reset" /> <input type="submit" />
+	</form>
 </sec:authorize>
 
-
-
+<!--  
+<div class="inbox-head">
+		<h3>Inbox</h3>
+		<form action="#" class="pull-right position">
+			<div class="input-append">
+				<input type="text" class="sr-input" placeholder="Search Mail">
+				<button class="btn sr-btn" type="button">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+		</form>
+	</div>
+-->
 <c:choose>
-<c:when test="${hasRecommendation}">
-	<p>
-	<h1>Providers Recommendation Page</h1>
-	</p>
-	
-	<table class="table table-hover">
-		<tr>
-			<td>Name</td>
-			<td>   </td>
-			<td>Details</td>
-			<td>Distance</td>
-			<td>Date Posted</td>
-			<td>Description</td>
-			
-		</tr>
-	
-		<c:forEach var="jobpost" items="${recommend}">
+	<c:when test="${hasRecommendation}">
+		<p>
+		<h1>Providers Recommendation Page</h1>
+		</p>
+
+		<table class="table table-hover">
 			<tr>
-	
-				<td><c:out value="${jobpost.user.name}"></c:out></td>
-		
-				<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />" >View Job Post</a></td>
-				<td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
-				<td><c:out value="${jobpost.distance} KM"></c:out></td>
-				<td><c:out value="${jobpost.date} "></c:out></td>
-		
-				<td><c:out value="${jobpost.description}"></c:out></td>
-	
+				<td>Name</td>
+				<td></td>
+				<td>Details</td>
+				<td>Distance</td>
+				<td>Date Posted</td>
+				<td>Description</td>
+
 			</tr>
-		</c:forEach>
-	</table>
-	
-</c:when>
+
+			<c:forEach var="jobpost" items="${recommend}">
+				<tr>
+
+					<td><c:out value="${jobpost.user.name}"></c:out></td>
+
+					<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />">View
+							Job Post</a></td>
+					<td><a
+						href="<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+					<td><c:out value="${jobpost.distance} KM"></c:out></td>
+					<td><c:out value="${jobpost.date} "></c:out></td>
+
+					<td><c:out value="${jobpost.description}"></c:out></td>
+
+				</tr>
+			</c:forEach>
+		</table>
+
+	</c:when>
 	<c:otherwise>
 		<p>
-		<a>Based on your profile and cirteria, the system has not been able to determine any matches, try and update your profile with more relivant information or search jobs manuely</a>
-			<a href="${pageContext.request.contextPath}/profile">Profile</a>
-			<a href="${pageContext.request.contextPath}/">Browse All Jobs</a>
+			<a>Based on your profile and cirteria, the system has not been
+				able to determine any matches, try and update your profile with more
+				relivant information or search jobs manuely</a> <a
+				href="${pageContext.request.contextPath}/profile">Profile</a> <a
+				href="${pageContext.request.contextPath}/">Browse All Jobs</a>
 		</p>
 	</c:otherwise>
 
@@ -66,44 +81,54 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- goes to url and tries to download the data and pass it to the function -->
 <script type="text/javascript">
- 
-function messageCountLink(data){
-	$("#messageNumber").text(data.number);
-	
-}
-function pageLoad(){
-	pageUpdate();
-	window.setInterval(pageUpdate, 5000);
-	
-}
-function pageUpdate(){
-	
-	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+	function messageCountLink(data) {
+		$("#messageNumber").text(data.number);
 
-}
+	}
+	function pageLoad() {
+		pageUpdate();
+		window.setInterval(pageUpdate, 5000);
 
-$(document).ready(pageLoad);
+	}
+	function pageUpdate() {
+
+		$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+	}
+
+	$(document).ready(pageLoad);
 </script>
 
 <!-- goes to url and tries to download the data and pass it to the function -->
 <script type="text/javascript">
- 
-function messageCountLink(data){
-	$("#messageNumber").text(data.number);
-	
-}
-function pageLoad(){
-	pageUpdate();
-	window.setInterval(pageUpdate, 5000);
-	
-}
-function pageUpdate(){
-	
-	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+	function messageCountLink(data) {
+		$("#messageNumber").text(data.number);
 
-}
+	}
+	function pageLoad() {
+		pageUpdate();
+		window.setInterval(pageUpdate, 5000);
 
-$(document).ready(pageLoad);
+	}
+	function pageUpdate() {
+
+		$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+	}
+
+	$(document).ready(pageLoad);
 </script>

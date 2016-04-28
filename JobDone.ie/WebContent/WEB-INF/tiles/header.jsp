@@ -101,9 +101,11 @@
 		<sec:authorize access="isAuthenticated()">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<c:url value='/messageinbox'/>"><span
-						class="glyphicon glyphicon-envelope  fa-3x"></span> (<span class="badge"
+						class="glyphicon glyphicon-envelope  fa-2x"></span> (<span class="badge"
 						id="messageNumber">0</span>)</a></li>
+			
 		</sec:authorize>
+		
 
 		<ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="!isAuthenticated()">
@@ -120,7 +122,7 @@
 			<sec:authorize access="hasRole('ROLE_TRADE')">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><span
-						class="glyphicon glyphicon-user fa-3x"></span> <b class="caret"></b></a>
+						class="glyphicon glyphicon-user fa-2x"></span> <b class="caret"></b></a>
 
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value='/j_spring_security_logout'/>">Log
@@ -145,7 +147,7 @@
 			<sec:authorize access="hasRole('ROLE_USER')">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><span
-						class="glyphicon glyphicon-user fa-3x"></span> <b class="caret"></b></a>
+						class="glyphicon glyphicon-user fa-2x"></span> <b class="caret"></b></a>
 
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value='/j_spring_security_logout'/>">Log

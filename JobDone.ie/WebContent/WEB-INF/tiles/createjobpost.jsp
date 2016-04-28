@@ -146,6 +146,7 @@
 								<sf:option selected="selected" value="painter">Painter</sf:option>
 								<sf:option value="catering">Catering</sf:option>
 								<sf:option value="gardening">Gardening</sf:option>
+								<sf:option value="handyman">HandyMan</sf:option>
 
 							</sf:select>
 						</div>

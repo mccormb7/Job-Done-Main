@@ -6,7 +6,7 @@
 
 
 
-
+<!--  
 
 <sec:authorize access="hasRole('ROLE_USER')">
 <c:choose>
@@ -68,7 +68,7 @@
 <sec:authorize access="hasRole('ROLE_TRADE')">
 
 	<!-- user cant be recommended jobs unless the profile is filled out -->
-	<c:choose>
+<!--  <c:choose>
 	<c:when test="${hasProfile}">
 		<a href="<c:url value='/recommendationpro'/>">View your Recommended Jobs</a>
 

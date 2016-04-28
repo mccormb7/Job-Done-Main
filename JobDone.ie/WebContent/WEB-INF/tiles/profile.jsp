@@ -5,141 +5,179 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
+<c:choose>
+	<c:when test="${hasProfile}">
+		
+	
+
+
+
 
 <div class="container">
-      <div class="row">
-      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+	<div class="row">
+		<div class="col-md-5  toppad  pull-right col-md-offset-3 ">
 
-       <br>
-<p class=" text-info"></p>
-      </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-   
-   
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">${provider.user.username}</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src=${provider.internetpic} class="img-circle img-responsive"> </div>
-       
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="tableprofile table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Title:</td>
-                        <td>${provider.title}</td>
-                      </tr>
-                      <tr>
-                        <td>Experience</td>
-                        <td>${provider.experience}</td>
-                      </tr>
-                      <tr>
-                        <td>Qualifications</td>
-                        <td>${provider.qualifications}</td>
-                      </tr>
-                   
-                         <tr>
-                             <tr>
-                        <td>Gender</td>
-                        <td>${provider.gender}</td>
-                      </tr>
-                        <tr>
-                        <td>Address</td>
-                        <td>${provider.location}</td>
-                      </tr>
-                      <tr>
-                        <td>Message</td>
-                        <td><a href = "<c:url value='/message?uid=${provider.user.username}'/>">contact</a></td>
-                      </tr>
-                      <tr>
-                        <td>Email Directly</td>
-                        <td><a href = "<c:url value='/sendmail'/>">contact</a></td>
-                      </tr>
-                     
-                      
+			<br>
+			<p class=" text-info"></p>
+		</div>
+		<div
+			class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
 
-                     
-                    </tbody>
-                  </table>
-                  
-                </div>
-              </div>
-            </div>
-                 <div class="panel-footer">
-                 		   
-                        <a data-original-title="Send Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                    
-                    
-                        <span class="pull-right">
+
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">${provider.user.username}</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 col-lg-3 " align="center">
+							<img alt="User Pic" src=${provider.internetpic
+								} class="img-circle img-responsive">
+						</div>
+
+						<div class=" col-md-9 col-lg-9 ">
+							<table class="tableprofile table-user-information">
+								<tbody>
+									<tr>
+										<td>Title:</td>
+										<td>${provider.title}</td>
+									</tr>
+									<tr>
+										<td>Experience:</td>
+										<td>${provider.experience}</td>
+									</tr>
+									<tr>
+										<td>Qualifications:</td>
+										<td>${provider.qualifications}</td>
+									</tr>
+
+									<tr>
+									<tr>
+										<td>Gender:</td>
+										<td>${provider.gender}</td>
+									</tr>
+									<tr>
+										<td>Address:</td>
+										<td>${provider.location}</td>
+									</tr>
+									<tr>
+										<td>Message:</td>
+										<td><a
+											href="<c:url value='/message?uid=${provider.user.username}'/>">Message</a></td>
+									</tr>
+									<tr>
+
+										<td>Email Directly:</td>
+										<td><a
+											href="<c:url value='/emailform?uid=${provider.user.email}'/>">Email</a></td>
+									</tr>
+
+
+
+
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+
+					<a data-original-title="Send Message" data-toggle="tooltip"
+						type="button" class="btn btn-sm btn-primary"><i
+						class="glyphicon glyphicon-envelope"></i></a>
+
+
+					<!--       <span class="pull-right">
                             <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Edit Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                             <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Delete Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
-                        
-                        
-                    </div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  <script type="text/javascript">  
-  $(document).ready(function() {
-    var panels = $('.user-infos');
-    var panelsButton = $('.dropdown-user');
-    panels.hide();
+                      -->
 
-    //Click dropdown
-    panelsButton.click(function() {
-        //get data-for attribute
-        var dataFor = $(this).attr('data-for');
-        var idFor = $(dataFor);
+				</div>
 
-        //current button
-        var currentButton = $(this);
-        idFor.slideToggle(400, function() {
-            //Completed slidetoggle
-            if(idFor.is(':visible'))
-            {
-                currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
-            }
-            else
-            {
-                currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
-            }
-        })
-    });
+			</div>
+		</div>
+	</div>
+</div>
+
+</c:when>
+	<c:otherwise>
+		
+		
+		<div class="inner-bg">
+		
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3 form-box">
+				<div class="form-top">
+				<font size="6" color="white">Create Profile to get recommendations</font>
+					<div class="form-top-center">
+					
+					<a class="btn btn-primary btn-lg" role="button" href="${pageContext.request.contextPath}/createprofile">Create here</a>	
+					</div>
+					
+				</div>
+		</div>
+		</div>
+	</div>
+	</c:otherwise>
+</c:choose>
 
 
-    $('[data-toggle="tooltip"]').tooltip();
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						var panels = $('.user-infos');
+						var panelsButton = $('.dropdown-user');
+						panels.hide();
 
-    $('button').click(function(e) {
-        e.preventDefault();
-        alert("This is a demo.\n :-)");
-    });
-});
-    
+						//Click dropdown
+						panelsButton
+								.click(function() {
+									//get data-for attribute
+									var dataFor = $(this).attr('data-for');
+									var idFor = $(dataFor);
+
+									//current button
+									var currentButton = $(this);
+									idFor
+											.slideToggle(
+													400,
+													function() {
+														//Completed slidetoggle
+														if (idFor
+																.is(':visible')) {
+															currentButton
+																	.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
+														} else {
+															currentButton
+																	.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
+														}
+													})
+								});
+
+						$('[data-toggle="tooltip"]').tooltip();
+
+					});
 </script>
 
 <!-- goes to url and tries to download the data and pass it to the function -->
 <script type="text/javascript">
- 
-function messageCountLink(data){
-	$("#messageNumber").text(data.number);
-	
-}
-function pageLoad(){
-	pageUpdate();
-	window.setInterval(pageUpdate, 5000);
-	
-}
-function pageUpdate(){
-	
-	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+	function messageCountLink(data) {
+		$("#messageNumber").text(data.number);
 
-}
+	}
+	function pageLoad() {
+		pageUpdate();
+		window.setInterval(pageUpdate, 5000);
 
-$(document).ready(pageLoad);
+	}
+	function pageUpdate() {
+
+		$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+	}
+
+	$(document).ready(pageLoad);
 </script>

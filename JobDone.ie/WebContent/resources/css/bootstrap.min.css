@@ -193,7 +193,8 @@ table {
 }
 
 td, th {
-	padding: 0
+	padding: 3px;
+	font-size: 17px;
 }
 	/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -1483,7 +1484,8 @@ hr {
 }
 
 .h1, h1 {
-	font-size: 36px
+	font-size: 50px;
+	font-style: bold;
 }
 
 .h2, h2 {
@@ -2610,7 +2612,7 @@ th {
 	line-height: 1.6;
 	vertical-align: center;
 	border-top: 1px solid #ddd;
-	font-size: 30px;
+	font-size: 20;
 	border-spacing: 20px;
 }
 
