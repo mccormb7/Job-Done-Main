@@ -83,12 +83,14 @@ public class GenerateTestData {
 			"blygh@hotmail.com", true, "ROLE_USER");
 	private User user4 = new User("Tradetest2", "Blygh McCormack", "password",
 			"trade@hotmail.com", true, "ROLE_TRADE");
+	
 	private User user5 = new User("blyghtest2", "Blygh McCormack", "password",
 			"blygh@hotmail.com", true, "ROLE_USER");
 
 	// private JobPost jobPost4 = new JobPost(user1, "title", "domain",
 	// "description", "location2", 20);
 
+	
 	private JobPost jobPost1 = new JobPost(
 			user2,
 			"French",
@@ -130,11 +132,17 @@ public class GenerateTestData {
 	private Provider pro2 = new Provider("Garderner",
 			"have been cutting lawns for over 5 years", "handyman",
 			"Weed killer spray course", "male", "Sligo, Ireland", 40);
+	
+	private User userMain = new User("tradeBill", "Bill fallow", "password",
+			"bill@hotmail.com", true, "ROLE_TRADE");
 
-	private Provider pro3 = new Provider(user4, "Cook for rent",
-			"have been cooking for over 5 years", "catering",
-			"First aid. Degree in culinary arts", "male",
-			"3 Knights Bridge, Clontarf", 40);
+
+	private Provider providerMain = new Provider(userMain, "Experienced Painter",
+			"Spent sixteen years in the decorating trade. large projects restoration.", "painter",
+			"Completed an NVQ level 3 in Painting and Decorating", "male",
+			"3 Crestfield Road, Whitehall, Ireland", 40);
+	
+	
 
 	@Before
 	public void init() {
@@ -179,56 +187,50 @@ public class GenerateTestData {
 
 	@Test
 	public void fillDatabase() throws IOException {
-		// //private JobPost jobPost4 = new JobPost(user1, "title", "domain",
-		// "description", "location2", 20);
-		// private User user1 = new User("blyghtest", "Blygh McCormack",
-		// "password",
-		// "blygh@hotmail.com", true, "ROLE_USER");
-		// random username
-		// --addres from dublin 1-18
-		//"C:\\Users\\User\\Desktop\\college 4th\\dbimage\\test.jpg")
-		
-	/*	Scanner s = new Scanner(new File("C:\\Users\\User\\Desktop\\college 4th\\ProjectTestData\\tempTest.txt"));
-		//title, description, domain, price, location , date
-		ArrayList<String> details = new ArrayList<String>();
-		while (s.hasNext()){
-		    details.add(s.next());
-		    
-		    System.out.println(details.toString());
-		}
-		s.close();*/
+
 		
 		List<String> details = Files.readAllLines(Paths.get("C:\\Users\\User\\Desktop\\college 4th\\ProjectTestData\\tempTest.txt"), StandardCharsets.UTF_8);
-		//String[] a = list.toArray(new String[list.size()]); 
-		//System.out.println(list.toString());
-		
-		String [] domains = {"painter","catering","gardening","handyman"};
-		String [] tasks = {"assignment","duty","task","job","gig","business","work", "project"};
-		Random randNum = new Random();
+//		
+//		String [] domains = {"painter","catering","gardening","handyman"};
+//		String [] tasks = {"assignment","duty","task","job","gig","business","work", "project"};
+//		Random randNum = new Random();
 	
+		//user1, "title", "domain",
+		// "description", "location2", 20);
+		
 		usersDao.create(user2);
+		usersDao.create(userMain);
 		for(int j= 0;j <= details.size()-5;j=j+5){
 			//str.replace(/#|_/g,'');
 			String costValue = details.get(j+3).replaceAll("€", "").replaceAll(",", "");
+			
 			Double cost = Double.parseDouble(costValue);
-			JobPost jobPost = new JobPost(user2,
-					details.get(j), details.get(j+2),details.get(j+1), details.get(j+4), cost);
+			String title = details.get(j);
+			String domain = details.get(j+2).split("\\/", 2)[0];
+			String description = details.get(j+1);
+			String location = details.get(j+4);
+			
+			System.out.println( domain  + "---------------------");
+			JobPost jobPost = new JobPost(user2,title, domain,description, location, cost);
 			System.out.println(jobPost.toString() + "----------jobpost-----------");
 			jobPostsDao.saveOrUpdate(jobPost);
 		}
 		
+		providerDao.saveOrUpdate(providerMain);
+	
+	}
 		
 		
 		
 		
-		for(int i = 0;i< 100;i ++){
+		/*for(int i = 0;i< 100;i ++){
 			String username = generateName();
 			String usertemp = "usertempadded ";
 			/*int idD = new Random().nextInt(domains.length-1);
 			int idT = new Random().nextInt(tasks.length-1);
 			String randomDomain = (domains[idD]);
 			String randomTask = (domains[idT]);
-			*/
+			
 			  int randomDomain = (int) (Math.random() * domains.length);
 			  int randomTask = (int) (Math.random() * tasks.length);
 	          System.out.print(domains[randomDomain]);
@@ -252,7 +254,7 @@ public class GenerateTestData {
 			//jobPostsDao.saveOrUpdate(jobPost);
 			//System.out.println(jobPost.toString());
 		} 
+		*/
 
-	}
 
 }

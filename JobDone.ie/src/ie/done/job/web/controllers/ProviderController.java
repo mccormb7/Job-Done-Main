@@ -3,6 +3,7 @@ package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.FormValidationGroup;
 import ie.done.job.web.dao.JobPost;
+
 import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.JobPostModel;
 import ie.done.job.web.dao.JobPostsDao;
@@ -59,6 +60,8 @@ public class ProviderController {
 	
 	private ProviderDao providerDao;
 	
+	@Autowired
+	private JobPostService jobPostService;
 	
 	
 	
@@ -137,10 +140,22 @@ public class ProviderController {
 		if (provider == null) {
 			provider = new Provider();
 		}
-
+		List<JobPost> allJobPosts = jobPostService.getCurrent();
+		
+		List<String> domainList = new ArrayList<>();
+		
+		for (int i = 0; i < allJobPosts.size(); i++) {
+			System.out.println(allJobPosts.get(i)+ "---------------------------------");
+			domainList.add(allJobPosts.get(i).getDomain());
+			 
+		}
+		
+		model.addAttribute("domainList", domainList);
+		
 		model.addAttribute("provider", provider);
 
 		return "createprofile";
+		
 	}
 	
 	@RequestMapping("/searchprovider")
@@ -164,10 +179,19 @@ public class ProviderController {
 			// used to create jobPost in DB
 			provider.getUser().setUsername(username);
 			System.out.println(provider.getUser() + "-----------------");
-			providerService.saveOrUpdate(provider);
-			//model.addAttribute("docreatejob", new JobPostModel());
-			//jobPostsDao.addBookToDB(jobInfo.getJobDescription(), jobInfo.getJobDomain(), jobInfo.getJobTitle());
+			char comma = provider.getDomain().charAt(0);
+			//remove comma if added
 			
+			if((provider.getDomain().length()>3 &&provider.getDomain().charAt(0) == ',')||(provider.getDomain().charAt(1)== ',')){
+				provider.setDomain(provider.getDomain().substring(2));
+				System.out.println("===================================" +provider.getDomain() );
+				providerService.saveOrUpdate(provider);
+			}else{
+				System.out.println("++++++++++++++++++++++++++=" +provider.getDomain() );
+				providerService.saveOrUpdate(provider);
+			}
+			
+		
 			return "profile";
 		}
 		else {

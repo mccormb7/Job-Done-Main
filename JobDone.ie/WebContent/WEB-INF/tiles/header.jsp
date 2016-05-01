@@ -129,6 +129,8 @@
 								out</a></li>
 						<li><a href="<c:url value='/settings'/>">settings</a></li>
 						<li><a href="<c:url value='/profile'/>">View your profile</a></li>
+						<li><a href="<c:url value='/createprofile'/>">Edit Profile</a></li>
+						<li><a href="<c:url value='/'/>">Home</a></li>
 							<c:choose>
 							<c:when test="${hasProfile}">
 								<li><a href="<c:url value='/recommendationpro'/>">View your Recommended Jobs</a></li>

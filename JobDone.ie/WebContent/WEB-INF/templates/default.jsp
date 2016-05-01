@@ -3,17 +3,28 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html> 
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title><tiles:insertAttribute name="title"></tiles:insertAttribute></title>
 
 
 
+<link href="${pageContext.request.contextPath}/static/css/gridTable.css"
+	rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/static/js/filterTable.js"></script>
+	
+
 <link href="${pageContext.request.contextPath}/static/css/main.css"
 	rel="stylesheet" type="text/css" />
 	
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/script/jquery.js"></script>
+	
+	
 	
 	
 	<!-- TimeLine Core CSS -->

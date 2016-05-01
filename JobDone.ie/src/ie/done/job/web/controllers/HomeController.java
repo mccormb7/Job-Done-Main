@@ -2,11 +2,9 @@ package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
-import ie.done.job.web.dao.Offer;
 import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.web.service.JobPostService;
-import ie.done.job.web.web.service.OffersService;
 import ie.done.job.web.web.service.ProviderService;
 
 import java.security.Principal;
@@ -42,6 +40,12 @@ public class HomeController {
 
 		//List<Offer> offers = offersService.getCurrent();
 		List<JobPost> jobposts = jobPostService.getCurrent();
+		for (int i = 0; i < jobposts.size(); i++) {
+			System.out.println(jobposts.get(i).toString()+ "---------------------------------");
+			//domainList.add(allJobPosts.get(i).getDomain());
+			 
+		}
+		
 		model.addAttribute("jobposts1", jobposts);
 		//only allow one offer
 		

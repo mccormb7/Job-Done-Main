@@ -214,13 +214,14 @@ public class JobPostsController {
 		if(delete == null) {
 			// need to suppy username when jobPost is created
 			String username = principal.getName();
+			
 			// used to create jobPost in DB
 			jobPost.getUser().setUsername(username);
 			System.out.println(jobPost.getUser() + "-----------------");
-			jobPostsService.saveOrUpdate(jobPost);
-			//model.addAttribute("docreatejob", new JobPostModel());
-			//jobPostsDao.addBookToDB(jobInfo.getJobDescription(), jobInfo.getJobDomain(), jobInfo.getJobTitle());
 			
+			
+			jobPostsService.saveOrUpdate(jobPost);
+	
 			return "offercreated";
 		}
 		else {

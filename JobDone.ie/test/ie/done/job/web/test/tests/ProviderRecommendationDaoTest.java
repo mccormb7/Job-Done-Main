@@ -8,6 +8,7 @@ import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.ProviderDao;
+import ie.done.job.web.dao.ProviderRecommendationDao;
 import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
 
@@ -32,7 +33,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 		"classpath:ie/done/job/web/web/configurations/security-context.xml",
 		"classpath:ie/done/job/web/test/config/datasource.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ProviderDaoTest {
+public class ProviderRecommendationDaoTest {
 
 	@Autowired
 	private JobPostsDao jobPostsDao;
@@ -45,9 +46,11 @@ public class ProviderDaoTest {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private ProviderRecommendationDao providerRecommendationDao;
 
-	
-	
+
 	
 	
 	
@@ -122,130 +125,51 @@ public class ProviderDaoTest {
 
 	
 	@Test
-	public void testCreateRetrieveProfile() {
+	public void testAddSynonymAndRemoveStopWords(){
 		
-		usersDao.create(user5);
-		usersDao.create(user6);
-		usersDao.create(user7);
+		String testSentance = " Building and painter for a house";
+		String testSentance2 = " Handyman in the area";
 		
+		List<String> splitList = providerRecommendationDao.splitStringasList(testSentance);
+		List<String> splitList2 = providerRecommendationDao.splitStringasList(testSentance2);
+		List<String> synList = providerRecommendationDao.addSynonymToSearch(splitList);
+		List<String> synList2 = providerRecommendationDao.addSynonymToSearch(splitList2);
+		
+		assertEquals("List should have 29 available synonym's in List", 29, synList.size());
+		assertEquals("List should have 15 available synonym's in List", 15, synList2.size());
+
 				
-		//providerDao.saveOrUpdate(pro1);
-		providerDao.saveOrUpdate(pro2);
-		providerDao.saveOrUpdate(pro3);
 		
-		List<Provider> providerRet1 = providerDao.getProviders();
-		
-		assertEquals("2 Provider Profiles in List", 2, providerRet1.size());
-		assertEquals("Provider should match", pro2, providerRet1.get(0));
-		
-	
-		
-	}
-
-	
-	
-	@Ignore
-	public void testDeleteProfile() {
-		usersDao.create(user5);
-		usersDao.create(user6);
-		usersDao.create(user7);
-		
-		providerDao.saveOrUpdate(pro2);
-		providerDao.saveOrUpdate(pro3);
-
-		Provider ret1 = providerDao.getProvider(pro2.getId());
-		assertNotNull("Provider with ID " + ret1.getId() + " should not be null", ret1);
-		
-		providerDao.delete(pro2.getId());
-		assertNotNull("Provider with ID " + ret1.getId() + " should be deleted", ret1);
-	}
-	
-	
-	@Test
-	public void testGetProviderById() {
-		
-		
-		usersDao.create(user5);
-		usersDao.create(user6);
-		usersDao.create(user7);
-		
-		providerDao.saveOrUpdate(pro2);
-		providerDao.saveOrUpdate(pro3);
-		
-		
-		Provider retrieved1 = providerDao.getProvider(pro2.getId());
-		assertEquals("Profile should match", pro2, retrieved1);
-			
-	
-	}
-
-
-	@Test
-	public void testEditProfile() {
-		
-		usersDao.create(user5);
-		usersDao.create(user6);
-		usersDao.create(user7);
-		
-		providerDao.saveOrUpdate(pro2);
-		providerDao.saveOrUpdate(pro3);
-	
-		
-		Provider before = providerDao.getProvider(pro2.getId());
-		
-		pro2.setTitle("German Grinds");
-		pro2.setPrice(10);
-		providerDao.saveOrUpdate(pro2);
-		
-		Provider after = providerDao.getProvider(pro2.getId());
-		
-		assertNotEquals("Retrieved Profile should not be updated", pro2,before);
-		assertEquals("Retrieved Profile should be updated", pro2, after);
-		
-	
-	
-	}
-
-	@Test
-	public void testGetProviderByUsername() {
-		usersDao.create(user5);
-		usersDao.create(user6);
-		usersDao.create(user7);
-		
-		providerDao.saveOrUpdate(pro2);
-		providerDao.saveOrUpdate(pro3);
-						
-		List<Provider> providerRet1 = providerDao.getProviders(user6.getUsername());
-		assertEquals("Should be One profile", 1, providerRet1.size());
-		
-
 	}
 	
 	@Test
-	public void testSearchForProvider() throws Exception{
-		usersDao.create(user5);
-		usersDao.create(user6);
-		usersDao.create(user7);
-		usersDao.create(user8);
-		usersDao.create(user1);
+	public void testLongLatPosition() throws Exception{
+		String address = "8 Crestfield Ave, Whitehall, Dublin 9";
+		String address2 = "53 Belmont Ave, Dublin 4";
 		
-		providerDao.saveOrUpdate(pro2);
-		providerDao.saveOrUpdate(pro3);
-		providerDao.saveOrUpdate(pro4);
+		String [] location  = providerRecommendationDao.getLatLongPositions(address);
+		String [] location2  = providerRecommendationDao.getLatLongPositions(address2);
+
+		assertEquals("Should be the same value returned", "53.3860672", location[0]);
+		assertEquals("Should be the same value returned", "-6.2512838", location[1]);
 		
-		jobPostsDao.saveOrUpdate(jobPost);
-		
-		String searchTextPro = "Painter";
-		
-		List<Provider> searchResults = providerDao.searchForProvider(searchTextPro);
-		assertEquals("Should be One result returned", 1, searchResults.size());
-		
-		searchTextPro = "Builder";
-		List<Provider> searchResults2 = providerDao.searchForProvider(searchTextPro);
-		assertEquals("Should be two results returned", 2, searchResults2.size());
+		assertEquals("Should be the same value returned", "53.3213100", location2[0]);
+		assertEquals("Should be the same value returned", "-6.2401419", location2[1]);
+		System.out.println(location.length + "----length");
 		
 	}
-	
 
+	@Test 
+	public void testDistance(){
+		
+		
+		Double lat1 = Double.parseDouble("53.3860672");
+		Double long1 = Double.parseDouble("-6.2512838");
+		Double lat2 = Double.parseDouble("53.3213100");
+		Double long2 = Double.parseDouble("-6.2401419");
+		Double knownDistance = 4.5;
+		Double distance =providerRecommendationDao.distance(lat1, long1, lat2, long2, "k");
+		assertEquals("Should be the same value returned", knownDistance, distance);
+	}
 }
 

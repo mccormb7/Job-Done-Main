@@ -7,20 +7,16 @@
 
 
 <h1> List of Job Posts </h1>
-<table class="table table-hover" >
+<table class="table table-hover" id ="table6" >
 	
-	<thead>
-		<tr class="danger">
+	<thead >
+		<tr class="danger" font-size= "7px">
 		
-			<td>Name</td>
-			<td>   </td>
-			
-			<td>Details</td>
+			<td>Name:</td>
+			<td>Details:</td>
 			<td></td>
-			<td>   </td>
-			<td></td>
-			<td></td>
-			<td>Description</td>	
+		
+			<td>Title:</td>	
 		</tr>
 	</thead>
 
@@ -28,12 +24,10 @@
 		<tr class="info">
 			<td><c:out value="${jobpost.user.name}"></c:out></td>
 
-			<td></td>
-			<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />" >View </a></td>
-			<td></td>
-			<td><a href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
-			<td></td>
-			<td><a href = "<c:url value='/emailform?uid=${jobpost.user.email}'/>">Email</a></td>
+			<td><a class="btn btn-success" href="<c:url value='/viewjobpost/${jobpost.id}' />" >View </a></td>
+	
+			<td><a  class="btn btn-primary" href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+
 			
 			<td><c:out value="${jobpost.title}"></c:out></td>
 	
@@ -59,15 +53,18 @@
 		<tr>
 			<td><img style= "display:block; " width="100%" height="100%" src="${provider.internetpic}" /></td>
 			<td><c:out value="${provider.user.name}"></c:out></td>
-			<td><a href="<c:url value='/viewprofile/${provider.id}' />" >View Profile</a></td>
-			<td><a href = "<c:url value='/message?uid=${provider.user.username}'/>">contact</a></td>
+			<td><a class="btn btn-success" href="<c:url value='/viewprofile/${provider.id}' />" >View Profile</a></td>
+			<td><a class="btn btn-primary" href = "<c:url value='/message?uid=${provider.user.username}'/>">contact</a></td>
 	
 			<td><c:out value="${provider.experience}"></c:out></td>
 
 		</tr>
 	</c:forEach>
 </table>
-</p>
+
+
+
+
 
 <!-- goes to url and tries to download the data and pass it to the function -->
 <script type="text/javascript">
@@ -89,3 +86,19 @@ function pageUpdate(){
 
 $(document).ready(pageLoad);
 </script>
+
+<script>
+//<![CDATA[  
+  var table6_Props =  {  
+                  paging: true,  
+                  paging_length: 10,  
+                  rows_counter: true,  
+                  rows_counter_text: "Rows:",  
+                  btn_reset: true,  
+                  loader: true,  
+                  loader_text: "Filtering data..."  
+              };  
+  var tf6 = setFilterGrid( "table6",table6_Props );  
+//]]>  
+</script>  
+

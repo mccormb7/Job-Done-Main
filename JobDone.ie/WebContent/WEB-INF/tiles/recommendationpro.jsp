@@ -7,53 +7,59 @@
 
 
 
-<sec:authorize access="hasRole('ROLE_TRADE')">
-	<h1>Search for recommended Jobs within a desired distance</h1>
-	<form action="journey" method="post">
-		Search: <input type="text" name="journeyString" /><br /> <input
-			type="reset" /> <input type="submit" />
-	</form>
-</sec:authorize>
 
-<!--  
-<div class="inbox-head">
-		<h3>Inbox</h3>
-		<form action="#" class="pull-right position">
-			<div class="input-append">
-				<input type="text" class="sr-input" placeholder="Search Mail">
-				<button class="btn sr-btn" type="button">
-					<i class="fa fa-search"></i>
-				</button>
-			</div>
-		</form>
+
+<div class="inner-bg">
+		
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3 form-box">
+				<div class="form-top">
+				<font size="6" color="white">Recommended Tasks and JobPosts</font>
+					<div class="form-top-center">
+					&nbsp;
+					&nbsp;
+					&nbsp;
+					&nbsp;
+					<sec:authorize access="hasRole('ROLE_TRADE')">
+						<form action="journey" method="post">
+							<font size="3" color="white">Set Max Distance: </font>
+							 <input type="text" name="journeyString" /><br />
+							 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp
+							 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+							 <input type="reset" /> <input type="submit" />
+						</form>
+					</sec:authorize>
+				</div>
+					
+				</div>
+		</div>
+		</div>
 	</div>
--->
 <c:choose>
 	<c:when test="${hasRecommendation}">
-		<p>
-		<h1>Providers Recommendation Page</h1>
-		</p>
+
 
 		<table class="table table-hover">
-			<tr>
+		<thead>
+			<tr  class="danger" >
 				<td>Name</td>
 				<td></td>
-				<td>Details</td>
+				<td></td>
 				<td>Distance</td>
 				<td>Date Posted</td>
 				<td>Description</td>
 
 			</tr>
-
+		</thead>
+		<tbody>
 			<c:forEach var="jobpost" items="${recommend}">
 				<tr>
 
 					<td><c:out value="${jobpost.user.name}"></c:out></td>
 
-					<td><a href="<c:url value='/viewjobpost/${jobpost.id}' />">View
+					<td><a class="btn btn-success" href="<c:url value='/viewjobpost/${jobpost.id}' />">View
 							Job Post</a></td>
-					<td><a
-						href="<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+					<td><a class="btn btn-primary" href="<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
 					<td><c:out value="${jobpost.distance} KM"></c:out></td>
 					<td><c:out value="${jobpost.date} "></c:out></td>
 
@@ -61,6 +67,7 @@
 
 				</tr>
 			</c:forEach>
+			</tbody>
 		</table>
 
 	</c:when>

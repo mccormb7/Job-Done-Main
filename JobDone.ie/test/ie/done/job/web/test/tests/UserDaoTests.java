@@ -41,13 +41,17 @@ public class UserDaoTests {
 	private User user4 = new User("rogerblake", "Rog Blake", "liberator",
 			"rog@caveofprogramming.com", false, "user");
 
-	@Before
-	public void init() {
-		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
 
-		jdbc.execute("delete from offers");
-		jdbc.execute("delete from messages");
-		jdbc.execute("delete from users");
+		@Before
+		public void init() {
+			JdbcTemplate jdbc = new JdbcTemplate(dataSource);
+
+			// jdbc.execute("delete from offers");
+			jdbc.execute("delete from provider");
+			jdbc.execute("delete from jobposts");
+
+			jdbc.execute("delete from messages");
+			jdbc.execute("delete from users");
 	}
 	
 	@Test
@@ -77,5 +81,24 @@ public class UserDaoTests {
 		
 		assertTrue("User should exist.", usersDao.exists(user2.getUsername()));
 		assertFalse("User should not exist.", usersDao.exists("xkjhsfjlsjf"));
+	}
+
+	@Test
+	public void testGetByUsername() {
+		usersDao.create(user1);
+		usersDao.create(user2);
+		usersDao.create(user3);
+		User temp = usersDao.getUser("johnwpurcell");
+		assertEquals("Should be the same user object", user1, temp);
+		
+	}
+	
+	@Test 
+	public void testEnabled(){
+		usersDao.create(user1);
+		usersDao.create(user4);
+		assertTrue("User should be enabled.", user1.isEnabled());
+		assertFalse("User should be not be enabled.", user4.isEnabled());
+		
 	}
 }

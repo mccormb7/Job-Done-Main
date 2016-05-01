@@ -33,7 +33,7 @@ public class EmailVerificationDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<EmailVerification> getAllToken (String username) {
+	public List<EmailVerification> getAllToken () {
 		return session().createQuery("from EmailVerification").list();
 	}
 
@@ -43,7 +43,6 @@ public class EmailVerificationDao {
 	}
 	
 	public EmailVerification getToken(String token) {
-		
 		Criteria crit = session().createCriteria(EmailVerification.class);
 		crit.add(Restrictions.idEq(token));
 		return (EmailVerification)crit.uniqueResult();

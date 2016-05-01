@@ -83,7 +83,7 @@ public class UsersDao {
 	}
 	
 	
-
+/*
 	public User getUserSendTo(String email) {
 		Criteria crit = session().createCriteria(User.class);
 		crit.add(Restrictions.idEq(email));
@@ -94,7 +94,7 @@ public class UsersDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 	public void enabled(User user) {
 		user.setEnabled(true);
 		session().saveOrUpdate(user);

@@ -175,21 +175,7 @@ public class JobPostsDao {
 		return crit.list();
 	}
 
-	// ////////////////////////////Fucntiomn to perform search///////////////
-	@SuppressWarnings("unchecked")
-	public List<JobPost> searchForJobtemp(String text) {
-
-		Criteria crit = session().createCriteria(JobPost.class);
-		crit.add(Restrictions.eq("username", "%" + text + "%"));
 	
-		return crit.list();
-	}
-
-	/*
-	 * Criteria cri = session().createCriteria(User.class);
-	 * cri.add(Restrictions.eq("email", email)); User user = (User)
-	 * cri.uniqueResult();
-	 */
 
 	public void saveOrUpdate(JobPost JobPost) {
 		Date currentDate = new Date();

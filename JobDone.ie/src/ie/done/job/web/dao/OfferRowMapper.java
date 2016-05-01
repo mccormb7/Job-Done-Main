@@ -5,10 +5,16 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class OfferRowMapper implements RowMapper<Offer> {
+public class OfferRowMapper implements RowMapper<JobPost> {
 
 	@Override
-	public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public JobPost mapRow(ResultSet rs, int rowNum) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+/*
+	@Override
+	public JobPost mapRow(ResultSet rs, int rowNum) throws SQLException {
 		User user = new User();
 		user.setAuthority(rs.getString("authority"));
 		user.setEmail(rs.getString("email"));
@@ -16,12 +22,12 @@ public class OfferRowMapper implements RowMapper<Offer> {
 		user.setName(rs.getString("name"));
 		user.setUsername(rs.getString("username"));
 
-		Offer offer = new Offer();
+		JobPost offer = new JobPost();
 		offer.setId(rs.getInt("id"));
 		offer.setText(rs.getString("text"));
 		offer.setUser(user);
 
 		return offer;
 	}
-
+*/
 }

@@ -13,9 +13,9 @@
 
 <c:choose>
 	<c:when test="${hasPostedJob}">
-		<p>
-			<a> Edit or delete your current job posts </a>
-		</p>
+
+
+
 
 		<table class="table table-hover">
 			<thead>

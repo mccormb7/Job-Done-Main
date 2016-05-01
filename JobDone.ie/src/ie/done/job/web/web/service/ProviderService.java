@@ -1,7 +1,7 @@
 package ie.done.job.web.web.service;
 
 import ie.done.job.web.dao.Provider;
-import ie.done.job.web.dao.OffersDao;
+
 import ie.done.job.web.dao.ProviderDao;
 
 import java.util.List;

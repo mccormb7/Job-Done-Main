@@ -8,7 +8,10 @@ body {
     text-align: center;
 }
 
-strong { font-weight: 500; }
+strong
+ { font-weight: 500;
+ 	font-size: xx-large;
+ }
 
 a, a:hover, a:focus {
 	color: #de615e;

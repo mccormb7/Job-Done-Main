@@ -42,6 +42,16 @@ public class MessagesDao {
 
 		return crit.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Message> getMessagesFromUser(String username, String fromuser) {
+		Criteria crit = session().createCriteria(Message.class);
+
+		crit.add(Restrictions.eq("username", username)).add(Restrictions.eq("fromuser", fromuser));
+
+		return crit.list();
+	}
+	
 
 	public void saveOrUpdate(Message message) {
 		System.out.println(message);

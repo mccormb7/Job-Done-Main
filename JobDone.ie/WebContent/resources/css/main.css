@@ -125,10 +125,12 @@
 	border-top-left-radius:3px;
 }.CSSTableGenerator table{
     border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
+    border-spacing: 0;
+    margin-left:auto; 
+    margin-right:auto;
+	width:80%;
 	height:100%;
-	margin:0px;padding:0px;
+	padding-left:100px;
 }.CSSTableGenerator tr:last-child td:last-child {
 	-moz-border-radius-bottomright:3px;
 	-webkit-border-bottom-right-radius:3px;

@@ -127,12 +127,8 @@ public class ProviderRecommendationDao {
 			
 			//finds all possible synonyms of each line of split details
 			if (synsets.length > 0){
-//				System.out.println("The following synsets contain '" +
-//						splitDetails.get(k) + "' or a possible base form " +
-//						"of that text:");
 				
 				for (int i = 0; i < synsets.length; i++){
-				//	System.out.println("");
 					String[] wordForms = synsets[i].getWordForms();
 					
 					for (int j = 0; j < wordForms.length; j++){

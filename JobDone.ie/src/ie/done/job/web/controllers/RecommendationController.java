@@ -151,31 +151,6 @@ public class RecommendationController {
 		*/
 			
 	}
-	/*
-	private static Map<JobPost, Integer> sortByComparator(Map<JobPost, Integer> unsortMap) {
-
-		// Convert Map to List
-		List<Map.Entry<JobPost, Integer>> list = 
-			new LinkedList<Map.Entry<JobPost, Integer>>(unsortMap.entrySet());
-
-		// Sort list with comparator, to compare the Map values
-		Collections.sort(list, new Comparator<Map.Entry<JobPost, Integer>>() {
-			public int compare(Map.Entry<JobPost, Integer> o1,
-                                           Map.Entry<JobPost, Integer> o2) {
-				return (o1.getValue()).compareTo(o2.getValue());
-			}
-		});
-
-		// Convert sorted map back to a Map
-		Map<JobPost, Integer> sortedMap = new LinkedHashMap<JobPost, Integer>();
-		for (Iterator<Map.Entry<JobPost, Integer>> it = list.iterator(); it.hasNext();) {
-			Map.Entry<JobPost, Integer> entry = it.next();
-			sortedMap.put(entry.getKey(), entry.getValue());
-		}
-		return sortedMap;
-	}
-	
-	*/
 
 	
 	
@@ -184,7 +159,7 @@ public class RecommendationController {
 	public String createJobPost(Model model, Principal principal) throws Exception {
 		
 		Provider provider = null;
-		Double radius = 10.0;
+		Double radius = 300.0;
 		
 		if (principal != null) {
 			String username = principal.getName();
@@ -283,6 +258,7 @@ public class RecommendationController {
 			System.out.println("DESCRITPION -> " + uniqueListDistance.get(i).getDescription());
 			System.out.println("Location -> " + uniqueListDistance.get(i).getLocation());
 		}
+		
 		boolean hasRecommendation = true;
 		if(uniqueListDistance.size()<1){
 			hasRecommendation = false;

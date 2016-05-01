@@ -57,6 +57,17 @@
 	});
 </script>
 
+<script type="text/javascript">
+function CheckColors(val){
+ var element=document.getElementById('color');
+ if(val=='pick a color'||val==' ')
+   element.style.display='block';
+ else  
+   element.style.display='none';
+}
+
+</script> 
+
 
 
 <!-- title, domain, description, photo, location. price -->
@@ -142,15 +153,15 @@
 							<div class="form-group">
 							<b><font size="6">Domain:</font></b>
 								<label class="sr-only" for="form-role">Domain</label>
-								<sf:select type="text" path="domain" name="domain"
+								<sf:select onchange='CheckColors(this.value);' type="text" path="domain" name="domain"
 									placeholder="Email.." class="form-role form-control"
 									id="form-role">
-									<sf:option value="grinds">Grinds</sf:option>
-									<sf:option selected="selected" value="painter">Painter</sf:option>
-									<sf:option value="catering">Catering</sf:option>
-									<sf:option value="gardening">Gardening</sf:option>
-
+									<sf:option value="" label="Select Domain available" />
+									<sf:options items="${domainList}" path="domain" name="domain" />
+									<sf:option value=" ">Other</sf:option>
 								</sf:select>
+								
+								<input type="text" name="domain" id="color" style='display:none;'/>
 							</div>
 							<div class="error">
 								<sf:errors path="domain"></sf:errors>

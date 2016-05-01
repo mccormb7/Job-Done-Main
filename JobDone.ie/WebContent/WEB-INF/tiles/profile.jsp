@@ -5,12 +5,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
-<c:choose>
-	<c:when test="${hasProfile}">
-		
-	
-
-
 
 
 <div class="container">
@@ -31,8 +25,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-3 col-lg-3 " align="center">
-							<img alt="User Pic" src=${provider.internetpic
-								} class="img-circle img-responsive">
+							<img alt="User Pic" src=${provider.internetpic} class="img-circle img-responsive">
 						</div>
 
 						<div class=" col-md-9 col-lg-9 ">
@@ -101,9 +94,7 @@
 	</div>
 </div>
 
-</c:when>
-	<c:otherwise>
-		
+
 		
 		<div class="inner-bg">
 		
@@ -120,8 +111,7 @@
 		</div>
 		</div>
 	</div>
-	</c:otherwise>
-</c:choose>
+	
 
 
 <script type="text/javascript">
