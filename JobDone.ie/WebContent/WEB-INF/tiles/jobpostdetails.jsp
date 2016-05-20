@@ -56,7 +56,8 @@
                       </tr>
                       <tr>
                         <td>Email Directly</td>
-                        <td><a href = "<c:url value='/sendmail'/>">contact</a></td>
+                        
+                        <td><a href="<c:url value='/emailform?uid=${jobpost.user.email}'/>">Email</a></td>
                       </tr>
                      
                       

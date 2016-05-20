@@ -39,9 +39,7 @@ public class JobPost extends Post implements Comparable<JobPost>  {
 	@Column(name="title")//must match name in DB
 	private String title;
 	
-	//@Column(name="domain")//must match name in DB
-	//private String domain;
-	//title, domain, description, photo, location. price
+
 	@Size(min=5, max=255, groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Column(name="description")//must match name in DB
 	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)

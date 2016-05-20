@@ -182,6 +182,11 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/mailsent.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="FAQ" extends="jobdone.base">
+		<put-attribute name="title" value="FAQ page "></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/FAQ.jsp"></put-attribute>
+	</definition>
+	
 	
 
 	<definition name="foundjobs" extends="jobdone.base">

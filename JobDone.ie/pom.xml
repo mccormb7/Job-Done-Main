@@ -18,7 +18,12 @@
 		</plugins>
 	</build>
 	<dependencies>
-
+		<dependency>
+			<artifactId>guava</artifactId>
+			<groupId>com.google.guava</groupId>
+			<type>jar</type>
+			<version>15.0</version>
+		</dependency>
 		<dependency>
 			<groupId>antlr</groupId>
 			<artifactId>antlr</artifactId>

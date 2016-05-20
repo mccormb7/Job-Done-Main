@@ -36,7 +36,6 @@ public class UsersDao {
 	@Transactional
 	public void create(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		//gets current session
 		session().save(user);
 	}
 	

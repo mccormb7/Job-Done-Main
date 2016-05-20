@@ -127,6 +127,8 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/journey"
 			access="permitAll" />
+		<security:intercept-url pattern="/FAQ"
+			access="permitAll" />
 		<security:intercept-url pattern="/searchnullrecommend"
 			access="hasRole('ROLE_TRADE')" />
 		

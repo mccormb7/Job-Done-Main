@@ -30,8 +30,8 @@
 				<tr class="info">
 
 					<td><c:out value="${jobpost.user.name}"></c:out></td>
-					<td><a href="<c:url value='/remove/${jobpost.id}' />">Delete</a></td>
-					<td><a href="<c:url value='/editjobpost/${jobpost.id}' />">Edit</a></td>
+					<td><a  class="btn btn-danger" href="<c:url value='/remove/${jobpost.id}' />">Delete</a></td>
+					<td><a class="btn btn-warning" href="<c:url value='/editjobpost/${jobpost.id}' />">Edit</a></td>
 
 					<td><c:out value="${jobpost.description}"></c:out></td>
 
@@ -54,7 +54,10 @@
 				<font size="6" color="white">No Task Posts Made</font>
 					<div class="form-top-center">
 					<a class="btn btn-primary btn-lg" role="button"
-								href="${pageContext.request.contextPath}/createjobpost">Create Task Here</a>	
+								href="${pageContext.request.contextPath}/createjobpost">Create Task Here</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="btn btn-primary btn-lg" role="button"
+								href="${pageContext.request.contextPath}/FAQ"> Get Help Here</a>	
 					</div>
 					
 				</div>

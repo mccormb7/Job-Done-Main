@@ -21,6 +21,25 @@
   padding: 7px 14px;
 }
 
+/* Fixed navbar */
+body {
+    padding-top: 90px;
+}
+/* General sizing */
+ul.dropdown-lr {
+  width: 300px;
+}
+
+/* mobile fix */
+@media (max-width: 768px) {
+	.dropdown-lr h3 {
+		color: #eee;
+	}
+	.dropdown-lr label {
+		color: #eee;
+	}
+}
+
 </style>
 
 
@@ -109,13 +128,80 @@
 
 		<ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="!isAuthenticated()">
-				<li><a class="login" href="<c:url value='/login'/>">Log in</a></li>
+				<li id="FAQ"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a class="login" href="<c:url value='/FAQ'/>">FAQ's</a></li>
 			</sec:authorize>
-
+			
 			<sec:authorize access="!isAuthenticated()">
-				<li><a class="login" href="<c:url value='/newaccount'/>">Register</a></li>
+				<li id="Register"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a class="login" href="<c:url value='/newaccount'/>">Register</a></li>
+			</sec:authorize>
+			
+		
+			<sec:authorize access="!isAuthenticated()">
+			
+				<li id="Log-In"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"class="dropdown">
+                        <a  class="dropdown-toggle" data-toggle="dropdown">Log In <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                            <div class="col-lg-12">
+                            
+                                <div class="text-center"><h3><b>Log In</b></h3></div>
+                                 <form role="form" action='${pageContext.request.contextPath}/j_spring_security_check' method='POST' class="login-form" name ='f'>
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                                <label for="remember"> Remember Me</label>
+                                            </div>
+                                            <div class="col-xs-5 pull-right">
+                                               <button name="submit" type="submit" value="login" class="btn">Sign in</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
+                                </form>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+			</div>
+		</div>
+	</nav>
 			</sec:authorize>
 
+			
 
 
 
@@ -124,19 +210,60 @@
 					data-toggle="dropdown"><span
 						class="glyphicon glyphicon-user fa-2x"></span> <b class="caret"></b></a>
 
-					<ul class="dropdown-menu">
-						<li><a href="<c:url value='/j_spring_security_logout'/>">Log
+					<ul class="dropdown-menu" id="mb1" class="menubar root-level" role="menubar" title="Styling Menu" aria-controls="st1">
+						<li id="log-out"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/j_spring_security_logout'/>">Log
 								out</a></li>
-						<li><a href="<c:url value='/settings'/>">settings</a></li>
-						<li><a href="<c:url value='/profile'/>">View your profile</a></li>
-						<li><a href="<c:url value='/createprofile'/>">Edit Profile</a></li>
-						<li><a href="<c:url value='/'/>">Home</a></li>
+						<li id="settings"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/settings'/>">settings</a></li>
+						<li id="FAQ"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/FAQ'/>">FAQ</a></li>
+						<li id="View-your-profile"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/profile'/>">View your profile</a></li>
+						<li id="Edit-Profile"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/createprofile'/>">Edit Profile</a></li>
+						<li id="Home"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/'/>">Home</a></li>
 							<c:choose>
 							<c:when test="${hasProfile}">
-								<li><a href="<c:url value='/recommendationpro'/>">View your Recommended Jobs</a></li>
+								<li id="View-your-recommened-jobs"
+						        class="menu-item checked"
+						        role="menuitemradio"
+						        tabindex="-1"
+						        aria-controls="st1"
+						        aria-checked="true"><a href="<c:url value='/recommendationpro'/>">View your Recommended Jobs</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="<c:url value='/createprofile'/>">Update profile to get job Recommendations</a></li>
+								<li id="Update-profile-to-get-job-recommendations"
+							        class="menu-item checked"
+							        role="menuitemradio"
+							        tabindex="-1"
+							        aria-controls="st1"
+							        aria-checked="true"><a href="<c:url value='/createprofile'/>">Update profile to get job Recommendations</a></li>
 							</c:otherwise>
 							</c:choose>
 					
@@ -152,11 +279,37 @@
 						class="glyphicon glyphicon-user fa-2x"></span> <b class="caret"></b></a>
 
 					<ul class="dropdown-menu">
-						<li><a href="<c:url value='/j_spring_security_logout'/>">Log
+						<li id="log-out"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/j_spring_security_logout'/>">Log
 								out</a></li>
-						<li><a href="<c:url value='/settings'/>">Settings</a></li>
-						<li><a href="<c:url value='/jobposts'/>">View Posted Tasks</a></li>
-						<li><a href="<c:url value='/createjobpost'/>">Create New Task</a></li>
+						<li id="settings"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/settings'/>">Settings</a></li>
+						<li id="View Posted Tasks"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/jobposts'/>">View Posted Tasks</a></li>
+						<li id="Create-New-Task"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/createjobpost'/>">Create New Task</a></li>
+						<li id="FAQ"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/FAQ'/>">FAQ</a></li>
 						<li class="divider"></li>
 						<li></li>
 					</ul></li>
@@ -170,6 +323,26 @@
 		</ul>
 </div>
 
+
+<script type="text/javascript">
+ 
+function messageCountLink(data){
+	$("#messageNumber").text(data.number);
+	
+}
+function pageLoad(){
+	pageUpdate();
+	window.setInterval(pageUpdate, 5000);
+	
+}
+function pageUpdate(){
+	
+	$.getJSON("<c:url value="/getmessages"/>", messageCountLink);
+
+}
+
+$(document).ready(pageLoad);
+</script>
 
 <!-- /.navbar-collapse -
 

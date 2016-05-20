@@ -16,11 +16,16 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-//allows hibernate to treat class as an entity
+//allows Hibernate to treat class as an entity
 @Table(name="users")
 //decides which table to use
 public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//links contrasints to these groups, done for validating passwords
 	@NotBlank(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Size(min=8, max=15, groups={PersistenceValidationGroup.class, FormValidationGroup.class})
@@ -32,7 +37,7 @@ public class User implements Serializable {
 	@NotBlank(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Pattern(regexp="^\\S+$", groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Size(min=8, max=15, groups={FormValidationGroup.class})
-	//allows password to pass vailidation from front end and then is encrypted
+	//allows password to pass validation from front end and then is encrypted
 	private String password;
 	
 	//own annotation set up to validate email addresses

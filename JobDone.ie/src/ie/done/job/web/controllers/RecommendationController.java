@@ -159,7 +159,7 @@ public class RecommendationController {
 	public String createJobPost(Model model, Principal principal) throws Exception {
 		
 		Provider provider = null;
-		Double radius = 300.0;
+		Double radius = 100.0;//default distance set to 100KM
 		
 		if (principal != null) {
 			String username = principal.getName();
@@ -171,13 +171,7 @@ public class RecommendationController {
 		List<JobPost> recommendedList = recommend.recommendJob(provider);
 		//List<JobPost> uniqueList = new ArrayList<JobPost>();
 		List<JobPost> uniqueListDistance = new ArrayList<JobPost>();
-		int numberOfMatchs = 0;
-		
-		
-		List<String> list = new ArrayList<String>();
-		list.add("aaa");
-		list.add("bbb");
-		list.add("aaa");
+
 		
 		System.out.println(" ________________________------occurences1 ------------_____________");
 
@@ -211,16 +205,7 @@ public class RecommendationController {
 		
 		
 		System.out.println(" ________________________------occurences2 ------------_____________");
-		
-	/*	//ensures no duplicate results in Arraylist
-		for(int i=0;i<recommendedList.size();i++) {
-			
-	        if(!uniqueList.contains(recommendedList.get(i)))
-	            uniqueList.add(recommendedList.get(i));
-	            
-	    }
-	*/	
-		
+
 		//used to check the distance
 		String postcode=provider.getLocation();
 		System.setProperty("java.net.useSystemProxies", "true");
@@ -260,6 +245,7 @@ public class RecommendationController {
 		}
 		
 		boolean hasRecommendation = true;
+		//removes searches with less than 2 matches
 		if(uniqueListDistance.size()<1){
 			hasRecommendation = false;
 		}

@@ -296,7 +296,6 @@ public class JobPostsController {
 	   List<JobPostModel> jobPostModels = new ArrayList<JobPostModel>();
 
 
-	  // System.out.println(allFound.get(0).getDescription());
 	   System.out.print(allFound.size() + " size of the array being passed");
 	   
 	   if(allFound.isEmpty()){
@@ -304,8 +303,6 @@ public class JobPostsController {
 		  return "searchnull";
 		  
 	   }
-	 // JobPost b = new JobPost();
-	 //  System.out.println("test");
 	  for(JobPost b : allFound){
 
 		   JobPostModel jm = new JobPostModel();

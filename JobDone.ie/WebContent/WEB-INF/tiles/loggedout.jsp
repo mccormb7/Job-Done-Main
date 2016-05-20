@@ -8,6 +8,7 @@
 					<div class="form-top-center">
 					<a class="btn btn-primary btn-lg" role="button" href="${pageContext.request.contextPath}/login">Login</a>
 					<a class="btn btn-primary btn-lg" role="button" href="${pageContext.request.contextPath}/newaccount">Register</a>	
+					<a class="btn btn-primary btn-lg" role="button" href="${pageContext.request.contextPath}/FAQ">FAQ's</a>
 					</div>
 					
 				</div>

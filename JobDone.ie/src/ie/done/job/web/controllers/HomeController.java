@@ -70,5 +70,10 @@ public class HomeController {
 		//logger.debug("show home page");
 		return "home";
 	}
+	
+	@RequestMapping("/FAQ")
+	public String showFAQ() {
+		return "FAQ";
+	}
 
 }

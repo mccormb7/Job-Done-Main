@@ -200,6 +200,7 @@ public class GenerateTestData {
 		
 		usersDao.create(user2);
 		usersDao.create(userMain);
+		providerDao.saveOrUpdate(providerMain);
 		for(int j= 0;j <= details.size()-5;j=j+5){
 			//str.replace(/#|_/g,'');
 			String costValue = details.get(j+3).replaceAll("€", "").replaceAll(",", "");
