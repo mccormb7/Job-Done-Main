@@ -83,7 +83,7 @@
     
     
  
-<!-- gets the email addres the email has to be sent to -->
+<!-- gets the email address of the user the email will be sent to. -->
 <script type="text/javascript">
 	
 	function getParameterByName(name, url) {
