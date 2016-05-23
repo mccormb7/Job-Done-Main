@@ -248,26 +248,26 @@ ul.dropdown-lr {
 					        tabindex="-1"
 					        aria-controls="st1"
 					        aria-checked="true"><a href="<c:url value='/'/>">Home</a></li>
-							<c:choose>
-							<c:when test="${hasProfile}">
 								<li id="View-your-recommened-jobs"
 						        class="menu-item checked"
 						        role="menuitemradio"
 						        tabindex="-1"
 						        aria-controls="st1"
 						        aria-checked="true"><a href="<c:url value='/recommendationpro'/>">View your Recommended Jobs</a></li>
-							</c:when>
-							<c:otherwise>
+						
 								<li id="Update-profile-to-get-job-recommendations"
 							        class="menu-item checked"
 							        role="menuitemradio"
 							        tabindex="-1"
 							        aria-controls="st1"
 							        aria-checked="true"><a href="<c:url value='/createprofile'/>">Update profile to get job Recommendations</a></li>
-							</c:otherwise>
-							</c:choose>
-					
-								
+						        <li id="Home"
+						        class="menu-item checked"
+						        role="menuitemradio"
+						        tabindex="-1"
+						        aria-controls="st1"
+						        aria-checked="true"><a href="<c:url value='/'/>">Home</a></li>
+							
 						<li class="divider"></li>
 						<li></li>
 					</ul></li>
@@ -310,6 +310,12 @@ ul.dropdown-lr {
 					        tabindex="-1"
 					        aria-controls="st1"
 					        aria-checked="true"><a href="<c:url value='/FAQ'/>">FAQ</a></li>
+				        <li id="Home"
+						        class="menu-item checked"
+						        role="menuitemradio"
+						        tabindex="-1"
+						        aria-controls="st1"
+						        aria-checked="true"><a href="<c:url value='/'/>">View Providers</a></li>
 						<li class="divider"></li>
 						<li></li>
 					</ul></li>

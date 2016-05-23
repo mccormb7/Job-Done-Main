@@ -159,13 +159,13 @@ public class GenerateTestData {
 
 	private static String[] Beginning = { "Kr", "Ca", "Ra", "Mrok", "Cru",
 			"Ray", "Bre", "Zed", "Drak", "Mor", "Jag", "Mer", "Jar", "Mjol",
-			"Zork", "Mad", "Cry", "Zur", "Creo", "Azak", "Azur", "Rei", "Cro",
+			"Zork", "Mad", "Cry", "Zur", "Creo", "Azak", "Azur", "Rei", "Cro","dzur", "Rai",
 			"Mar", "Luk" };
 	private static String[] Middle = { "air", "ir", "mi", "sor", "mee", "clo",
 			"red", "cra", "ark", "arc", "miri", "lori", "cres", "mur", "zer",
-			"marac", "zoir", "slamar", "salmar", "urak" };
-	private static String[] End = { "d", "ed", "ark", "arc", "es", "er", "der",
-			"tron", "med", "ure", "zur", "cred", "mur" };
+			"marac", "zoir", "slmr", "sama", "urak" };
+	private static String[] End = { "des", "aed", "ark", "arc", "ess", "err", "der",
+			"tron", "med", "ure", "zur", "cred", "mur" ,"zur", "cred", "mur"};
 
 	private static Random rand = new Random();
 
@@ -204,7 +204,18 @@ public class GenerateTestData {
 		for(int j= 0;j <= details.size()-5;j=j+5){
 			//str.replace(/#|_/g,'');
 			String costValue = details.get(j+3).replaceAll("€", "").replaceAll(",", "");
+			String username = generateName();
+			int count = 1;
+			if(count ==99){
+				count = 1;
+			}
+			//User user = new User(usertemp, usertemp, "password","tom@hotmail.com", true, "ROLE_USER");
+			User user1 = new User( username+count, username + " userTest", "password",
+					username + j + "@hotmail.com", true, "ROLE_USER");
 			
+			
+			System.out.println(user1.toString() + "-------------------------------");
+			usersDao.create(user1);
 			Double cost = Double.parseDouble(costValue);
 			String title = details.get(j);
 			String domain = details.get(j+2).split("\\/", 2)[0];
@@ -212,7 +223,7 @@ public class GenerateTestData {
 			String location = details.get(j+4);
 			
 			System.out.println( domain  + "---------------------");
-			JobPost jobPost = new JobPost(user2,title, domain,description, location, cost);
+			JobPost jobPost = new JobPost(user1,title, domain,description, location, cost);
 			System.out.println(jobPost.toString() + "----------jobpost-----------");
 			jobPostsDao.saveOrUpdate(jobPost);
 		}

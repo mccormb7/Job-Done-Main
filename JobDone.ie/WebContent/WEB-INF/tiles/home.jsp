@@ -6,7 +6,7 @@
 
 
 <sec:authorize access="isAuthenticated()">
-	
+	<!--  
 
 	<h1> List of Job Posts </h1>
 	<table class="table table-hover" id ="table6" >
@@ -40,6 +40,7 @@
 	<p/>
 	
 	<p>
+	-->
 	<h1> List of providers </h1>
 	<table class="table table-hover">
 		<tr>

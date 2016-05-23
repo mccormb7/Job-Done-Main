@@ -10,7 +10,7 @@
 		<tr class="danger">
 			<td>Title</td>
 			<td></td>
-			<td>Domain</td>
+			<td>Domain </td>
 			<td>Description</td>
 
 		</tr>
@@ -21,10 +21,10 @@
 			<tr>
 
 				<td><strong style="font-size: 35px;"></strong><c:out value="${jobpost.getJobTitle()}"></c:out></strong> </td>
-				<td><a
+				<td><a class="btn btn-success"
 					href="<c:url value='/viewjobpost/${jobpost.getJobId()}' />">View
 						Job Post</a></td>
-				<td><c:out value="${jobpost.getJobDomain()}"></c:out></td>
+				<td>&nbsp &nbsp <c:out value="${jobpost.getJobDomain()}"></c:out>&nbsp &nbsp </td>
 				<td><c:out value="${jobpost.getJobDescription()}"></c:out></td>
 
 

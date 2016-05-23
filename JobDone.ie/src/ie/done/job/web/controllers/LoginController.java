@@ -45,7 +45,7 @@ public class LoginController {
 	
 	@Autowired
 	private MailSender mailSender;
-	//bean autowired from offer-servlet
+	//bean autowired from jobpost-servlet
 	
 	@Autowired
 	public void setUsersService(UsersService usersService) {
@@ -169,7 +169,7 @@ public class LoginController {
 		String userEmail = user.getEmail();
 		String subject = "Registration Confirmation";
 		String confirmationUrl = appUrl + "/confirmedregister?token=" + randomToken;
-		String message = "Account has been registed, To start using our website, confirm your email address";
+		String message = "Account has been registed, To start using Task Tackler, confirm your email address";
 		SimpleMailMessage mailReceiver = new SimpleMailMessage();
 		
 		mailReceiver.setFrom("tasktacklerire@gmail.com");
@@ -177,7 +177,7 @@ public class LoginController {
 		mailReceiver.setSubject(subject);
 		mailReceiver.setText(message + " \r\n" + confirmationUrl);
 		mailSender.send(mailReceiver);
-		System.out.println(" test 1");
+		
 		
 		//return "accountcreated";
 		
@@ -258,7 +258,7 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/getmessages", method=RequestMethod.GET, produces = "application/json")
-	@ResponseBody//causes spring to look at data return and try to return in approipate format from "produces"
+	@ResponseBody//causes spring to look at data returned and try to return it in the appropriate format from "produces"
 	public Map<String, Object> getMessages(Principal prince){
 		
 		List<Message> messages = null;
@@ -278,25 +278,6 @@ public class LoginController {
 		return info;
 		
 	}
-	
-	/*@RequestMapping(value = "/sendmessage", method=RequestMethod.POST, produces = "application/json")
-	@ResponseBody//causes spring to look at data return and try to return in approipate format from "produces"
-	public Map<String, Object> sendMessages(Principal prince, @RequestBody Map<String, Object>info){
-		
-		String text = (String) info.get("text");//taken from messages.jsp
-		String name = (String) info.get("name");
-		String email = (String) info.get("email");
-		Integer target =(Integer)info.get("target");;
-		
-		Map<String, Object> data = new HashMap<String, Object>();
-		System.out.println(name + " " + email + " " + text );
-		//gets JSON and put into map and is index of message
-		data.put("success", true);
-		data.put("target", target);
-		
-		return data;
-		
-	}*/
 	
 	
 	
@@ -338,26 +319,9 @@ public class LoginController {
 	@ResponseBody
 	public Map<String, Object> sendMessage(Principal principal, @RequestBody Map<String, Object> data) {
 		
-		
-		String text = (String)data.get("text");
-		String name = (String)data.get("name");
-		String email = (String)data.get("email");
+
 		Integer target = (Integer)data.get("target");
 		
-
-		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setFrom("jobdoneire@gmail.com");
-		mail.setTo(email);
-		mail.setSubject("Re: " + name + ", your message");
-		mail.setText(text);
-		
-		try {
-			mailSender.send(mail);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Can't send message");
-		}
-
 		Map<String, Object> rval = new HashMap<String, Object>();
 		rval.put("success", true);
 		rval.put("target", target);

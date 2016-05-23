@@ -47,7 +47,7 @@
 				<td></td>
 				<td>Distance</td>
 				<td>Date Posted</td>
-				<td>Description</td>
+				<td>Title</td>
 
 			</tr>
 		</thead>

@@ -75,7 +75,7 @@
 									<div class="form-group">
 			                    		<label class="sr-only" for="form-role">Role</label>
 			                        	<sf:select type="text" path="authority" name="authority" placeholder="Email.." class="form-role form-control" id="form-role">
-				                        	<sf:option value="ROLE_TRADE">Tradesman</sf:option>
+				                        	<sf:option value="ROLE_TRADE">Provider</sf:option>
 											<sf:option selected="selected" value="ROLE_USER">Client</sf:option>
 											
 										 </sf:select>

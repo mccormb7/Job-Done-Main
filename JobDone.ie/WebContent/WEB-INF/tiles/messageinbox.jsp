@@ -17,7 +17,8 @@
 	$(document).ready(onReady);
 </script>
 
-<script type="text/javascript"
+
+<!--  <script type="text/javascript">
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -48,6 +49,7 @@
 	</script>
 
 	
+
 
 	<div class="CSSTableGenerator">
 		<p>
@@ -82,4 +84,44 @@
 		</table>
 	</div>
 </div>	
+
+-->
+<p><font size="8" color="white">Message Inbox</font></p>
+<table id="table12" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>from</th>
+        <th>Actions</th>
+        <th>Subject</th>
+        <th>Content</th>
+
+    </tr>
+   	<c:forEach var="messages" items="${messages1}">
+				<tr>
+					<td>&nbsp<span class="glyphicon glyphicon-star-empty"><c:out
+								value="${messages.fromuser}"></c:out></span></td>
+					<td>&nbsp<a class="btn btn-danger" href="<c:url value='/deletemessage/${messages.id}' />">Delete</a>&nbsp<span class="glyphicon glyphicon-trash"></span>
+					<a class="btn btn-success" href="<c:url value='/message?uid=${messages.fromuser}'/>">Reply</a>&nbsp<span class="glyphicon glyphicon-pencil"></span></td>
+						
+					<td><c:out value="${messages.subject}"></c:out></td>
+					<td><c:out value="${messages.content}"></c:out></td>
+					
+					
+
+				</tr>
+			</c:forEach>
+</table>
+
+<script>
+//<![CDATA[ 
+var table12_Props = {
+    highlight_keywords: true,
+    on_keyup: true,
+    on_keyup_delay: 1500,
+    single_search_filter: true,
+    selectable: true
+};
+
+var tf12 = setFilterGrid("table12", table12_Props);
+//]]>  
+</script>  
 	

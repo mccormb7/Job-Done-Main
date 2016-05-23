@@ -11,10 +11,11 @@
 					</h4>
 				</div>
 				<div id="collapse2" class="panel-collapse collapse">
-					<div class="panel-body">PickMeUpDCU is a carpooling network that connects both Students and Faculty members with similar commute routes to be able to share rides, 
-						all through our easy to use Web app.<br><br>Our goal is to make ridesharing easy and flexible so we can help reduce the number of people
-						driving cars alone on the roads – which helps reduce traffic congestion, CO2 emissions and also helps make new friends!<br><br>
-						PickMeUpDCU is 3rd Project made specifically for members of Dublin City University.
+					<div class="panel-body">TaskTackler.ie is a RESTful web application built using the Spring Framework. It provides a medium for freelancers to portray their skill sets and expertise. 
+									<p>These are known as Providers throughout this document and the application. It also creates a platform for users to advertise available tasks and work available in which they need Providers for</p><p>These users are known as Clients throughout this document and the application. 
+									This application will locate and suggest assignments to Providers based on the specifics of the jobs or tasks in conjunction with their individual profile. This will ensure that only the most relevant </p>Providers receive notice for each specific project thus creating a competitive marketplace to operate within. 
+									It also will give choice to Clients in helping them find the right people for their tasks at a competitive price
+					
 					</div>
 				</div>
 			</div>
