@@ -2,10 +2,13 @@ package ie.done.job.web.dao;
 
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -21,6 +24,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.lucene.analysis.*;
 import org.tartarus.snowball.ext.EnglishStemmer;
+
+import edu.smu.tspell.wordnet.Synset;
+import edu.smu.tspell.wordnet.WordNetDatabase;
 
 @Repository
 @Transactional
@@ -49,72 +55,88 @@ public class JobPostsDao {
 		}
 	}
 	
-	//***************************
-	//change find job to take list instead
-	
-	
 
-	@Transactional
-	public String[] splitString(String searchText) {
-		String[] splitArray = searchText.split("\\s+");
-		
-		return splitArray;
-		
-
-	}
-	
-	
-	//splits a field for the search,ie. description taken as string and split to array
-	@Transactional
-	public String[] splitStringTest(String searchText) {
-		String[] splitArray = searchText.split("\\s+");
-		EnglishStemmer stemmer = new EnglishStemmer();
-		for(int i = 0; i< splitArray.length;i++){
-			stemmer.setCurrent(splitArray[i]);
-			//if the word can be stemmed it will set it
-			if(stemmer.stem()){
-				splitArray[i] = stemmer.getCurrent();	
-			}
-		}
-		
-		return splitArray;
-		
-
-	}
-	
-	
 	@Transactional
 	public List <String> splitStringasList(String searchText) {
 		List<String> items = Arrays.asList(searchText.split("\\s+"));
-		List<String> noStopWords = new ArrayList<String>();
-		//List<String> splitList = searchText.split("\\s+");
-		String [] stopWords = { "an", "and","a", "are", "as", "at", "be", "but", "by",
-                "for", "if", "in", "into", "is", "it",
-                "no", "not", "of", "on", "or", "such",
-                "that", "the", "their", "then", "there", "these",
-                "they", "this", "to", "was", "will", "with"};
+		items = addSynonymToSearch(items);		
+		System.out.println(items);
+		return items;
+
+	}
+
+	public boolean isStopWord(String word){
 		
-		//remove stop words from the search list
-		for(int i = 0; i< items.size(); i++){
-			
-			for(int j = 0; j< stopWords.length; j++){
-				if(items.get(i).equals(stopWords[j])){
-					System.out.println("word removed "   + stopWords[j]);
-					String temp = stopWords[j];
-					items.remove(temp);		
-					i--;
-				}
-				break;
-				
-				
-			}
+		String lowerWord = word.toLowerCase();
+		boolean stopWord= true;
+		String [] stopWords = { "an","looking", "my", "in", "and","a", "are", "as", "at", "be", "but", "by",
+	            "for", "if", "in", "into", "is", "it",
+	            "no", "not", "of", "on", "or", "such",
+	            "that", "the", "their", "then", "there", "these",
+	            "they", "this", "to", "was", "will", "with"};
+		
+		if(Arrays.asList(stopWords).contains(lowerWord)){
+			stopWord=true;
+		}
+		else{
+			return false;
 		}
 		
-		System.out.println("==============iteams = " + items);
-		System.out.println(" ==============no Stop " + noStopWords);
+		return stopWord;
+		
+	}
+	
+	public boolean hasSpecialChar(String word){
+		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(word);
+		boolean specialCharContained = false;
+		boolean b = m.find();
+
+		if (b){
+			specialCharContained = true;
+		}else{
+			return specialCharContained;
+		}
+		return specialCharContained;
+	   
+	}
+	
+	@Transactional
+	public List <String> addSynonymToSearch(List<String> splitDetails) {
 		
 		
-		return items;
+		File f=new File("C://Program Files (x86)//WordNet//2.1//dict2");
+        System.setProperty("wordnet.database.dir", f.toString());
+	
+        WordNetDatabase database = WordNetDatabase.getFileInstance();
+        List<String> uniqueListOfSyn = new ArrayList<String>();
+
+		//  Get the synsets containing the wrod form
+        for(int k =0;k< splitDetails.size();k++){
+	        Synset[] synsets = database.getSynsets(splitDetails.get(k));
+			
+			//finds all possible synonyms of each line of split details
+			if (synsets.length > 0){
+				
+				for (int i = 0; i < synsets.length; i++){
+					String[] wordForms = synsets[i].getWordForms();
+					
+					for (int j = 0; j < wordForms.length; j++){
+						if(!uniqueListOfSyn.contains(wordForms[j])){
+							if(!wordForms[j].contains(" ")&& (!isStopWord(wordForms[j])) &&(!hasSpecialChar(wordForms[j]))){
+								uniqueListOfSyn.add(wordForms[j]);
+							}
+						}
+						
+						//System.out.println(wordForms[j]);
+					}
+				
+
+				}
+			}
+			
+        }
+        return uniqueListOfSyn;	
 
 	}
 
@@ -126,7 +148,6 @@ public class JobPostsDao {
 			List<JobPost> results = null;
 			List<JobPost> resultsFinal = new ArrayList<JobPost>();
 			Session session = sessionFactory.getCurrentSession();
-			System.out.println(searchText + " in the search here1");
 			FullTextSession fullTextSession = Search
 					.getFullTextSession(session);
 			

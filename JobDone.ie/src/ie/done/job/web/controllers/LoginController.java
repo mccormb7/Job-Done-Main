@@ -94,6 +94,7 @@ public class LoginController {
 	public String showAdmin(Model model) {
 		
 		List<User> users = usersService.getAllUsers();
+
 		
 		model.addAttribute("users", users);
 		
@@ -109,6 +110,20 @@ public class LoginController {
 	public String showMailSent() {
 		return "mailsent";
 	}
+	
+	@RequestMapping("/unEnabledAccount/{username}")
+    public String removeEnabled(@PathVariable("username") String username){
+		User user = usersService.getUser(username);
+		
+		if(user.isEnabled()){
+			usersService.disable(user);
+		}else{
+			usersService.enabled(user);
+		}
+		
+        System.out.println(user.toString());
+        return "redirect:/admin";
+    }
 	
 	/*****************************Registration verification***********************************/
 	

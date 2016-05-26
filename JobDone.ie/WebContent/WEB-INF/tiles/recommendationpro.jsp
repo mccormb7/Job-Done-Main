@@ -36,39 +36,49 @@
 		</div>
 	</div>
 <c:choose>
+
+
 	<c:when test="${hasRecommendation}">
 
 
-		<table class="table table-hover">
-		<thead>
-			<tr  class="danger" >
-				<td>Name</td>
-				<td></td>
-				<td></td>
-				<td>Distance</td>
-				<td>Date Posted</td>
-				<td>Title</td>
+		<h1>List of Recommended Jobs</h1>
 
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="jobpost" items="${recommend}">
+<table id="demo">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+            <th>Price</th>
+            <th>Distance(KM)</th>
+            <th>Title</th>
+            <th>Date Posted</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        
+        <c:forEach var="jobpost" items="${recommend}">
 				<tr>
 
 					<td><c:out value="${jobpost.user.name}"></c:out></td>
 
 					<td><a class="btn btn-success" href="<c:url value='/viewjobpost/${jobpost.id}' />">View
-							Job Post</a></td>
-					<td><a class="btn btn-primary" href="<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
-					<td><c:out value="${jobpost.distance} KM"></c:out></td>
-					<td><c:out value="${jobpost.date} "></c:out></td>
+							Job Post</a> &nbsp &nbsp
+					<a class="btn btn-primary" href="<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+					<td><c:out value="${jobpost.price} "></c:out></td>
+					<td><c:out value="${jobpost.distance} "></c:out></td>
+					<td><c:out value="${jobpost.title} "></c:out></td>
 
-					<td><c:out value="${jobpost.description}"></c:out></td>
+					<td><c:out value="${jobpost.date}"></c:out></td>
 
 				</tr>
 			</c:forEach>
 			</tbody>
-		</table>
+</table>
+		
+		
+		
 
 	</c:when>
 	<c:otherwise>
@@ -138,4 +148,60 @@
 	}
 
 	$(document).ready(pageLoad);
+</script>
+
+<script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-ddaa1eeb67d762ab8aad46508017908c.js"></script>
+ <script src='https://koalyptus.github.io/TableFilter/tablefilter/tablefilter.js'></script>
+<script src='https://koalyptus.github.io/TableFilter/tablefilter/tf-1.js'></script>
+
+
+        <script>
+      var filtersConfig = {
+    base_path: '',
+    col_1: 'select',
+    col_2: 'select',
+    col_3: 'select',
+    col_4: 'select',
+    alternate_rows: true,
+    rows_counter: true,
+    btn_reset: true,
+    loader: true,
+    mark_active_columns: true,
+    highlight_keywords: true,
+    col_number_format: [
+        null,
+        null,
+        'US',
+        'US',
+        'US',
+        'US',
+        'US',
+        'US',
+        'US'
+    ],
+   
+    col_widths: [
+        '150px',
+        '100px',
+        '100px',
+        '70px',
+        '70px',
+        '70px',
+        '70px',
+        '60px',
+        '60px'
+    ],
+    extensions: [{
+            name: 'sort',
+            images_path: 'https://koalyptus.github.io/TableFilter/tablefilter/style/themes/'
+        }]
+};
+var tf = new TableFilter('demo', filtersConfig);
+tf.init();
+      //# sourceURL=pen.js
+    </script>
+    <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
 </script>

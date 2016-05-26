@@ -21,6 +21,7 @@
 			<thead>
 				<tr>
 					<td>Name</td>
+					<td>Date Posted</td>
 					<td></td>
 					<td></td>
 					<td>Task</td>
@@ -30,6 +31,7 @@
 				<tr class="info">
 
 					<td><c:out value="${jobpost.user.name}"></c:out></td>
+					<td><c:out value="${jobpost.date}"></c:out></td>
 					<td><a  class="btn btn-danger" href="<c:url value='/remove/${jobpost.id}' />">Delete</a></td>
 					<td><a class="btn btn-warning" href="<c:url value='/editjobpost/${jobpost.id}' />">Edit</a></td>
 

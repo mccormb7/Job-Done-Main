@@ -4,10 +4,13 @@ import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
+import ie.done.job.web.dao.User;
+import ie.done.job.web.dao.UsersDao;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.ProviderService;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -33,6 +36,9 @@ public class HomeController {
 	
 	@Autowired
 	private ProviderDao providerDao;
+	
+	@Autowired
+	private UsersDao usersDao;
 
 	//principal allows you to get the current username of user logged in
 	@RequestMapping("/")
@@ -45,6 +51,7 @@ public class HomeController {
 			//domainList.add(allJobPosts.get(i).getDomain());
 			 
 		}
+		Collections.reverse(jobposts);
 		
 		model.addAttribute("jobposts1", jobposts);
 		//only allow one offer
@@ -53,6 +60,8 @@ public class HomeController {
 		
 		List<Provider> providers = providerService.getCurrent();
 		model.addAttribute("providers1", providers);
+		
+
 		
 		//jobDao.indexJobs();
 		providerDao.indexProviders();

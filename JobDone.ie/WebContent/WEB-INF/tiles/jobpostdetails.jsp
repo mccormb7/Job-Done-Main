@@ -28,7 +28,14 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-6 col-lg-6" align="right"> <img alt="User Pic" src=${jobpost.internetpic} > </div>
+              <c:choose>
+              <c:when test="${hasPic}">
+					<img alt="User Pic" src="${jobpost.internetpic}" class="img-circle img-responsive">
+				</c:when>
+				<c:when test="${!hasPic}">
+					<img src="https://www.drphillipscenter.org/resources/images/default.jpg" class="img-circle img-responsive">
+					</c:when>
+				</c:choose>
        
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="tableprofile table-user-information">
@@ -58,6 +65,12 @@
                         <td>Email Directly</td>
                         
                         <td><a href="<c:url value='/emailform?uid=${jobpost.user.email}'/>">Email</a></td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Date Created</td>
+                        
+                        <td>${jobpost.date}</td>
                       </tr>
                      
                       

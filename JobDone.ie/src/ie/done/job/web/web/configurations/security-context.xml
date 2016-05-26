@@ -52,6 +52,8 @@
 			access="isAuthenticated()" />
 			<security:intercept-url pattern="/deletemessage/{id}"
 			access="isAuthenticated()" />
+			<security:intercept-url pattern="/unEnabledAccount/{username}"
+			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/editjobpost"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/emailform"

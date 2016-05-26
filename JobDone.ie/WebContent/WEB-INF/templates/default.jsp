@@ -9,8 +9,12 @@
 <title><tiles:insertAttribute name="title"></tiles:insertAttribute></title>
 
 
+<link rel='stylesheet prefetch' href='http://koalyptus.github.io/TableFilter/tablefilter/style/tablefilter.css'>
 
 <link href="${pageContext.request.contextPath}/static/css/gridTable.css"
+	rel="stylesheet" type="text/css" />
+	
+<link href="${pageContext.request.contextPath}/static/css/tableFilter.css"
 	rel="stylesheet" type="text/css" />
 	
 	<script type="text/javascript"

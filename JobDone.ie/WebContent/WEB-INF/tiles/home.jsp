@@ -6,7 +6,7 @@
 
 
 <sec:authorize access="isAuthenticated()">
-	<!--  
+	<sec:authorize access="hasRole('ROLE_TRADE')">
 
 	<h1> List of Job Posts </h1>
 	<table class="table table-hover" id ="table6" >
@@ -14,33 +14,31 @@
 		<thead >
 			<tr class="danger" font-size= "7px">
 			
-				<td>Name:</td>
-				<td>Details:</td>
+				<td>Title:</td>
 				<td></td>
 			
-				<td>Title:</td>	
+				<td> Location</td>
+			
+				<td>Date Posted</td>	
 			</tr>
 		</thead>
 	
 		<c:forEach var="jobpost" items="${jobposts1}">
 			<tr class="info">
-				<td><c:out value="${jobpost.user.name}"></c:out></td>
-	
-				<td><a class="btn btn-success" href="<c:url value='/viewjobpost/${jobpost.id}' />" >View </a></td>
-		
-				<td><a  class="btn btn-primary" href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
-	
-				
 				<td><c:out value="${jobpost.title}"></c:out></td>
+				<td><a class="btn btn-success" href="<c:url value='/viewjobpost/${jobpost.id}' />" >View </a> &nbsp &nbsp
+				<a  class="btn btn-primary" href = "<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
+				<td><c:out value="${jobpost.location}"></c:out></td>
+				<td><c:out value="${jobpost.date}"></c:out></td>
+				
+				
 		
 			</tr>
 		</c:forEach>
 	</table>
-	
-	<p/>
-	
-	<p>
-	-->
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_USER')">
+
 	<h1> List of providers </h1>
 	<table class="table table-hover">
 		<tr>
@@ -66,6 +64,8 @@
 	</table>
 
 </sec:authorize>
+</sec:authorize>
+
 
 <sec:authorize access="!isAuthenticated()">
 <!-- Top content -->

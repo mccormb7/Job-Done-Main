@@ -50,70 +50,69 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse4">How to post a Job or Task if your are a client</a>
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse5">How to post a Job or Task if your are a client</a>
 					</h4>
 				</div>
 				
-				<div id="collapse4" class="panel-collapse collapse">
-					<div class="panel-body">No, your insurance will not be affected or need to change in order to drive or ride with PickMeUpDCU. 
-					Your insurance coverage will act just as it does if you were driving a friend, family member, or a neighbour. PickMeUpDCU is different from other ridesharing companies because our drivers don't actually earn a “profit” so there is no impact on the driver's 
-					insurance requirements or tax implications. The purpose of PickMeUpDCU is to enable both the passengers and the drivers to lower the cost of their travel and at no stage is it a profit making venture. The goal is for people to be able to easily share transportation costs to make carpooling a way to save money and 
-					take extra cars off the road..
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse4">How to create a profile if your are a Provider</a>
-					</h4>
-				</div>
-				
-				<div id="collapse4" class="panel-collapse collapse">
-					<div class="panel-body">No, your insurance will not be affected or need to change in order to drive or ride with PickMeUpDCU. 
-					Your insurance coverage will act just as it does if you were driving a friend, family member, or a neighbour. PickMeUpDCU is different from other ridesharing companies because our drivers don't actually earn a “profit” so there is no impact on the driver's 
-					insurance requirements or tax implications. The purpose of PickMeUpDCU is to enable both the passengers and the drivers to lower the cost of their travel and at no stage is it a profit making venture. The goal is for people to be able to easily share transportation costs to make carpooling a way to save money and 
-					take extra cars off the road..
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse4">How to upload a picture</a>
-					</h4>
-				</div>
-				
-				<div id="collapse4" class="panel-collapse collapse">
-					<div class="panel-body">No, your insurance will not be affected or need to change in order to drive or ride with PickMeUpDCU. 
-					Your insurance coverage will act just as it does if you were driving a friend, family member, or a neighbour. PickMeUpDCU is different from other ridesharing companies because our drivers don't actually earn a “profit” so there is no impact on the driver's 
-					insurance requirements or tax implications. The purpose of PickMeUpDCU is to enable both the passengers and the drivers to lower the cost of their travel and at no stage is it a profit making venture. The goal is for people to be able to easily share transportation costs to make carpooling a way to save money and 
-					take extra cars off the road..
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Terms and Conditions</a>
-					</h4>
-				</div>
-				
-				<div id="collapse4" class="panel-collapse collapse">
-					<div class="panel-body">No, your insurance will not be affected or need to change in order to drive or ride with PickMeUpDCU. 
-					Your insurance coverage will act just as it does if you were driving a friend, family member, or a neighbour. PickMeUpDCU is different from other ridesharing companies because our drivers don't actually earn a “profit” so there is no impact on the driver's 
-					insurance requirements or tax implications. The purpose of PickMeUpDCU is to enable both the passengers and the drivers to lower the cost of their travel and at no stage is it a profit making venture. The goal is for people to be able to easily share transportation costs to make carpooling a way to save money and 
-					take extra cars off the road..
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Leave Feedback</a>
-					</h4>
-				</div>
 				<div id="collapse5" class="panel-collapse collapse">
+					<div class="panel-body">No, your insurance will not be affected or need to change in order to drive or ride with PickMeUpDCU. 
+					Your insurance coverage will act just as it does if you were driving a friend, family member, or a neighbour. PickMeUpDCU is different from other ridesharing companies because our drivers don't actually earn a “profit” so there is no impact on the driver's 
+					insurance requirements or tax implications. The purpose of PickMeUpDCU is to enable both the passengers and the drivers to lower the cost of their travel and at no stage is it a profit making venture. The goal is for people to be able to easily share transportation costs to make carpooling a way to save money and 
+					take extra cars off the road..
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse6">How to create a profile if your are a Provider</a>
+					</h4>
+				</div>
+				
+				<div id="collapse6" class="panel-collapse collapse">
+					<div class="panel-body">No, your insurance will not be affected or need to change in order to drive or ride with PickMeUpDCU. 
+					Your insurance coverage will act just as it does if you were driving a friend, family member, or a neighbour. PickMeUpDCU is different from other ridesharing companies because our drivers don't actually earn a “profit” so there is no impact on the driver's 
+					insurance requirements or tax implications. The purpose of PickMeUpDCU is to enable both the passengers and the drivers to lower the cost of their travel and at no stage is it a profit making venture. The goal is for people to be able to easily share transportation costs to make carpooling a way to save money and 
+					take extra cars off the road..
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse7">How to upload a picture</a>
+					</h4>
+				</div>
+				
+				<div id="collapse7" class="panel-collapse collapse">
+					<div class="panel-body">
+					
+					<a class="btn btn-info" target="_blank" href="http://postimage.org/">Upload Image here</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse8">Terms and Conditions</a>
+					</h4>
+				</div>
+				
+				<div id="collapse8" class="panel-collapse collapse">
+					<div class="panel-body">No, your insurance will not be affected or need to change in order to drive or ride with PickMeUpDCU. 
+					Your insurance coverage will act just as it does if you were driving a friend, family member, or a neighbour. PickMeUpDCU is different from other ridesharing companies because our drivers don't actually earn a “profit” so there is no impact on the driver's 
+					insurance requirements or tax implications. The purpose of PickMeUpDCU is to enable both the passengers and the drivers to lower the cost of their travel and at no stage is it a profit making venture. The goal is for people to be able to easily share transportation costs to make carpooling a way to save money and 
+					take extra cars off the road..
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse9">Leave Feedback</a>
+					</h4>
+				</div>
+				<div id="collapse9" class="panel-collapse collapse">
 					<div class="panel-body">	<!-- Feedback Form-->
 	<div class="container">
 		<div class="row">

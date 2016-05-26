@@ -98,6 +98,8 @@ public class JobPostService {
 		//deletes from DB
 		JobPostsDao.delete(id);
 	}
+	
+	
 
 	public void indexJobs() throws Exception {
 		JobPostsDao.indexJobs();

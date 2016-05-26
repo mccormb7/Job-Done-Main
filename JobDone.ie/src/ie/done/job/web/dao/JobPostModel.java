@@ -1,11 +1,15 @@
 package ie.done.job.web.dao;
 
+import java.util.Date;
+
 public class JobPostModel {
 	
 	private String jobTitle;
 	private String jobDomain;
 	private String jobDescription;
 	private String jobLocation;
+	private Double jobPrice;
+	private Date jobDate;
 	private int jobId;
 	
 	
@@ -21,6 +25,7 @@ public class JobPostModel {
 	}
 	public void setJobLocation(String jobLocation) {
 		this.jobLocation = jobLocation;
+		
 	}
 	public String getJobTitle() {
 		return jobTitle;
@@ -39,6 +44,18 @@ public class JobPostModel {
 	}
 	public void setJobDescription(String jobDescription) {
 		this.jobDescription = jobDescription;
+	}
+	public Date getJobDate() {
+		return jobDate;
+	}
+	public void setJobDate(Date jobDate) {
+		this.jobDate = jobDate;
+	}
+	public Double getJobPrice() {
+		return jobPrice;
+	}
+	public void setJobPrice(Double jobPrice) {
+		this.jobPrice = jobPrice;
 	}
 	
 	

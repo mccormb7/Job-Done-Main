@@ -9,6 +9,7 @@ import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.User;
 import ie.done.job.web.test.tests.ProviderDaoTest;
 import ie.done.job.web.web.service.JobPostService;
+import ie.done.job.web.web.service.ProviderService;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 
 
@@ -51,6 +54,8 @@ public class JobPostsController {
 	
 	private JobPostService jobPostsService;
 
+	private ProviderService providerService;
+	
 	private JobPostsDao jobPostsDao;
 
 	@Autowired
@@ -63,19 +68,13 @@ public class JobPostsController {
 	public void setJobPostsService(JobPostService jobPostsService) {
 		this.jobPostsService = jobPostsService;
 	}
+	
+	@Autowired
+	public void ProviderService(ProviderService providerService) {
+		this.providerService = providerService;
+	}
 
-//	ModelAndView mav = null;
-//	@ModelAttribute("countryList")
-//	public List getDomain()
-//	{
-//		List countryList = new ArrayList();
-//		countryList.add("India");
-//		countryList.add("Australia");
-//		countryList.add("England");
-//		return countryList;
-//	}
-	
-	
+
 	//adds only the jobs that the current logged in user made
 	@RequestMapping("/jobposts")
 	public String showUsersJobPosts(Model model, Principal principal) throws Exception {
@@ -95,6 +94,7 @@ public class JobPostsController {
 		}
 		
 		boolean hasPostedJob = false;
+		
 		if(currentPosts.size()>0) {
 			//hasJobPost = offersService.hasOffer(principal.getName());
 			hasPostedJob = true;
@@ -104,49 +104,29 @@ public class JobPostsController {
 		model.addAttribute("jobposts2", currentPosts);
 		return "jobposts";
 	}
-		//only allow one offer
-		
-	/*
-		boolean hasJobPost = false;
-		if(principal != null) {
-			//hasJobPost = offersService.hasOffer(principal.getName());
-			hasJobPost = jobPostsService.hasJobPost(principal.getName());
-		}
-		
-		model.addAttribute("hasJobPost", hasJobPost);
-		//logger.debug("show home page");
-		return "home";
-	}
-	*/
-	
-/*	@RequestMapping("/jobposts")
-	public String showJobPosts(Model model) {
 
-		// jobPostsService.throwTestException();
-
-		List<JobPost> jobPosts = jobPostsService.getCurrent();
-
-		model.addAttribute("jobposts", jobPosts);
-
-		return "jobposts";
-	}
-	*/
-	
 	
 	@RequestMapping("/jobpostdetails")
 	public String showJobPostDetails(Model model, Principal principal) {
 		//boolean hasProfile = false;
 		
 		JobPost jobpost = null;
-		
-		if (principal != null) {
+	
+		if(principal != null) {
 			String username = principal.getName();
 			jobpost = jobPostsService.getJobPost(username);
 			
 			//check if they have a profile
 			//hasProfile = providerService.hasProvider(username);
 		}
-
+		
+		boolean hasPic = false;
+		if(jobpost.getInternetpic()!=null){
+			hasPic=true;
+		}
+		
+		model.addAttribute("hasPic", hasPic);
+		
 		model.addAttribute("jobpost", jobpost);
 		//model.addAttribute("hasProfile", hasProfile);
 		
@@ -159,6 +139,13 @@ public class JobPostsController {
 
 		JobPost jobpost = jobPostsService.getJobPostByIdEdit(id);
 				//jobPostsDao.getJobPost(id);
+		
+		boolean hasPic = false;
+		if(jobpost.getInternetpic()!=null){
+			hasPic=true;
+		}
+		
+		model.addAttribute("hasPic", hasPic);
 		
 
 		model.addAttribute("jobpost", jobpost);
@@ -174,21 +161,33 @@ public class JobPostsController {
 	public String createJobPost(Model model, Principal principal) {
 
 		JobPost jobPost = new JobPost();
-		/*
-		if (principal != null) {
-			String username = principal.getName();
-			// check if user has an jobPost already and use to check if user has
-			// any jobPosts
-			jobPost = jobPostsService.getJobPost(username);
+	
+		List<String> domainList = new ArrayList<String>();
+		List<String> unique = new ArrayList<String>();
+		List<JobPost> allJobPosts = jobPostsService.getCurrent();
+		List<Provider> allProviders = providerService.getCurrent();
+		
+		for (int i = 0; i < allJobPosts.size(); i++) {		
+			domainList.add(allJobPosts.get(i).getDomain());
+			if(!unique.contains(domainList.get(i))){
+				unique.add(domainList.get(i));
+			}	 
 		}
-
-		if (jobPost == null) {
-			jobPost = new JobPost();
-		}*/
-
+		for (int i = 0; i <allProviders.size(); i++) {		
+			domainList.add(allProviders.get(i).getDomain());
+			if(!unique.contains(domainList.get(i))){
+				System.out.println(domainList.get(i));
+				unique.add(domainList.get(i));
+			}	 
+		}
+		Collections.sort(unique);
+		model.addAttribute("unique", unique);
 		model.addAttribute("jobpost", jobPost);
 
 		return "createjobpost";
+		
+
+	        
 	}
 
 	/*@RequestMapping(value = "/docreatejob", method = RequestMethod.POST)
@@ -217,9 +216,8 @@ public class JobPostsController {
 			
 			// used to create jobPost in DB
 			jobPost.getUser().setUsername(username);
-			System.out.println(jobPost.getUser() + "-----------------");
-			
-			
+			String domain = jobPost.getDomain().replaceAll("[-+.^:,]","");
+			jobPost.setDomain(domain);
 			jobPostsService.saveOrUpdate(jobPost);
 	
 			return "offercreated";
@@ -313,6 +311,8 @@ public class JobPostsController {
 		  jm.setJobTitle(b.getTitle());
 		  jm.setJobLocation(b.getLocation());
 		  jm.setJobId(b.getId());
+		  jm.setJobDate(b.getDate());
+		  jm.setJobPrice(b.getPrice());
 		  
 	      
 

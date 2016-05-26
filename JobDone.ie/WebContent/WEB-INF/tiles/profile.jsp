@@ -4,7 +4,28 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
+<style>
+.spinner {
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
 
+  -webkit-transition: opacity 0.25s, max-width 0.45s; 
+  -moz-transition: opacity 0.25s, max-width 0.45s;
+  -o-transition: opacity 0.25s, max-width 0.45s;
+  transition: opacity 0.25s, max-width 0.45s; /* Duration fixed since we animate additional hidden width */
+}
+
+.has-spinner.active {
+  cursor:progress;
+}
+
+.has-spinner.active .spinner {
+  opacity: 1;
+  max-width: 50px; /* More than it will ever come, notice that this affects on animation duration */
+}
+
+</style>
 
 
 <div class="container">
@@ -25,7 +46,14 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-3 col-lg-3 " align="center">
-							<img alt="User Pic" src=${provider.internetpic} class="img-circle img-responsive">
+							<c:choose>
+  							<c:when test="${hasPic}">
+							<img alt="User Pic" src="${provider.internetpic}" class="img-circle img-responsive">
+							</c:when>
+							<c:when test="${!hasPic}">
+							<img alt="User Pic" src="http://www.aspneter.com/aspneter/wp-content/uploads/2016/01/no-thumb.jpg" class="img-circle img-responsive">
+							 </c:when>
+							</c:choose>
 						</div>
 
 						<div class=" col-md-9 col-lg-9 ">
@@ -75,43 +103,23 @@
 					</div>
 				</div>
 				<div class="panel-footer">
-
+					<sec:authorize access="hasRole('ROLE_USER')">
 					<a data-original-title="Send Message" data-toggle="tooltip"
 						type="button" class="btn btn-sm btn-primary"><i
 						class="glyphicon glyphicon-envelope"></i></a>
-
-
-					<!--       <span class="pull-right">
-                            <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Edit Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a href="${pageContext.request.contextPath}/createprofile" data-original-title="Delete Your Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
-                      -->
-
-				</div>
-
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_TRADE')">
+					<a href="<c:url value='/recommendationpro'/>"><button type="button" class="btn btn-success btn-lg " id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ">View Recommended Jobs</button></a>
+					</sec:authorize>
+					
+					
+					
 			</div>
 		</div>
 	</div>
 </div>
 
 
-		
-		<div class="inner-bg">
-		
-		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3 form-box">
-				<div class="form-top">
-				<font size="6" color="white">Create Profile to get recommendations</font>
-					<div class="form-top-center">
-					
-					<a class="btn btn-primary btn-lg" role="button" href="${pageContext.request.contextPath}/createprofile">Create here</a>	
-					</div>
-					
-				</div>
-		</div>
-		</div>
-	</div>
-	
 
 
 <script type="text/javascript">
@@ -171,3 +179,14 @@
 
 	$(document).ready(pageLoad);
 </script>
+
+<script type="text/javascript">
+$('.btn').on('click', function() {
+    var $this = $(this);
+  $this.button('loading');
+    setTimeout(function() {
+       $this.button('reset');
+   }, 8000);
+});
+</script>
+

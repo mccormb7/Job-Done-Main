@@ -29,6 +29,11 @@ public class UsersService {
 		usersDao.enabled(user);
 	}
 	
+	public void disable(User user){
+		usersDao.disable(user);
+	}
+	
+	
 	public void createEmailVerificationToken(User user, String token) {
 		EmailVerification emailToken  = new EmailVerification(token, user);
 		emailVerificationDao.create(emailToken);

@@ -1,56 +1,30 @@
 package ie.done.job.web.controllers;
 
 
+
+
 import ie.done.job.web.dao.FormValidationGroup;
 import ie.done.job.web.dao.JobPost;
-
 import ie.done.job.web.dao.Provider;
-import ie.done.job.web.dao.JobPostModel;
-import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.dao.ProviderModel;
-import ie.done.job.web.dao.User;
-import ie.done.job.web.test.tests.ProviderDaoTest;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.ProviderService;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.SimpleFormController;
 
 @Controller
 public class ProviderController {
@@ -94,13 +68,16 @@ public class ProviderController {
 	
 	@RequestMapping("/profile")
 	public String showProfile(Model model, Principal principal) {
+		
 		Provider provider = null;
+		
 		boolean hasProfile = false;
 		
 		if (principal != null) {
 			String username = principal.getName();
 			provider = providerService.getProvider(username);
 			//check if they have a profile
+		
 			
 			hasProfile = providerService.hasProvider(username);
 		}
@@ -119,6 +96,12 @@ public class ProviderController {
 
 		Provider provider = providerDao.getProvider(id);
 
+		boolean hasPic = false;
+		if(provider.getInternetpic()!=null){
+			hasPic=true;
+		}
+		
+		model.addAttribute("hasPic", hasPic);
 		model.addAttribute("provider", provider);
 
 		return "profile";
@@ -140,17 +123,26 @@ public class ProviderController {
 		if (provider == null) {
 			provider = new Provider();
 		}
-		List<JobPost> allJobPosts = jobPostService.getCurrent();
-		
 		List<String> domainList = new ArrayList<>();
+		List<String> unique = new ArrayList<>();
+		List<JobPost> allJobPosts = jobPostService.getCurrent();
+		List<Provider> allProviders = providerService.getCurrent();
 		
-		for (int i = 0; i < allJobPosts.size(); i++) {
-			System.out.println(allJobPosts.get(i)+ "---------------------------------");
+		for (int i = 0; i < allJobPosts.size(); i++) {		
 			domainList.add(allJobPosts.get(i).getDomain());
-			 
+			if(!unique.contains(domainList.get(i))){
+				unique.add(domainList.get(i));
+			}	 
 		}
-		
-		model.addAttribute("domainList", domainList);
+		for (int i = 0; i <allProviders.size(); i++) {		
+			domainList.add(allProviders.get(i).getDomain());
+			if(!unique.contains(domainList.get(i))){
+				System.out.println(domainList.get(i));
+				unique.add(domainList.get(i));
+			}	 
+		}
+		Collections.sort(unique);
+		model.addAttribute("unique", unique);
 		
 		model.addAttribute("provider", provider);
 
@@ -178,19 +170,12 @@ public class ProviderController {
 			String username = principal.getName();
 			// used to create jobPost in DB
 			provider.getUser().setUsername(username);
-			System.out.println(provider.getUser() + "-----------------");
-			char comma = provider.getDomain().charAt(0);
-			//remove comma if added
-			
-			if((provider.getDomain().length()>3 &&provider.getDomain().charAt(0) == ',')||(provider.getDomain().charAt(1)== ',')){
-				provider.setDomain(provider.getDomain().substring(2));
-				System.out.println("===================================" +provider.getDomain() );
-				providerService.saveOrUpdate(provider);
-			}else{
-				System.out.println("++++++++++++++++++++++++++=" +provider.getDomain() );
-				providerService.saveOrUpdate(provider);
-			}
-			
+
+			String domain = provider.getDomain().replaceAll("[-+.^:,]","");
+			provider.setDomain(domain);
+
+			providerService.saveOrUpdate(provider);
+		
 		
 			return "profile";
 		}

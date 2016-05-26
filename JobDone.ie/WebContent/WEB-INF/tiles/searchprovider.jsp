@@ -6,23 +6,22 @@
 	
 	
 
-<table class="table table-hover" >
+<table id="table12" cellpadding="0" cellspacing="0" >
 
-	<thead>
+
 	<tr class ="danger">
-		<td>Title</td>
-		<td>Profile</td>
-		<td>Domain</td>
+		<th>Title</th>
+		<th>Profile</th>
+		<th>Domain</th>
 		
-		<td>Location</td>
+		<th>Location</th>
 	</tr>	
-	</thead>
 	<tbody>
 		<c:forEach var="provider" items="${searchprovider}">
 				<tr>
 					
 					<td><c:out value="${provider.getProviderTitle()}"></c:out></td>
-					<td><a href="<c:url value='/viewprofile/${provider.getProviderId()}' />" >View</a></td>
+					<td><a class="btn btn-success" href="<c:url value='/viewprofile/${provider.getProviderId()}' />" >View</a></td>
 					
 					<td><c:out value="${provider.getProviderDomain()}"></c:out></td>
 					
@@ -35,4 +34,18 @@
 </table>
 
     
+    
+    
+<script language="javascript" type="text/javascript">  
+//<![CDATA[  
+    var table12_Props = {  
+        highlight_keywords: true,  
+        on_keyup: true,  
+        on_keyup_delay: 1500,  
+        single_search_filter: true,  
+        selectable: true  
+    };  
+    var tf12 = setFilterGrid( "table12",table12_Props );  
+//]]>  
+</script> 
    

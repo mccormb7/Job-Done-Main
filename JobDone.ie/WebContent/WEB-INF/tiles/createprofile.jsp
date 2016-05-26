@@ -157,10 +157,9 @@ function CheckColors(val){
 									placeholder="Email.." class="form-role form-control"
 									id="form-role">
 									<sf:option value="" label="Select Domain available" />
-									<sf:options items="${domainList}" path="domain" name="domain" />
+									<sf:options items="${unique}" path="domain" name="domain" />
 									<sf:option value=" ">Other</sf:option>
-								</sf:select>
-								
+								</sf:select>	
 								<input type="text" name="domain" id="color" style='display:none;'/>
 							</div>
 							<div class="error">

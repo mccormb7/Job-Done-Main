@@ -200,8 +200,29 @@ ul.dropdown-lr {
 		</div>
 	</nav>
 			</sec:authorize>
-
-			
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><span
+						class="glyphicon glyphicon-user fa-2x"></span> <b class="caret"></b></a>
+						<ul class="dropdown-menu" id="mb1" class="menubar root-level" role="menubar" title="Styling Menu" aria-controls="st1">
+						<li id="log-out"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/j_spring_security_logout'/>">Log
+								out</a></li>
+							<li id="Admin"
+					        class="menu-item checked"
+					        role="menuitemradio"
+					        tabindex="-1"
+					        aria-controls="st1"
+					        aria-checked="true"><a href="<c:url value='/admin'/>">Admin Panel</a></li>
+							<li class="divider"></li>
+						<li></li>
+					</ul></li>
+			</sec:authorize>
+			<li><a></a></li>
 
 
 
@@ -247,7 +268,7 @@ ul.dropdown-lr {
 					        role="menuitemradio"
 					        tabindex="-1"
 					        aria-controls="st1"
-					        aria-checked="true"><a href="<c:url value='/'/>">Home</a></li>
+					        aria-checked="true"><a href="<c:url value='/'/>">View all Job Posts</a></li>
 								<li id="View-your-recommened-jobs"
 						        class="menu-item checked"
 						        role="menuitemradio"
@@ -261,12 +282,7 @@ ul.dropdown-lr {
 							        tabindex="-1"
 							        aria-controls="st1"
 							        aria-checked="true"><a href="<c:url value='/createprofile'/>">Update profile to get job Recommendations</a></li>
-						        <li id="Home"
-						        class="menu-item checked"
-						        role="menuitemradio"
-						        tabindex="-1"
-						        aria-controls="st1"
-						        aria-checked="true"><a href="<c:url value='/'/>">Home</a></li>
+						        
 							
 						<li class="divider"></li>
 						<li></li>

@@ -99,6 +99,10 @@ public class UsersDao {
 		session().saveOrUpdate(user);
 		
 	}
-	
 
+	public void disable(User user) {
+		user.setEnabled(false);
+		session().saveOrUpdate(user);
+		
+	}
 }
