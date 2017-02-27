@@ -89,7 +89,7 @@
 <p><font size="8" color="white">Message Inbox</font></p>
 <table id="table12" cellpadding="0" cellspacing="0">
     <tr>
-        <th>from</th>
+        <th>From</th>
         <th>Actions</th>
         <th>Subject</th>
         <th>Content</th>

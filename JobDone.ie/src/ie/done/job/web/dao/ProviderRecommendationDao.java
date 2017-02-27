@@ -1,5 +1,8 @@
 package ie.done.job.web.dao;
 
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
+
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;

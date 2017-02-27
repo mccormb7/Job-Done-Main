@@ -46,14 +46,10 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-3 col-lg-3 " align="center">
-							<c:choose>
-  							<c:when test="${hasPic}">
+						
 							<img alt="User Pic" src="${provider.internetpic}" class="img-circle img-responsive">
-							</c:when>
-							<c:when test="${!hasPic}">
-							<img alt="User Pic" src="http://www.aspneter.com/aspneter/wp-content/uploads/2016/01/no-thumb.jpg" class="img-circle img-responsive">
-							 </c:when>
-							</c:choose>
+							
+							
 						</div>
 
 						<div class=" col-md-9 col-lg-9 ">
@@ -77,21 +73,26 @@
 										<td>Gender:</td>
 										<td>${provider.gender}</td>
 									</tr>
+									
+			
 									<tr>
 										<td>Address:</td>
 										<td>${provider.location}</td>
 									</tr>
+									<sec:authorize access="hasRole('ROLE_USER')">
 									<tr>
 										<td>Message:</td>
 										<td><a
 											href="<c:url value='/message?uid=${provider.user.username}'/>">Message</a></td>
 									</tr>
+									
 									<tr>
 
 										<td>Email Directly:</td>
 										<td><a
 											href="<c:url value='/emailform?uid=${provider.user.email}'/>">Email</a></td>
 									</tr>
+									</sec:authorize>
 
 
 
@@ -103,11 +104,21 @@
 					</div>
 				</div>
 				<div class="panel-footer">
+				
 					<sec:authorize access="hasRole('ROLE_USER')">
+	
+					
 					<a data-original-title="Send Message" data-toggle="tooltip"
 						type="button" class="btn btn-sm btn-primary"><i
-						class="glyphicon glyphicon-envelope"></i></a>
+						class="glyphicon glyphicon-envelope"   href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover"></i>
+						
+						</a>
+					
+					
+						
+						
 					</sec:authorize>
+					
 					<sec:authorize access="hasRole('ROLE_TRADE')">
 					<a href="<c:url value='/recommendationpro'/>"><button type="button" class="btn btn-success btn-lg " id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ">View Recommended Jobs</button></a>
 					</sec:authorize>
@@ -190,3 +201,32 @@ $('.btn').on('click', function() {
 });
 </script>
 
+<script>
+$(document).ready(function() {
+    $('#loginForm').formValidation({
+        framework: 'bootstrap',
+        excluded: ':disabled',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

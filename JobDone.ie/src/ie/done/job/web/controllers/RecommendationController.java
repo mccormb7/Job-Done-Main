@@ -2,14 +2,14 @@ package ie.done.job.web.controllers;
 
 
 import ie.done.job.web.dao.FormValidationGroup;
-import ie.done.job.web.dao.JobPost;
-import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.JobPostModel;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.dao.ProviderModel;
 import ie.done.job.web.dao.ProviderRecommendationDao;
-import ie.done.job.web.dao.User;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
+import ie.done.job.web.pojo.User;
 import ie.done.job.web.test.tests.ProviderDaoTest;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.ProviderService;
@@ -82,8 +82,6 @@ public class RecommendationController {
 	@Autowired
 	private ProviderDao providerDao;
 
-	
-	
 	@Autowired
 	private ProviderRecommendationDao recommend;
 
@@ -94,18 +92,10 @@ public class RecommendationController {
 	@Autowired
 	private ProviderService providerService;
 	
-	
-	
-	
-	
-	
 	@Autowired
 	public void setProviderDao(ProviderDao providerDao) {
 		this.providerDao = providerDao;
 	}
-
-
-
 
 	@Autowired
 	public void setProviderService(ProviderService providerService) {
@@ -142,13 +132,7 @@ public class RecommendationController {
 		        it.remove();
 		      }
 		 }
-		//System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
-		/*for (Map.Entry<JobPost, Integer> entry : map.entrySet()) {
-			if( entry.getValue() < 2){
-				map.remove(entry.getKey(), entry.getValue());
-			}
-		}
-		*/
+
 			
 	}
 
@@ -250,6 +234,7 @@ public class RecommendationController {
 			hasRecommendation = false;
 		}
 		
+		Collections.reverse(uniqueListDistance);
 		model.addAttribute("hasRecommendation", hasRecommendation);
 		model.addAttribute("recommend", uniqueListDistance);
 

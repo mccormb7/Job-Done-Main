@@ -1,5 +1,7 @@
 package ie.done.job.web.dao;
 
+import ie.done.job.web.pojo.User;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;

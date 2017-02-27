@@ -1,13 +1,13 @@
 package ie.done.job.web.test.tests;
 
 
-import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
-import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.dao.ProviderRecommendationDao;
-import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
+import ie.done.job.web.pojo.User;
 
 import java.io.File;
 import java.net.HttpURLConnection;
@@ -114,26 +114,6 @@ public class SearchDaoTests {
 	
 	private Provider pro3 = new Provider(user4, "Cook for rent", "have been cooking for over 5 years", "catering", "First aid. Degree in culinary arts", "male", "3 Knights Bridge, Clontarf", 40);
 
-	/*
-	 * private User user2 = new User("richardhannay", "Richard Hannay",
-	 * "the39steps", "richard@caveofprogramming.com", true, "ROLE_ADMIN");
-	 * private User user3 = new User("suetheviolinist", "Sue Black",
-	 * "iloveviolins", "sue@caveofprogramming.com", true, "ROLE_USER"); private
-	 * User user4 = new User("rogerblake", "Rog Blake", "liberator",
-	 * "rog@caveofprogramming.com", false, "user");
-	 */
-
-	/*
-	 * private Offer offer1 = new Offer(user1, "This is a test offer."); private
-	 * Offer offer2 = new Offer(user1, "This is another test offer."); private
-	 * Offer offer3 = new Offer(user2, "This is yet another test offer.");
-	 * private Offer offer4 = new Offer(user3,
-	 * "This is a test offer once again."); private Offer offer5 = new
-	 * Offer(user3, "Here is an interesting offer of some kind."); private Offer
-	 * offer6 = new Offer(user3, "This is just a test offer."); private Offer
-	 * offer7 = new Offer(user4,
-	 * "This is a test offer for a user that is not enabled.");
-	 */
 
 	@Before
 	public void init() {
@@ -220,31 +200,7 @@ public class SearchDaoTests {
 		}
 		
 		System.out.println("++++++++++++++++++Stemming++++++++++++++++");
-	/*	List<String> stemmedList = new ArrayList<String>();
-	//	String[] wordList = {"Handyman",  "general", "maintenance", "around","beside", "Dublin","cranmore"};
-		for(int j=0;j<wordList.length;j++){
-			
-			String term = wordList[j];
-			EnglishStemmer eng = new EnglishStemmer();
-			eng.setCurrent(term);
-			if(eng.stem()){
-				stemmedList.add(eng.getCurrent());
-			}
-			//System.out.println(eng.getCurrent());
-		}
-		System.out.println("++++++++++++++++++StemmedList++++++++++++++++");
-		for (int j = 0; j < stemmedList.size(); j++)
-		{
-			System.out.println(stemmedList.get(j));
-		}
-	*/
-		
-			//String term = "intresting";
-//			String term = wordForm[j];
-//			EnglishStemmer eng = new EnglishStemmer();
-//			eng.setCurrent(term);
-//			eng.stem();
-//			System.out.println(eng.getCurrent());
+	
 	}
 	
 	@Test
@@ -283,108 +239,18 @@ public class SearchDaoTests {
 		
 		//recommendation list
 		for(int i=0;i<uniqueList.size();i++){
-
-		 /*   String postcode2=uniqueList.get(i).getLocation();// job post user location
-			 String latLongs[] = getLatLongPositions(postcode);
-		     String latLongs2[] = getLatLongPositions(postcode2);
-
-		     Double lat1 = Double.parseDouble(latLongs[0]);
-		     Double long1 = Double.parseDouble(latLongs[1]);
-			  Double lat2 = Double.parseDouble(latLongs2[0]);
-			  Double long2 = Double.parseDouble(latLongs2[1]);
-			  
-		*/	  
+	  
 			System.out.println("Id -> " + uniqueList.get(i).getId());
 			System.out.println("User -> " + uniqueList.get(i).getUser());
 			System.out.println("Title ->" + uniqueList.get(i).getTitle());
 			System.out.println("DESCRITPION -> " + uniqueList.get(i).getDescription());
 			System.out.println("Location -> " + uniqueList.get(i).getLocation());
-			
-			//System.out.println("...........................distance to House................................");
-		      
-		      //System.out.println(pro3.getLocation() + "  " + uniqueList.get(i).getLocation() + "  " + distance(lat1,long1, lat2,long2, "K") + " KM\n");
-		      
+		
 		      System.out.println("...........................................................");
 	
 		}
-	
-		/*
-		for(int j=0;j<uniqueList.size();j++){
-
-		    String postcode2=uniqueList.get(j).getLocation();// job post user location
-			 String latLongs[] = getLatLongPositions(postcode);
-		     String latLongs2[] = getLatLongPositions(postcode2);
-
-		     Double lat1 = Double.parseDouble(latLongs[0]);
-		     Double long1 = Double.parseDouble(latLongs[1]);
-			  Double lat2 = Double.parseDouble(latLongs2[0]);
-			  Double long2 = Double.parseDouble(latLongs2[1]);
-			  System.out.println("...........................Refinded list details................................");
-			//print jobs within a certain location
-			if(distance(lat1,long1, lat2,long2, "K") < 50.0){
-				System.out.println("User -> " + uniqueList.get(j).getUser());
-				System.out.println("Title ->" + uniqueList.get(j).getTitle());
-				System.out.println("DESCRITPION -> " + uniqueList.get(j).getDescription());
-				System.out.println("Location -> " + uniqueList.get(j).getLocation());
-				
-				//System.out.println("...........................Refinded list................................");
-			      
-			      System.out.println(pro3.getLocation() + "  " + uniqueList.get(j).getLocation() + "  " + distance(lat1,long1, lat2,long2, "K") + " KM\n");
-			      
-			      System.out.println("...........................................................");
-			}
-		}
-
-		/*System.out.println("...........................................................");
-		System.out.println(distance(53.3856612,-6.2533645, 53.3482961,-6.257899, "M") + " Miles\n");
-		System.out.println(distance(32.9697, -96.80322, 29.46786, -98.53506, "K") + " Kilometers\n");
-		System.out.println(distance(32.9697, -96.80322, 29.46786, -98.53506, "N") + " Nautical Miles\n");
-		System.out.println("...........................................................");
-		System.out.println("....................Lat coords.......................................");
-		System.setProperty("java.net.useSystemProxies", "true");
-		
-		*/
-	    //  BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	    //  System.out.println("Please enter a location:");
-		
-	     // String postcode="3 Crestfield Ave, Whitehall, Dublin 9";
-	      //String postcode2="O'Connell Street, Dublin";
-	     /* String latLongs[] = getLatLongPositions(postcode);
-	      String latLongs2[] = getLatLongPositions(postcode2);
-	      System.out.println("Latitude: "+latLongs[0]+" and Longitude: "+latLongs[1]);
-	      System.out.println("...........................................................");
-	      Double lat1 = Double.parseDouble(latLongs[0]);
-	      Double long1 = Double.parseDouble(latLongs[1]);
-	      Double lat2 = Double.parseDouble(latLongs2[0]);
-	      Double long2 = Double.parseDouble(latLongs2[1]);
-	      
-	      System.out.println("...........................distance to O'connel................................");
-	      
-	      System.out.println(distance(lat1,long1, lat2,long2, "M") + " Miles\n");
-	      
-	      System.out.println("...........................................................");*/
-		
-		/*
-		for(int i=0;i<resultsFinal.size();i++){
-			System.out.println("DESCRITPION -> " + resultsFinal.get(i).getDescription());
-			System.out.println("Title ->" + resultsFinal.get(i).getTitle());
-			System.out.println("User -> " + resultsFinal.get(i).getUser());
-		}
-		*/
-		
-		/*List<Provider> results = new ArrayList<Provider>();
-		
-		//JobPost ret1 = jobPostsDao.getJobPost(jobPost.getId());
-		String testText = "German";
-		List<JobPost> allFound = jobPostsDao.searchForJob(testText);
-		//jobPostsDao.searchForJob(searchText)
-		
-		for(int i=0;i<allFound.size();i++){
-			System.out.println("DESCRITPION -> " + allFound.get(i).getDescription());
-			System.out.println("Title ->" + allFound.get(i).getTitle());
-			System.out.println("User -> " + allFound.get(i).getUser());
-		}*/
 	}
+	
 	
 	@Ignore
 	public void testRecommendation() throws Exception{
@@ -416,7 +282,7 @@ public class SearchDaoTests {
 
 
 	
-	
+	@Ignore
 	public static String[] getLatLongPositions(String address) throws Exception
 	  {
 	    int responseCode = 0;
@@ -451,7 +317,7 @@ public class SearchDaoTests {
 	  }
 	
 	
-	
+	@Ignore
 	private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
 		double theta = lon1 - lon2;
 		double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
@@ -470,6 +336,7 @@ public class SearchDaoTests {
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 	/*::	This function converts decimal degrees to radians						 :*/
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	@Ignore
 	private static double deg2rad(double deg) {
 		return (deg * Math.PI / 180.0);
 	}
@@ -477,6 +344,7 @@ public class SearchDaoTests {
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 	/*::	This function converts radians to decimal degrees						 :*/
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	@Ignore
 	private static double rad2deg(double rad) {
 		return (rad * 180 / Math.PI);
 	}

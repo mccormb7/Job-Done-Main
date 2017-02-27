@@ -8,7 +8,7 @@
 
 
 
-
+<!--  
 <div class="inner-bg">
 		
 		<div class="row">
@@ -35,6 +35,8 @@
 		</div>
 		</div>
 	</div>
+	
+	-->
 <c:choose>
 
 
@@ -48,11 +50,10 @@
         <tr>
             <th>Name</th>
             <th></th>
-            <th></th>
             <th>Price</th>
             <th>Distance(KM)</th>
-            <th>Title</th>
             <th>Date Posted</th>
+			<th>Title</th>            
 
         </tr>
     </thead>
@@ -64,13 +65,14 @@
 					<td><c:out value="${jobpost.user.name}"></c:out></td>
 
 					<td><a class="btn btn-success" href="<c:url value='/viewjobpost/${jobpost.id}' />">View
-							Job Post</a> &nbsp &nbsp
+							Job Post</a> &nbsp 
 					<a class="btn btn-primary" href="<c:url value='/message?uid=${jobpost.user.username}'/>">contact</a></td>
 					<td><c:out value="${jobpost.price} "></c:out></td>
 					<td><c:out value="${jobpost.distance} "></c:out></td>
+					<td><c:out value="${jobpost.date}"></c:out></td>
 					<td><c:out value="${jobpost.title} "></c:out></td>
 
-					<td><c:out value="${jobpost.date}"></c:out></td>
+					
 
 				</tr>
 			</c:forEach>

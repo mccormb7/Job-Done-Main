@@ -1,5 +1,7 @@
 package ie.done.job.web.dao;
 
+import ie.done.job.web.pojo.Message;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

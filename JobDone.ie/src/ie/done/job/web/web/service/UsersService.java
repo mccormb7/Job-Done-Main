@@ -2,10 +2,10 @@ package ie.done.job.web.web.service;
 
 import ie.done.job.web.dao.EmailVerification;
 import ie.done.job.web.dao.EmailVerificationDao;
-import ie.done.job.web.dao.Message;
 import ie.done.job.web.dao.MessagesDao;
-import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
+import ie.done.job.web.pojo.Message;
+import ie.done.job.web.pojo.User;
 
 import java.util.List;
 
@@ -29,8 +29,13 @@ public class UsersService {
 		usersDao.enabled(user);
 	}
 	
+	
 	public void disable(User user){
 		usersDao.disable(user);
+	}
+	
+	public void makeAdmin(User user){
+		usersDao.makeAdmin(user);
 	}
 	
 	

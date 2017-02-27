@@ -30,7 +30,7 @@
               <div class="row">
               <c:choose>
               <c:when test="${hasPic}">
-					<img alt="User Pic" src="${jobpost.internetpic}" class="img-circle img-responsive">
+					<img alt="User Pic" src="${jobpost.internetpic}" >
 				</c:when>
 				<c:when test="${!hasPic}">
 					<img src="https://www.drphillipscenter.org/resources/images/default.jpg" class="img-circle img-responsive">

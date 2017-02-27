@@ -1,5 +1,7 @@
 package ie.done.job.web.dao;
 
+import ie.done.job.web.pojo.JobPost;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

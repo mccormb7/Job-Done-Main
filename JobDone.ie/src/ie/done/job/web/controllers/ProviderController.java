@@ -4,10 +4,10 @@ package ie.done.job.web.controllers;
 
 
 import ie.done.job.web.dao.FormValidationGroup;
-import ie.done.job.web.dao.JobPost;
-import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.dao.ProviderModel;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.ProviderService;
 
@@ -107,7 +107,23 @@ public class ProviderController {
 		return "profile";
 	}
 	
+/*	
+	@RequestMapping("/leaveReview/{username}")
+	public String leaveReview(Model model, Principal principal, @PathVariable("username") String username) {
 
+
+		Provider provider = providerDao.getProvider(username);
+		//provider.setCompletedJob(
+		double completedJob =Provider.getCompletedJob()+1;
+		provider.setRating(provider.getRating());
+		
+
+		model.addAttribute("provider", provider);
+
+		return "profile";
+	}
+	
+*/
 	@RequestMapping("/createprofile")
 	public String createJobPost(Model model, Principal principal) {
 
@@ -160,7 +176,6 @@ public class ProviderController {
 	public String doCreateProfile(Model model, @Validated(value=FormValidationGroup.class) Provider provider,
 			BindingResult result, Principal principal, @RequestParam(value = "delete", required = false) String delete) {
 
-		System.out.println(provider.toString() + " provider value ==================");
 		if (result.hasErrors()) {
 			return "createprofile";
 		}

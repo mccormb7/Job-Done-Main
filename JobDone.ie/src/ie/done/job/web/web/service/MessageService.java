@@ -1,9 +1,9 @@
 package ie.done.job.web.web.service;
 
-import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
-import ie.done.job.web.dao.Message;
 import ie.done.job.web.dao.MessagesDao;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Message;
 
 import java.util.List;
 

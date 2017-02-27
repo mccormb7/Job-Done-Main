@@ -1,12 +1,12 @@
 package ie.done.job.web.test.tests;
 
-import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
-import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
 import ie.done.job.web.dao.ProviderRecommendationDao;
-import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
+import ie.done.job.web.pojo.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -169,6 +169,7 @@ public class GenerateTestData {
 
 	private static Random rand = new Random();
 
+	@Ignore
 	public static String generateName() {
 
 		return Beginning[rand.nextInt(Beginning.length)]
@@ -176,7 +177,7 @@ public class GenerateTestData {
 				+ End[rand.nextInt(End.length)];
 
 	}
-	
+	@Ignore
 	public static String replaceString(double value){
 	    NumberFormat formatter = NumberFormat.getCurrencyInstance();
 	    String currencySymbol = formatter.getCurrency().getSymbol();
@@ -185,18 +186,12 @@ public class GenerateTestData {
 	}
 
 
-	@Test
+	@Ignore
 	public void fillDatabase() throws IOException {
 
 		
 		List<String> details = Files.readAllLines(Paths.get("C:\\Users\\User\\Desktop\\college 4th\\ProjectTestData\\tempTest.txt"), StandardCharsets.UTF_8);
-//		
-//		String [] domains = {"painter","catering","gardening","handyman"};
-//		String [] tasks = {"assignment","duty","task","job","gig","business","work", "project"};
-//		Random randNum = new Random();
-	
-		//user1, "title", "domain",
-		// "description", "location2", 20);
+
 		
 		usersDao.create(user2);
 		usersDao.create(userMain);
@@ -232,41 +227,5 @@ public class GenerateTestData {
 	
 	}
 		
-		
-		
-		
-		/*for(int i = 0;i< 100;i ++){
-			String username = generateName();
-			String usertemp = "usertempadded ";
-			/*int idD = new Random().nextInt(domains.length-1);
-			int idT = new Random().nextInt(tasks.length-1);
-			String randomDomain = (domains[idD]);
-			String randomTask = (domains[idT]);
-			
-			  int randomDomain = (int) (Math.random() * domains.length);
-			  int randomTask = (int) (Math.random() * tasks.length);
-	          System.out.print(domains[randomDomain]);
-			
-			int address = randNum.nextInt(18);
-			int cost = randNum.nextInt(100);
-			
-			String name = "user" + i;
-			//User user = new User(usertemp, usertemp, "password","tom@hotmail.com", true, "ROLE_USER");
-			User user1 = new User("userTemptest" + i, username + " userTest", "password",
-					username + i + "@hotmail.com", true, "ROLE_USER");
-			
-			//User user1 = new User(username, name, password, email, enabled, authority)
-			//usersDao.create(user1);
-			//System.out.println(randomDomain + " domain ----------------");
-			
-			JobPost jobPost = new JobPost(user1,
-					domains[randomDomain] + " needed as soon as possible", domains[randomDomain],
-					"Need a " + domains[randomDomain] + " for help with a " + tasks[randomTask] + " in my area", "Dublin " + address, cost);
-			//JobPosts temp =new Jo
-			//jobPostsDao.saveOrUpdate(jobPost);
-			//System.out.println(jobPost.toString());
-		} 
-		*/
-
 
 }

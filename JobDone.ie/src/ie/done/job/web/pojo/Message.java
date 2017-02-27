@@ -1,4 +1,4 @@
-package ie.done.job.web.dao;
+package ie.done.job.web.pojo;
 
 //import ie.done.job.web.validation.Validfromuser;
 

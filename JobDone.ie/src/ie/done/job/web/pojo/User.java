@@ -1,5 +1,7 @@
-package ie.done.job.web.dao;
+package ie.done.job.web.pojo;
 
+import ie.done.job.web.dao.FormValidationGroup;
+import ie.done.job.web.dao.PersistenceValidationGroup;
 import ie.done.job.web.validation.ValidEmail;
 
 import java.io.Serializable;

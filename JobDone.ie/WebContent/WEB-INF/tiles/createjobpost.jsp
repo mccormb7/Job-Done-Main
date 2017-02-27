@@ -179,12 +179,13 @@ function CheckColors(val){
 
 
 						<div class="form-group">
-							<b><font size="6">Profile Picture URL</font></b> <label
-								class="sr-only" for="form-price">Enter Profile Picture
+							<b><font size="6">Task Picture URL</font></b> <label
+								class="sr-only" for="form-price">Enter Picture
 								URL</label>
 							<sf:input type="text" path="internetpic" name="internetpic"
 								placeholder="profile pic url.." class="form-name form-control"
 								id="form-name"></sf:input>
+								<a class="btn btn-info" target="_blank" href="http://postimage.org/">Upload Image here</a>
 						</div>
 						<div class="error">
 							<sf:errors path="internetpic"></sf:errors>
@@ -192,7 +193,7 @@ function CheckColors(val){
 
 
 						<div class="form-group">
-							<b><font size="6">Estimated Price:</font></b> <label
+							<b><font size="6">Estimated Price (Euro):</font></b> <label
 								class="sr-only" for="form-price">Price</label>
 							<sf:input type="text" path="price" name="price"
 								placeholder="price.." class="form-name form-control"

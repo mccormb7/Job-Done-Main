@@ -2,6 +2,8 @@ package ie.done.job.web.dao;
 
 
 
+import ie.done.job.web.pojo.JobPost;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -2,10 +2,10 @@ package ie.done.job.web.controllers;
 
 import ie.done.job.web.dao.EmailVerification;
 import ie.done.job.web.dao.FormValidationGroup;
-import ie.done.job.web.dao.JobPost;
-import ie.done.job.web.dao.Message;
-import ie.done.job.web.dao.Provider;
-import ie.done.job.web.dao.User;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Message;
+import ie.done.job.web.pojo.Provider;
+import ie.done.job.web.pojo.User;
 import ie.done.job.web.web.service.MessageService;
 import ie.done.job.web.web.service.UsersService;
 
@@ -125,6 +125,19 @@ public class LoginController {
         return "redirect:/admin";
     }
 	
+	@RequestMapping("/makeAdmin/{username}")
+    public String makeAdmin(@PathVariable("username") String username){
+		User user = usersService.getUser(username);
+		String provider = "ROLE_TRADE";
+		String client = "ROLE_USER";
+		
+		if(user.getAuthority().equals(provider)||user.getAuthority().equals(client)){
+			usersService.makeAdmin(user);
+		}
+		
+        System.out.println(user.toString());
+        return "redirect:/admin";
+    }
 	/*****************************Registration verification***********************************/
 	
 	@RequestMapping("/newaccount")

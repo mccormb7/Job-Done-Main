@@ -2,11 +2,11 @@ package ie.done.job.web.controllers;
 
 
 import ie.done.job.web.dao.FormValidationGroup;
-import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostModel;
 import ie.done.job.web.dao.JobPostsDao;
-import ie.done.job.web.dao.Provider;
-import ie.done.job.web.dao.User;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
+import ie.done.job.web.pojo.User;
 import ie.done.job.web.test.tests.ProviderDaoTest;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.ProviderService;
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 

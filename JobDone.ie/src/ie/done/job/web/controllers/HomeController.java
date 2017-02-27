@@ -1,11 +1,11 @@
 package ie.done.job.web.controllers;
 
-import ie.done.job.web.dao.JobPost;
 import ie.done.job.web.dao.JobPostsDao;
-import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.ProviderDao;
-import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
+import ie.done.job.web.pojo.User;
 import ie.done.job.web.web.service.JobPostService;
 import ie.done.job.web.web.service.ProviderService;
 

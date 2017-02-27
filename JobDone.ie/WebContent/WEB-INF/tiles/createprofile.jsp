@@ -216,10 +216,12 @@ function CheckColors(val){
 								<sf:input type="text" path="internetpic" name="internetpic"
 									placeholder="profile pic url.." class="form-name form-control"
 									id="form-name"></sf:input>
+									<a class="btn btn-info" target="_blank" href="http://postimage.org/">Upload Image here</a>
 							</div>
 							<div class="error">
 								<sf:errors path="internetpic"></sf:errors>
 							</div>
+							
 							
 
 							<button type="submit" value="Save Profile" class="btn">Save Profile</button>

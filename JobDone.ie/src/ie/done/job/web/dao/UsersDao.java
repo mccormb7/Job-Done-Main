@@ -1,5 +1,7 @@
 package ie.done.job.web.dao;
 
+import ie.done.job.web.pojo.User;
+
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -105,4 +107,11 @@ public class UsersDao {
 		session().saveOrUpdate(user);
 		
 	}
+	
+	public void makeAdmin(User user) {
+		user.setAuthority("ROLE_ADMIN");
+		session().saveOrUpdate(user);
+		
+	}
+
 }

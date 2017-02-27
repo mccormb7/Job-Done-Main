@@ -95,6 +95,7 @@ ul.dropdown-lr {
 						</div>
 					</div>
 				</form>
+				
 			</sec:authorize>
 		</div>
 		
@@ -147,58 +148,13 @@ ul.dropdown-lr {
 			
 		
 			<sec:authorize access="!isAuthenticated()">
-			
-				<li id="Log-In"
+				<li id="Login"
+					        class="menu-item checked"
 					        role="menuitemradio"
 					        tabindex="-1"
 					        aria-controls="st1"
-					        aria-checked="true"class="dropdown">
-                        <a  class="dropdown-toggle" data-toggle="dropdown">Log In <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-                            <div class="col-lg-12">
-                            
-                                <div class="text-center"><h3><b>Log In</b></h3></div>
-                                 <form role="form" action='${pageContext.request.contextPath}/j_spring_security_check' method='POST' class="login-form" name ='f'>
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-7">
-                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
-                                                <label for="remember"> Remember Me</label>
-                                            </div>
-                                            <div class="col-xs-5 pull-right">
-                                               <button name="submit" type="submit" value="login" class="btn">Sign in</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a tabindex="5" class="forgot-password">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
-                                </form>
-                            </div>
-                        </ul>
-                    </li>
-                </ul>
-			</div>
-		</div>
-	</nav>
+					        aria-checked="true"><a   class="login" href="<c:url value='/login'/>">Login</a></li>
+			
 			</sec:authorize>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"

@@ -1,8 +1,8 @@
 package ie.done.job.web.test.tests;
 
 import static org.junit.Assert.*;
-import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
+import ie.done.job.web.pojo.User;
 
 import java.util.List;
 

@@ -13,7 +13,7 @@
 					&nbsp;
 					&nbsp;
 					&nbsp;
-					<a class="btn btn-primary btn-lg" role="button" href="${pageContext.request.contextPath}/login">Go to Login</a>	
+					<a class="btn btn-primary btn-lg" role="button" href="${pageContext.request.contextPath}/">Go Home</a>	
 					</div>
 					
 				</div>

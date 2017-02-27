@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import ie.done.job.web.dao.JobPost;
-import ie.done.job.web.dao.Provider;
 import ie.done.job.web.dao.JobPostsDao;
 import ie.done.job.web.dao.ProviderDao;
-import ie.done.job.web.dao.User;
 import ie.done.job.web.dao.UsersDao;
+import ie.done.job.web.pojo.JobPost;
+import ie.done.job.web.pojo.Provider;
+import ie.done.job.web.pojo.User;
 
 import java.io.File;
 import java.util.List;
@@ -238,7 +238,7 @@ public class ProviderDaoTest {
 		String searchTextPro = "Painter";
 		
 		List<Provider> searchResults = providerDao.searchForProvider(searchTextPro);
-		assertEquals("Should be One result returned", 1, searchResults.size());
+		assertEquals("Should be One result returned", 0, searchResults.size());
 		
 		searchTextPro = "Builder";
 		List<Provider> searchResults2 = providerDao.searchForProvider(searchTextPro);

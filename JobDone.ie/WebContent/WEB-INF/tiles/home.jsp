@@ -45,7 +45,8 @@
 			<td></td>
 			<td>Name</td>
 			<td>   </td>
-			<td>Details</td>
+			<td></td>
+			<td>Domain</td>
 			<td>Description</td>
 			
 		</tr>
@@ -56,7 +57,7 @@
 				<td><c:out value="${provider.user.name}"></c:out></td>
 				<td><a class="btn btn-success" href="<c:url value='/viewprofile/${provider.id}' />" >View Profile</a></td>
 				<td><a class="btn btn-primary" href = "<c:url value='/message?uid=${provider.user.username}'/>">contact</a></td>
-		
+				<td>&nbsp &nbsp<c:out value="${provider.domain}"></c:out>&nbsp  &nbsp</td>
 				<td><c:out value="${provider.experience}"></c:out></td>
 	
 			</tr>
